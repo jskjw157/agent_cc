@@ -1,3 +1,30 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(set:*)",
+      "Bash(python:*)",
+      "Skill(subagent-creator)",
+      "Skill(hook-creator)",
+      "Bash(cmd.exe /c \"gradlew.bat :string_registry_meta:test --tests *EventsServiceTest*\")",
+      "Bash(powershell -Command \"cd C:\\\\source\\\\string_registry_management_system; .\\\\gradlew.bat :string_registry_meta:test --tests '*EventsServiceTest*'\")",
+      "Bash(Select-String -Pattern \"\\(BUILD|PASS|FAIL|SUCCESS|EventsService\\)\")",
+      "Bash(Select-Object -Last 30)",
+      "Bash(./gradlew test:*)",
+      "Bash(powershell -Command:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/run-tests-on-kotlin.py"
+          }
+        ]
+      }
+    ]
+  },
   "outputStyle": "Explanatory"
 }
