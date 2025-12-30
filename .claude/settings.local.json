@@ -23,6 +23,15 @@
             "command": "python .claude/hooks/run-tests-on-kotlin.py"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/config-review-notify.py"
+          }
+        ]
       }
     ]
   },
