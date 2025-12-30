@@ -1,0 +1,3 @@
+[submodule "external/htmlslim"]
+	path = external/htmlslim
+	url = https://github.com/greatSumini/htmlslim.git
