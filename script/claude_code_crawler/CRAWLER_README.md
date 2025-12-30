@@ -50,6 +50,20 @@ crawler = ClaudeCodeCrawler(
 )
 ```
 
+### 본문 압축 옵션
+
+기본으로 `compact_mode=True`가 적용되어 이미지 URL과 불필요한 UI 텍스트를 제거합니다.
+
+```python
+crawler = ClaudeCodeCrawler(compact_mode=False)
+```
+
+링크는 유지하고 싶다면 기본값 그대로 두면 됩니다. 링크까지 제거하려면:
+
+```python
+crawler = ClaudeCodeCrawler(keep_links=False)
+```
+
 ### Claude Code 문서 크롤링
 
 ```bash

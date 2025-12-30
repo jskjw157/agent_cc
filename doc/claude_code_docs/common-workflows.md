@@ -3,46 +3,13 @@ source: https://code.claude.com/docs/en/common-workflows
 title: Common workflows - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Getting started
-
-  * [Overview](/docs/en/overview)
-  * [Quickstart](/docs/en/quickstart)
-  * [Common workflows](/docs/en/common-workflows)
-
-##### Outside of the terminal
-
-  * [Claude Code on the web](/docs/en/claude-code-on-the-web)
-  * [Claude Code on desktop](/docs/en/desktop)
-  * [Chrome extension (beta)](/docs/en/chrome)
-  * [Visual Studio Code](/docs/en/vs-code)
-  * [JetBrains IDEs](/docs/en/jetbrains)
-  * [GitHub Actions](/docs/en/github-actions)
-  * [GitLab CI/CD](/docs/en/gitlab-ci-cd)
-  * [Claude Code in Slack](/docs/en/slack)
-
-Getting started
-
 # Common workflows
 
 Learn about common workflows with Claude Code.
 
 Each task in this document includes clear instructions, example commands, and best practices to help you get the most from Claude Code.
 
-## 
-
-​
-
 Understand new codebases
-
-### 
-
-​
 
 Get a quick codebase overview
 
@@ -52,75 +19,47 @@ Suppose you’ve just joined a new project and need to understand its structure 
 
 Navigate to the project root directory
 
-Copy
-
 Ask AI
-    
-    
-    cd /path/to/project 
-    
+
+    cd /path/to/project
 
 2
 
 Start Claude Code
 
-Copy
-
 Ask AI
-    
-    
-    claude 
-    
+
+    claude
 
 3
 
 Ask for a high-level overview
 
-Copy
-
 Ask AI
-    
-    
-    > give me an overview of this codebase 
-    
+
+    > give me an overview of this codebase
 
 4
 
 Dive deeper into specific components
 
-Copy
+Ask AI
+
+    > explain the main architecture patterns used here
 
 Ask AI
-    
-    
-    > explain the main architecture patterns used here 
-    
 
-Copy
-
-Ask AI
-    
-    
     > what are the key data models?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > how is authentication handled?
-    
 
 Tips:
 
   * Start with broad questions, then narrow down to specific areas
   * Ask about coding conventions and patterns used in the project
   * Request a glossary of project-specific terms
-
-### 
-
-​
 
 Find relevant code
 
@@ -130,37 +69,25 @@ Suppose you need to locate code related to a specific feature or functionality.
 
 Ask Claude to find relevant files
 
-Copy
-
 Ask AI
-    
-    
-    > find the files that handle user authentication 
-    
+
+    > find the files that handle user authentication
 
 2
 
 Get context on how components interact
 
-Copy
-
 Ask AI
-    
-    
-    > how do these authentication files work together? 
-    
+
+    > how do these authentication files work together?
 
 3
 
 Understand the execution flow
 
-Copy
-
 Ask AI
-    
-    
-    > trace the login process from front-end to database 
-    
+
+    > trace the login process from front-end to database
 
 Tips:
 
@@ -168,10 +95,6 @@ Tips:
   * Use domain language from the project
 
 * * *
-
-## 
-
-​
 
 Fix bugs efficiently
 
@@ -181,37 +104,25 @@ Suppose you’ve encountered an error message and need to find and fix its sourc
 
 Share the error with Claude
 
-Copy
-
 Ask AI
-    
-    
-    > I'm seeing an error when I run npm test 
-    
+
+    > I'm seeing an error when I run npm test
 
 2
 
 Ask for fix recommendations
 
-Copy
-
 Ask AI
-    
-    
-    > suggest a few ways to fix the @ts-ignore in user.ts 
-    
+
+    > suggest a few ways to fix the @ts-ignore in user.ts
 
 3
 
 Apply the fix
 
-Copy
-
 Ask AI
-    
-    
-    > update user.ts to add the null check you suggested 
-    
+
+    > update user.ts to add the null check you suggested
 
 Tips:
 
@@ -221,10 +132,6 @@ Tips:
 
 * * *
 
-## 
-
-​
-
 Refactor code
 
 Suppose you need to update old code to use modern patterns and practices.
@@ -233,49 +140,33 @@ Suppose you need to update old code to use modern patterns and practices.
 
 Identify legacy code for refactoring
 
-Copy
-
 Ask AI
-    
-    
-    > find deprecated API usage in our codebase 
-    
+
+    > find deprecated API usage in our codebase
 
 2
 
 Get refactoring recommendations
 
-Copy
-
 Ask AI
-    
-    
-    > suggest how to refactor utils.js to use modern JavaScript features 
-    
+
+    > suggest how to refactor utils.js to use modern JavaScript features
 
 3
 
 Apply the changes safely
 
-Copy
-
 Ask AI
-    
-    
-    > refactor utils.js to use ES2024 features while maintaining the same behavior 
-    
+
+    > refactor utils.js to use ES2024 features while maintaining the same behavior
 
 4
 
 Verify the refactoring
 
-Copy
-
 Ask AI
-    
-    
-    > run tests for the refactored code 
-    
+
+    > run tests for the refactored code
 
 Tips:
 
@@ -285,10 +176,6 @@ Tips:
 
 * * *
 
-## 
-
-​
-
 Use specialized subagents
 
 Suppose you want to use specialized AI subagents to handle specific tasks more effectively.
@@ -297,13 +184,9 @@ Suppose you want to use specialized AI subagents to handle specific tasks more e
 
 View available subagents
 
-Copy
-
 Ask AI
-    
-    
+
     > /agents
-    
 
 This shows all available subagents and lets you create new ones.
 
@@ -313,53 +196,33 @@ Use subagents automatically
 
 Claude Code automatically delegates appropriate tasks to specialized subagents:
 
-Copy
-
 Ask AI
-    
-    
+
     > review my recent code changes for security issues
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > run all tests and fix any failures
-    
 
 3
 
 Explicitly request specific subagents
 
-Copy
-
 Ask AI
-    
-    
+
     > use the code-reviewer subagent to check the auth module
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > have the debugger subagent investigate why users can't log in
-    
 
 4
 
 Create custom subagents for your workflow
 
-Copy
-
 Ask AI
-    
-    
+
     > /agents
-    
 
 Then select “Create New subagent” and follow the prompts to define:
 
@@ -377,17 +240,9 @@ Tips:
 
 * * *
 
-## 
-
-​
-
 Use Plan Mode for safe code analysis
 
 Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely.
-
-### 
-
-​
 
 When to use Plan Mode
 
@@ -395,91 +250,51 @@ When to use Plan Mode
   * **Code exploration** : When you want to research the codebase thoroughly before changing anything
   * **Interactive development** : When you want to iterate on the direction with Claude
 
-### 
-
-​
-
 How to use Plan Mode
 
 **Turn on Plan Mode during a session** You can switch into Plan Mode during a session using **Shift+Tab** to cycle through permission modes. If you are in Normal Mode, **Shift+Tab** first switches into Auto-Accept Mode, indicated by `⏵⏵ accept edits on` at the bottom of the terminal. A subsequent **Shift+Tab** will switch into Plan Mode, indicated by `⏸ plan mode on`. **Start a new session in Plan Mode** To start a new session in Plan Mode, use the `--permission-mode plan` flag:
 
-Copy
-
 Ask AI
-    
-    
+
     claude --permission-mode plan
-    
 
 **Run “headless” queries in Plan Mode** You can also run a query in Plan Mode directly with `-p` (that is, in [“headless mode”](/docs/en/headless)):
 
-Copy
-
 Ask AI
-    
-    
+
     claude --permission-mode plan -p "Analyze the authentication system and suggest improvements"
-    
-
-### 
-
-​
 
 Example: Planning a complex refactor
 
-Copy
-
 Ask AI
-    
-    
+
     claude --permission-mode plan
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.
-    
 
 Claude analyzes the current implementation and create a comprehensive plan. Refine with follow-ups:
 
-Copy
-
 Ask AI
-    
-    
+
     > What about backward compatibility?
     > How should we handle database migration?
-    
-
-### 
-
-​
 
 Configure Plan Mode as default
 
-Copy
-
 Ask AI
-    
-    
+
     // .claude/settings.json
     {
       "permissions": {
         "defaultMode": "plan"
       }
     }
-    
 
 See [settings documentation](/docs/en/settings#available-settings) for more configuration options.
 
 * * *
-
-## 
-
-​
 
 Work with tests
 
@@ -489,57 +304,37 @@ Suppose you need to add tests for uncovered code.
 
 Identify untested code
 
-Copy
-
 Ask AI
-    
-    
-    > find functions in NotificationsService.swift that are not covered by tests 
-    
+
+    > find functions in NotificationsService.swift that are not covered by tests
 
 2
 
 Generate test scaffolding
 
-Copy
-
 Ask AI
-    
-    
-    > add tests for the notification service 
-    
+
+    > add tests for the notification service
 
 3
 
 Add meaningful test cases
 
-Copy
-
 Ask AI
-    
-    
-    > add test cases for edge conditions in the notification service 
-    
+
+    > add test cases for edge conditions in the notification service
 
 4
 
 Run and verify tests
 
-Copy
-
 Ask AI
-    
-    
-    > run the new tests and fix any failures 
-    
+
+    > run the new tests and fix any failures
 
 Claude can generate tests that follow your project’s existing patterns and conventions. When asking for tests, be specific about what behavior you want to verify. Claude examines your existing test files to match the style, frameworks, and assertion patterns already in use. For comprehensive coverage, ask Claude to identify edge cases you might have missed. Claude can analyze your code paths and suggest tests for error conditions, boundary values, and unexpected inputs that are easy to overlook.
 
 * * *
-
-## 
-
-​
 
 Create pull requests
 
@@ -549,59 +344,39 @@ Suppose you need to create a well-documented pull request for your changes.
 
 Summarize your changes
 
-Copy
-
 Ask AI
-    
-    
-    > summarize the changes I've made to the authentication module 
-    
+
+    > summarize the changes I've made to the authentication module
 
 2
 
 Generate a pull request with Claude
 
-Copy
-
 Ask AI
-    
-    
-    > create a pr 
-    
+
+    > create a pr
 
 3
 
 Review and refine
 
-Copy
-
 Ask AI
-    
-    
-    > enhance the PR description with more context about the security improvements 
-    
+
+    > enhance the PR description with more context about the security improvements
 
 4
 
 Add testing details
 
-Copy
-
 Ask AI
-    
-    
-    > add information about how these changes were tested 
-    
+
+    > add information about how these changes were tested
 
 Tips:
 
   * Ask Claude directly to make a PR for you
   * Review Claude’s generated PR before submitting
   * Ask Claude to highlight potential risks or considerations
-
-## 
-
-​
 
 Handle documentation
 
@@ -611,49 +386,33 @@ Suppose you need to add or update documentation for your code.
 
 Identify undocumented code
 
-Copy
-
 Ask AI
-    
-    
-    > find functions without proper JSDoc comments in the auth module 
-    
+
+    > find functions without proper JSDoc comments in the auth module
 
 2
 
 Generate documentation
 
-Copy
-
 Ask AI
-    
-    
-    > add JSDoc comments to the undocumented functions in auth.js 
-    
+
+    > add JSDoc comments to the undocumented functions in auth.js
 
 3
 
 Review and enhance
 
-Copy
-
 Ask AI
-    
-    
-    > improve the generated documentation with more context and examples 
-    
+
+    > improve the generated documentation with more context and examples
 
 4
 
 Verify documentation
 
-Copy
-
 Ask AI
-    
-    
-    > check if the documentation follows our project standards 
-    
+
+    > check if the documentation follows our project standards
 
 Tips:
 
@@ -662,10 +421,6 @@ Tips:
   * Request documentation for public APIs, interfaces, and complex logic
 
 * * *
-
-## 
-
-​
 
 Work with images
 
@@ -685,69 +440,41 @@ You can use any of these methods:
 
 Ask Claude to analyze the image
 
-Copy
-
 Ask AI
-    
-    
+
     > What does this image show?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > Describe the UI elements in this screenshot
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > Are there any problematic elements in this diagram?
-    
 
 3
 
 Use images for context
 
-Copy
-
 Ask AI
-    
-    
+
     > Here's a screenshot of the error. What's causing it?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > This is our current database schema. How should we modify it for the new feature?
-    
 
 4
 
 Get code suggestions from visual content
 
-Copy
-
 Ask AI
-    
-    
+
     > Generate CSS to match this design mockup
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > What HTML structure would recreate this component?
-    
 
 Tips:
 
@@ -758,10 +485,6 @@ Tips:
 
 * * *
 
-## 
-
-​
-
 Reference files and directories
 
 Use @ to quickly include files or directories without waiting for Claude to read them.
@@ -770,13 +493,9 @@ Use @ to quickly include files or directories without waiting for Claude to read
 
 Reference a single file
 
-Copy
-
 Ask AI
-    
-    
+
     > Explain the logic in @src/utils/auth.js
-    
 
 This includes the full content of the file in the conversation.
 
@@ -784,13 +503,9 @@ This includes the full content of the file in the conversation.
 
 Reference a directory
 
-Copy
-
 Ask AI
-    
-    
+
     > What's the structure of @src/components?
-    
 
 This provides a directory listing with file information.
 
@@ -798,13 +513,9 @@ This provides a directory listing with file information.
 
 Reference MCP resources
 
-Copy
-
 Ask AI
-    
-    
+
     > Show me the data from @github:repos/owner/repo/issues
-    
 
 This fetches data from connected MCP servers using the format @server:resource. See [MCP resources](/docs/en/mcp#use-mcp-resources) for details.
 
@@ -817,10 +528,6 @@ Tips:
 
 * * *
 
-## 
-
-​
-
 Use extended thinking (thinking mode)
 
 [Extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) reserves a portion of the total output token budget for Claude to reason through complex problems step-by-step. This reasoning is visible in verbose mode, which you can toggle on with `Ctrl+O`. Extended thinking is particularly valuable for complex architectural decisions, challenging bugs, multi-step implementation planning, and evaluating tradeoffs between different approaches. It provides more space for exploring multiple solutions, analyzing edge cases, and self-correcting mistakes.
@@ -829,33 +536,21 @@ Sonnet 4.5 and Opus 4.5 have thinking enabled by default. All other models have 
 
 You can configure thinking mode for Claude Code in two ways:
 
-Scope| How to enable| Details  
----|---|---  
-**Global default**|  Use `/config` to toggle thinking mode on| Sets your default across all projects.  
-Saved as `alwaysThinkingEnabled` in `~/.claude/settings.json`  
-**Environment variable override**|  Set [`MAX_THINKING_TOKENS`](/docs/en/settings#environment-variables) environment variable| When set, applies a custom token budget to all requests, overriding your thinking mode configuration. Example: `export MAX_THINKING_TOKENS=1024`  
-  
-### 
-
-​
+Scope| How to enable| Details
+---|---|---
+**Global default**|  Use `/config` to toggle thinking mode on| Sets your default across all projects.
+Saved as `alwaysThinkingEnabled` in `~/.claude/settings.json`
+**Environment variable override**|  Set [`MAX_THINKING_TOKENS`](/docs/en/settings#environment-variables) environment variable| When set, applies a custom token budget to all requests, overriding your thinking mode configuration. Example: `export MAX_THINKING_TOKENS=1024`
 
 Per-request thinking with `ultrathink`
 
 You can include `ultrathink` as a keyword in your message to enable thinking for a single request:
 
-Copy
-
 Ask AI
-    
-    
+
     > ultrathink: design a caching layer for our API
-    
 
 Note that `ultrathink` both allocates the thinking budget AND semantically signals to Claude to reason more thoroughly, which may result in deeper thinking than necessary for your task. The `ultrathink` keyword only works when `MAX_THINKING_TOKENS` is not set. When `MAX_THINKING_TOKENS` is configured, it takes priority and controls the thinking budget for all requests. Other phrases like “think”, “think hard”, and “think more” are interpreted as regular prompt instructions and don’t allocate thinking tokens. To view Claude’s thinking process, press `Ctrl+O` to toggle verbose mode and see the internal reasoning displayed as gray italic text. See the token budget section below for detailed budget information and cost implications.
-
-### 
-
-​
 
 How extended thinking token budgets work
 
@@ -880,10 +575,6 @@ You’re charged for all thinking tokens used, even though Claude 4 models show 
 
 * * *
 
-## 
-
-​
-
 Resume previous conversations
 
 When starting Claude Code, you can resume a previous session:
@@ -892,10 +583,6 @@ When starting Claude Code, you can resume a previous session:
   * `claude --resume` opens a conversation picker or resumes by name
 
 From inside an active session, use `/resume` to switch to a different conversation. Sessions are stored per project directory. The `/resume` picker shows sessions from the same git repository, including worktrees.
-
-### 
-
-​
 
 Name your sessions
 
@@ -907,13 +594,9 @@ Name the current session
 
 Use `/rename` during a session to give it a memorable name:
 
-Copy
-
 Ask AI
-    
-    
+
     > /rename auth-refactor
-    
 
 You can also rename any session from the picker: run `/resume`, navigate to a session, and press `R`.
 
@@ -923,44 +606,32 @@ Resume by name later
 
 From the command line:
 
-Copy
-
 Ask AI
-    
-    
+
     claude --resume auth-refactor
-    
 
 Or from inside an active session:
 
-Copy
-
 Ask AI
-    
-    
+
     > /resume auth-refactor
-    
-
-### 
-
-​
 
 Use the session picker
 
 The `/resume` command (or `claude --resume` without arguments) opens an interactive session picker with these features: **Keyboard shortcuts in the picker:**
 
-Shortcut| Action  
----|---  
-`↑` / `↓`| Navigate between sessions  
-`→` / `←`| Expand or collapse grouped sessions  
-`Enter`| Select and resume the highlighted session  
-`P`| Preview the session content  
-`R`| Rename the highlighted session  
-`/`| Search to filter sessions  
-`A`| Toggle between current directory and all projects  
-`B`| Filter to sessions from your current git branch  
-`Esc`| Exit the picker or search mode  
-  
+Shortcut| Action
+---|---
+`↑` / `↓`| Navigate between sessions
+`→` / `←`| Expand or collapse grouped sessions
+`Enter`| Select and resume the highlighted session
+`P`| Preview the session content
+`R`| Rename the highlighted session
+`/`| Search to filter sessions
+`A`| Toggle between current directory and all projects
+`B`| Filter to sessions from your current git branch
+`Esc`| Exit the picker or search mode
+
 **Session organization:** The picker displays sessions with helpful metadata:
 
   * Session name or initial prompt
@@ -989,10 +660,6 @@ How it works:
 
 * * *
 
-## 
-
-​
-
 Run parallel Claude Code sessions with Git worktrees
 
 Suppose you need to work on multiple tasks simultaneously with complete code isolation between Claude Code instances.
@@ -1007,17 +674,13 @@ Git worktrees allow you to check out multiple branches from the same repository 
 
 Create a new worktree
 
-Copy
-
 Ask AI
-    
-    
-    # Create a new worktree with a new branch 
+
+    # Create a new worktree with a new branch
     git worktree add ../project-feature-a -b feature-a
-    
+
     # Or create a worktree with an existing branch
     git worktree add ../project-bugfix bugfix-123
-    
 
 This creates a new directory with a separate working copy of your repository.
 
@@ -1025,46 +688,34 @@ This creates a new directory with a separate working copy of your repository.
 
 Run Claude Code in each worktree
 
-Copy
-
 Ask AI
-    
-    
-    # Navigate to your worktree 
+
+    # Navigate to your worktree
     cd ../project-feature-a
-    
+
     # Run Claude Code in this isolated environment
     claude
-    
 
 4
 
 Run Claude in another worktree
 
-Copy
-
 Ask AI
-    
-    
+
     cd ../project-bugfix
     claude
-    
 
 5
 
 Manage your worktrees
 
-Copy
-
 Ask AI
-    
-    
+
     # List all worktrees
     git worktree list
-    
+
     # Remove a worktree when done
     git worktree remove ../project-feature-a
-    
 
 Tips:
 
@@ -1080,25 +731,14 @@ Tips:
 
 * * *
 
-## 
-
-​
-
 Use Claude as a unix-style utility
-
-### 
-
-​
 
 Add Claude to your verification process
 
 Suppose you want to use Claude Code as a linter or code reviewer. **Add Claude to your build script:**
 
-Copy
-
 Ask AI
-    
-    
+
     // package.json
     {
         ...
@@ -1107,7 +747,6 @@ Ask AI
             "lint:claude": "claude -p 'you are a linter. please look at the changes vs. main and report any issues related to typos. report the filename and line number on one line, and a description of the issue on the second line. do not return any other text.'"
         }
     }
-    
 
 Tips:
 
@@ -1115,31 +754,19 @@ Tips:
   * Customize the prompt to check for specific issues relevant to your project
   * Consider creating multiple scripts for different types of verification
 
-### 
-
-​
-
 Pipe in, pipe out
 
 Suppose you want to pipe data into Claude, and get back data in a structured format. **Pipe data through Claude:**
 
-Copy
-
 Ask AI
-    
-    
+
     cat build-error.txt | claude -p 'concisely explain the root cause of this build error' > output.txt
-    
 
 Tips:
 
   * Use pipes to integrate Claude into existing shell scripts
   * Combine with other Unix tools for powerful workflows
   * Consider using —output-format for structured output
-
-### 
-
-​
 
 Control output format
 
@@ -1149,13 +776,9 @@ Suppose you need Claude’s output in a specific format, especially when integra
 
 Use text format (default)
 
-Copy
-
 Ask AI
-    
-    
+
     cat data.txt | claude -p 'summarize this data' --output-format text > summary.txt
-    
 
 This outputs just Claude’s plain text response (default behavior).
 
@@ -1163,13 +786,9 @@ This outputs just Claude’s plain text response (default behavior).
 
 Use JSON format
 
-Copy
-
 Ask AI
-    
-    
+
     cat code.py | claude -p 'analyze this code for bugs' --output-format json > analysis.json
-    
 
 This outputs a JSON array of messages with metadata including cost and duration.
 
@@ -1177,13 +796,9 @@ This outputs a JSON array of messages with metadata including cost and duration.
 
 Use streaming JSON format
 
-Copy
-
 Ask AI
-    
-    
+
     cat log.txt | claude -p 'parse this log file for errors' --output-format stream-json
-    
 
 This outputs a series of JSON objects in real-time as Claude processes the request. Each message is a valid JSON object, but the entire output is not valid JSON if concatenated.
 
@@ -1195,17 +810,9 @@ Tips:
 
 * * *
 
-## 
-
-​
-
 Create custom slash commands
 
 Claude Code supports custom slash commands that you can create to quickly execute specific prompts or tasks. For more details, see the [Slash commands](/docs/en/slash-commands) reference page.
-
-### 
-
-​
 
 Create project-specific commands
 
@@ -1215,37 +822,25 @@ Suppose you want to create reusable slash commands for your project that all tea
 
 Create a commands directory in your project
 
-Copy
-
 Ask AI
-    
-    
+
     mkdir -p .claude/commands
-    
 
 2
 
 Create a Markdown file for each command
 
-Copy
-
 Ask AI
-    
-    
-    echo "Analyze the performance of this code and suggest three specific optimizations:" > .claude/commands/optimize.md 
-    
+
+    echo "Analyze the performance of this code and suggest three specific optimizations:" > .claude/commands/optimize.md
 
 3
 
 Use your custom command in Claude Code
 
-Copy
-
 Ask AI
-    
-    
-    > /optimize 
-    
+
+    > /optimize
 
 Tips:
 
@@ -1253,10 +848,6 @@ Tips:
   * You can organize commands in subdirectories (for example, `.claude/commands/frontend/component.md` creates `/component` with “(project:frontend)” shown in the description)
   * Project commands are available to everyone who clones the repository
   * The Markdown file content becomes the prompt sent to Claude when the command is invoked
-
-### 
-
-​
 
 Add command arguments with $ARGUMENTS
 
@@ -1266,17 +857,13 @@ Suppose you want to create flexible slash commands that can accept additional in
 
 Create a command file with the $ARGUMENTS placeholder
 
-Copy
-
 Ask AI
-    
-    
+
     echo 'Find and fix issue #$ARGUMENTS. Follow these steps: 1.
     Understand the issue described in the ticket 2. Locate the relevant code in
     our codebase 3. Implement a solution that addresses the root cause 4. Add
     appropriate tests 5. Prepare a concise PR description' >
-    .claude/commands/fix-issue.md 
-    
+    .claude/commands/fix-issue.md
 
 2
 
@@ -1284,13 +871,9 @@ Use the command with an issue number
 
 In your Claude session, use the command with arguments.
 
-Copy
-
 Ask AI
-    
-    
-    > /fix-issue 123 
-    
+
+    > /fix-issue 123
 
 This replaces $ARGUMENTS with “123” in the prompt.
 
@@ -1300,10 +883,6 @@ Tips:
   * You can position $ARGUMENTS anywhere in your command template
   * Other useful applications: generating test cases for specific functions, creating documentation for components, reviewing code in particular files, or translating content to specified languages
 
-### 
-
-​
-
 Create personal slash commands
 
 Suppose you want to create personal slash commands that work across all your projects.
@@ -1312,38 +891,26 @@ Suppose you want to create personal slash commands that work across all your pro
 
 Create a commands directory in your home folder
 
-Copy
-
 Ask AI
-    
-    
-    mkdir -p ~/.claude/commands 
-    
+
+    mkdir -p ~/.claude/commands
 
 2
 
 Create a Markdown file for each command
 
-Copy
-
 Ask AI
-    
-    
+
     echo "Review this code for security vulnerabilities, focusing on:" >
-    ~/.claude/commands/security-review.md 
-    
+    ~/.claude/commands/security-review.md
 
 3
 
 Use your personal custom command
 
-Copy
-
 Ask AI
-    
-    
-    > /security-review 
-    
+
+    > /security-review
 
 Tips:
 
@@ -1354,67 +921,35 @@ Tips:
 
 * * *
 
-## 
-
-​
-
 Ask Claude about its capabilities
 
 Claude has built-in access to its documentation and can answer questions about its own features and limitations.
 
-### 
-
-​
-
 Example questions
 
-Copy
-
 Ask AI
-    
-    
+
     > can Claude Code create pull requests?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > how does Claude Code handle permissions?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > what slash commands are available?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > how do I use MCP with Claude Code?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > how do I configure Claude Code for Amazon Bedrock?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > what are the limitations of Claude Code?
-    
 
 Claude provides documentation-based answers to these questions. For executable examples and hands-on demonstrations, refer to the specific workflow sections above.
 
@@ -1425,10 +960,6 @@ Tips:
   * Claude can explain complex features like MCP integration, enterprise configurations, and advanced workflows
 
 * * *
-
-## 
-
-​
 
 Next steps
 

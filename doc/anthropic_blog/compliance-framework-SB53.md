@@ -4,13 +4,9 @@ title: Sharing our compliance framework for California's Transparency in Frontie
 category: Commitments
 ---
 
-Policy
-
 # Sharing our compliance framework for California's Transparency in Frontier AI Act
 
 Dec 19, 2025
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6e00dbffcddc82df5e471c43453abfc74ca94e8d-1000x1000.svg)
 
 On January 1, California's Transparency in Frontier AI Act ([SB 53](https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB53)) will go into effect. It establishes the nation’s first frontier AI safety and transparency requirements for catastrophic risks.
 
@@ -39,8 +35,6 @@ Earlier this year, we proposed a [framework](https://www.anthropic.com/news/the-
   * **Limit application to the largest model developers** : To avoid burdening the startup ecosystem and smaller developers with models at low risk for causing catastrophic harm, requirements should apply only to established frontier developers building the most capable models.
 
 As AI systems grow more powerful, the public deserves visibility into how they're being developed and what safeguards are in place. We look forward to working with Congress and the administration to develop a national transparency framework that ensures safety while preserving America’s AI leadership.
-
-  
 
 [](https://twitter.com/intent/tweet?text=https://www.anthropic.com/news/compliance-framework-SB53)[](https://www.linkedin.com/shareArticle?mini=true&url=https://www.anthropic.com/news/compliance-framework-SB53)
 

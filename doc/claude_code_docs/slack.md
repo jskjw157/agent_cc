@@ -3,40 +3,11 @@ source: https://code.claude.com/docs/en/slack
 title: Claude Code in Slack - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Getting started
-
-  * [Overview](/docs/en/overview)
-  * [Quickstart](/docs/en/quickstart)
-  * [Common workflows](/docs/en/common-workflows)
-
-##### Outside of the terminal
-
-  * [Claude Code on the web](/docs/en/claude-code-on-the-web)
-  * [Claude Code on desktop](/docs/en/desktop)
-  * [Chrome extension (beta)](/docs/en/chrome)
-  * [Visual Studio Code](/docs/en/vs-code)
-  * [JetBrains IDEs](/docs/en/jetbrains)
-  * [GitHub Actions](/docs/en/github-actions)
-  * [GitLab CI/CD](/docs/en/gitlab-ci-cd)
-  * [Claude Code in Slack](/docs/en/slack)
-
-Outside of the terminal
-
 # Claude Code in Slack
 
 Delegate coding tasks directly from your Slack workspace
 
 Claude Code in Slack brings the power of Claude Code directly into your Slack workspace. When you mention `@Claude` with a coding task, Claude automatically detects the intent and creates a Claude Code session on the web, allowing you to delegate development work without leaving your team conversations. This integration is built on the existing Claude for Slack app but adds intelligent routing to Claude Code on the web for coding-related requests.
-
-## 
-
-​
 
 Use cases
 
@@ -45,24 +16,16 @@ Use cases
   * **Collaborative debugging** : When team discussions provide crucial context (e.g., error reproductions or user reports), Claude can use that information to inform its debugging approach.
   * **Parallel task execution** : Kick off coding tasks in Slack while you continue other work, receiving notifications when complete.
 
-## 
-
-​
-
 Prerequisites
 
 Before using Claude Code in Slack, ensure you have the following:
 
-Requirement| Details  
----|---  
-Claude Plan| Pro, Max, Team, or Enterprise with Claude Code access (premium seats)  
-Claude Code on the web| Access to [Claude Code on the web](/docs/en/claude-code-on-the-web) must be enabled  
-GitHub Account| Connected to Claude Code on the web with at least one repository authenticated  
-Slack Authentication| Your Slack account linked to your Claude account via the Claude app  
-  
-## 
-
-​
+Requirement| Details
+---|---
+Claude Plan| Pro, Max, Team, or Enterprise with Claude Code access (premium seats)
+Claude Code on the web| Access to [Claude Code on the web](/docs/en/claude-code-on-the-web) must be enabled
+GitHub Account| Connected to Claude Code on the web with at least one repository authenticated
+Slack Authentication| Your Slack account linked to your Claude account via the Claude app
 
 Setting up Claude Code in Slack
 
@@ -99,22 +62,14 @@ Choose your routing mode
 
 After connecting your accounts, configure how Claude handles your messages in Slack. Navigate to the Claude App Home in Slack to find the **Routing Mode** setting.
 
-Mode| Behavior  
----|---  
-**Code only**|  Claude routes all @mentions to Claude Code sessions. Best for teams using Claude in Slack exclusively for development tasks.  
-**Code + Chat**|  Claude analyzes each message and intelligently routes between Claude Code (for coding tasks) and Claude Chat (for writing, analysis, and general questions). Best for teams who want a single @Claude entry point for all types of work.  
-  
+Mode| Behavior
+---|---
+**Code only**|  Claude routes all @mentions to Claude Code sessions. Best for teams using Claude in Slack exclusively for development tasks.
+**Code + Chat**|  Claude analyzes each message and intelligently routes between Claude Code (for coding tasks) and Claude Chat (for writing, analysis, and general questions). Best for teams who want a single @Claude entry point for all types of work.
+
 In Code + Chat mode, if Claude routes a message to Chat but you wanted a coding session, you can click “Retry as Code” to create a Claude Code session instead. Similarly, if it’s routed to Code but you wanted a Chat session, you can choose that option in that thread.
 
-## 
-
-​
-
 How it works
-
-### 
-
-​
 
 Automatic detection
 
@@ -122,19 +77,11 @@ When you mention @Claude in a Slack channel or thread, Claude automatically anal
 
 Claude Code in Slack only works in channels (public or private). It does not work in direct messages (DMs).
 
-### 
-
-​
-
 Context gathering
 
 **From threads** : When you @mention Claude in a thread, it gathers context from all messages in that thread to understand the full conversation. **From channels** : When mentioned directly in a channel, Claude looks at recent channel messages for relevant context. This context helps Claude understand the problem, select the appropriate repository, and inform its approach to the task.
 
 When @Claude is invoked in Slack, Claude is given access to the conversation context to better understand your request. Claude may follow directions from other messages in the context, so users should make sure to only use Claude in trusted Slack conversations.
-
-### 
-
-​
 
 Session flow
 
@@ -145,23 +92,11 @@ Session flow
   5. **Completion** : When finished, Claude @mentions you with a summary and action buttons
   6. **Review** : Click “View Session” to see the full transcript, or “Create PR” to open a pull request
 
-## 
-
-​
-
 User interface elements
-
-### 
-
-​
 
 App Home
 
 The App Home tab shows your connection status and allows you to connect or disconnect your Claude account from Slack.
-
-### 
-
-​
 
 Message actions
 
@@ -170,58 +105,30 @@ Message actions
   * **Retry as Code** : If Claude initially responds as a chat assistant but you wanted a coding session, click this button to retry the request as a Claude Code task.
   * **Change Repo** : Allows you to select a different repository if Claude chose incorrectly.
 
-### 
-
-​
-
 Repository selection
 
 Claude automatically selects a repository based on context from your Slack conversation. If multiple repositories could apply, Claude may display a dropdown allowing you to choose the correct one.
 
-## 
-
-​
-
 Access and permissions
-
-### 
-
-​
 
 User-level access
 
-Access Type| Requirement  
----|---  
-Claude Code Sessions| Each user runs sessions under their own Claude account  
-Usage & Rate Limits| Sessions count against the individual user’s plan limits  
-Repository Access| Users can only access repositories they’ve personally connected  
-Session History| Sessions appear in your Claude Code history on claude.ai/code  
-  
-### 
-
-​
+Access Type| Requirement
+---|---
+Claude Code Sessions| Each user runs sessions under their own Claude account
+Usage & Rate Limits| Sessions count against the individual user’s plan limits
+Repository Access| Users can only access repositories they’ve personally connected
+Session History| Sessions appear in your Claude Code history on claude.ai/code
 
 Workspace admin permissions
 
 Slack workspace administrators control whether the Claude app can be installed in the workspace. Individual users then authenticate with their own Claude accounts to use the integration.
 
-## 
-
-​
-
 What’s accessible where
 
 **In Slack** : You’ll see status updates, completion summaries, and action buttons. The full transcript is preserved and always accessible. **On the web** : The complete Claude Code session with full conversation history, all code changes, file operations, and the ability to continue the session or create pull requests.
 
-## 
-
-​
-
 Best practices
-
-### 
-
-​
 
 Writing effective requests
 
@@ -230,23 +137,11 @@ Writing effective requests
   * **Define success** : Explain what “done” looks like—should Claude write tests? Update documentation? Create a PR?
   * **Use threads** : Reply in threads when discussing bugs or features so Claude can gather the full context.
 
-### 
-
-​
-
 When to use Slack vs. web
 
 **Use Slack when** : Context already exists in a Slack discussion, you want to kick off a task asynchronously, or you’re collaborating with teammates who need visibility. **Use the web directly when** : You need to upload files, want real-time interaction during development, or are working on longer, more complex tasks.
 
-## 
-
-​
-
 Troubleshooting
-
-### 
-
-​
 
 Sessions not starting
 
@@ -254,28 +149,16 @@ Sessions not starting
   2. Check that you have Claude Code on the web access enabled
   3. Ensure you have at least one GitHub repository connected to Claude Code
 
-### 
-
-​
-
 Repository not showing
 
   1. Connect the repository in Claude Code on the web at [claude.ai/code](https://claude.ai/code)
   2. Verify your GitHub permissions for that repository
   3. Try disconnecting and reconnecting your GitHub account
 
-### 
-
-​
-
 Wrong repository selected
 
   1. Click the “Change Repo” button to select a different repository
   2. Include the repository name in your request for more accurate selection
-
-### 
-
-​
 
 Authentication errors
 
@@ -283,18 +166,10 @@ Authentication errors
   2. Ensure you’re signed into the correct Claude account in your browser
   3. Check that your Claude plan includes Claude Code access
 
-### 
-
-​
-
 Session expiration
 
   1. Sessions remain accessible in your Claude Code history on the web
   2. You can continue or reference past sessions from [claude.ai/code](https://claude.ai/code)
-
-## 
-
-​
 
 Current limitations
 
@@ -302,10 +177,6 @@ Current limitations
   * **One PR at a time** : Each session can create one pull request.
   * **Rate limits apply** : Sessions use your individual Claude plan’s rate limits.
   * **Web access required** : Users must have Claude Code on the web access; those without it will only get standard Claude chat responses.
-
-## 
-
-​
 
 Related resources
 

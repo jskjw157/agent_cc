@@ -4,13 +4,9 @@ title: Accenture and Anthropic launch multi-year partnership to move enterprises
 category: Commitments
 ---
 
-AnnouncementsProduct
-
 # Accenture and Anthropic launch multi-year partnership to move enterprises from AI pilots to production
 
 Dec 9, 2025
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/225a673c4c38ae4b0d89639836c93b27e363f185-1000x1000.svg)
 
 Anthropic and Accenture today announced a major expansion of their partnership to help enterprises move from AI pilots to full-scale deployment. Key elements of the announcement:
 

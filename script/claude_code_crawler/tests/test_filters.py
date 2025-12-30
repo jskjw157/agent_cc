@@ -63,6 +63,37 @@ class TestClaudeCodeCrawlerFilters(unittest.TestCase):
         self.assertTrue(any(header.find("h1") for header in headers))
         self.assertEqual(len(headers), 1)
 
+    def test_trim_to_first_heading(self):
+        html = """
+        <html><body>
+        <main>
+          <p>Menu</p>
+          <section>
+            <h1>Title</h1>
+            <p>Body</p>
+          </section>
+        </main>
+        </body></html>
+        """
+        soup = BeautifulSoup(html, "html.parser")
+        content = soup.find("main")
+        self.crawler.trim_to_first_heading(content)
+        self.assertIsNone(content.find(string="Menu"))
+        self.assertIsNotNone(content.find(string="Body"))
+
+    def test_compress_markdown(self):
+        markdown = "Copy\n\n# Title\n\n\n```\nCopy\n```\n\n\nText\n"
+        compressed = self.crawler.compress_markdown(markdown)
+        self.assertTrue(compressed.startswith("# Title"))
+        self.assertIn("```\nCopy\n```", compressed)
+        self.assertNotIn("\n\n\n", compressed)
+        self.assertNotIn("# Title\n\n```", compressed)
+        self.assertNotIn("```\n\nText", compressed)
+
+    def test_compact_mode_keeps_links(self):
+        self.assertFalse(self.crawler.html_converter.ignore_links)
+        self.assertTrue(self.crawler.html_converter.ignore_images)
+
 
 class TestAnthropicBlogCrawlerFilters(unittest.TestCase):
     def setUp(self):
@@ -108,6 +139,37 @@ class TestAnthropicBlogCrawlerFilters(unittest.TestCase):
         self.assertFalse(
             crawler.is_valid_post_url("https://www.anthropic.com/news/claude-opus-4-5")
         )
+
+    def test_trim_to_first_heading(self):
+        html = """
+        <html><body>
+        <main>
+          <p>Menu</p>
+          <section>
+            <h1>Title</h1>
+            <p>Body</p>
+          </section>
+        </main>
+        </body></html>
+        """
+        soup = BeautifulSoup(html, "html.parser")
+        content = soup.find("main")
+        self.crawler.trim_to_first_heading(content)
+        self.assertIsNone(content.find(string="Menu"))
+        self.assertIsNotNone(content.find(string="Body"))
+
+    def test_compress_markdown(self):
+        markdown = "Copy\n\n# Title\n\n\n```\nCopy\n```\n\n\nText\n"
+        compressed = self.crawler.compress_markdown(markdown)
+        self.assertTrue(compressed.startswith("# Title"))
+        self.assertIn("```\nCopy\n```", compressed)
+        self.assertNotIn("\n\n\n", compressed)
+        self.assertNotIn("# Title\n\n```", compressed)
+        self.assertNotIn("```\n\nText", compressed)
+
+    def test_compact_mode_keeps_links(self):
+        self.assertFalse(self.crawler.html_converter.ignore_links)
+        self.assertTrue(self.crawler.html_converter.ignore_images)
 
 
 if __name__ == "__main__":

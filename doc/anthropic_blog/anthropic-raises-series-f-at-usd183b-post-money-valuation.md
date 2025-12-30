@@ -4,13 +4,9 @@ title: Anthropic raises $13B Series F at $183B post-money valuation
 category: Commitments
 ---
 
-Announcements
-
 # Anthropic raises $13B Series F at $183B post-money valuation
 
 Sep 2, 2025
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c0af2a56f56cf298ce5904f2901e9a36facd0dbe-1000x1000.svg)
 
 Anthropic has completed a Series F fundraising of $13 billion led by ICONIQ. This financing values Anthropic at $183 billion post-money. Along with ICONIQ, the round was co-led by Fidelity Management & Research Company and Lightspeed Venture Partners. The investment reflects Anthropic’s continued momentum and reinforces our position as the leading intelligence platform for enterprises, developers, and power users.
 

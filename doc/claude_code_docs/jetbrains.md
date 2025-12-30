@@ -3,40 +3,11 @@ source: https://code.claude.com/docs/en/jetbrains
 title: JetBrains IDEs - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Getting started
-
-  * [Overview](/docs/en/overview)
-  * [Quickstart](/docs/en/quickstart)
-  * [Common workflows](/docs/en/common-workflows)
-
-##### Outside of the terminal
-
-  * [Claude Code on the web](/docs/en/claude-code-on-the-web)
-  * [Claude Code on desktop](/docs/en/desktop)
-  * [Chrome extension (beta)](/docs/en/chrome)
-  * [Visual Studio Code](/docs/en/vs-code)
-  * [JetBrains IDEs](/docs/en/jetbrains)
-  * [GitHub Actions](/docs/en/github-actions)
-  * [GitLab CI/CD](/docs/en/gitlab-ci-cd)
-  * [Claude Code in Slack](/docs/en/slack)
-
-Outside of the terminal
-
 # JetBrains IDEs
 
 Use Claude Code with JetBrains IDEs including IntelliJ, PyCharm, WebStorm, and more
 
 Claude Code integrates with JetBrains IDEs through a dedicated plugin, providing features like interactive diff viewing, selection context sharing, and more.
-
-## 
-
-​
 
 Supported IDEs
 
@@ -49,10 +20,6 @@ The Claude Code plugin works with most JetBrains IDEs, including:
   * PhpStorm
   * GoLand
 
-## 
-
-​
-
 Features
 
   * **Quick launch** : Use `Cmd+Esc` (Mac) or `Ctrl+Esc` (Windows/Linux) to open Claude Code directly from your editor, or click the Claude Code button in the UI
@@ -61,15 +28,7 @@ Features
   * **File reference shortcuts** : Use `Cmd+Option+K` (Mac) or `Alt+Ctrl+K` (Linux/Windows) to insert file references (for example, @File#L1-99)
   * **Diagnostic sharing** : Diagnostic errors (lint, syntax, etc.) from the IDE are automatically shared with Claude as you work
 
-## 
-
-​
-
 Installation
-
-### 
-
-​
 
 Marketplace Installation
 
@@ -77,48 +36,24 @@ Find and install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/2
 
 After installing the plugin, you may need to restart your IDE completely for it to take effect.
 
-## 
-
-​
-
 Usage
-
-### 
-
-​
 
 From Your IDE
 
 Run `claude` from your IDE’s integrated terminal, and all integration features will be active.
 
-### 
-
-​
-
 From External Terminals
 
 Use the `/ide` command in any external terminal to connect Claude Code to your JetBrains IDE and activate all features:
 
-Copy
-
 Ask AI
-    
-    
+
     claude
     > /ide
-    
 
 If you want Claude to have access to the same files as your IDE, start Claude Code from the same directory as your IDE project root.
 
-## 
-
-​
-
 Configuration
-
-### 
-
-​
 
 Claude Code Settings
 
@@ -128,17 +63,9 @@ Configure IDE integration through Claude Code’s settings:
   2. Enter the `/config` command
   3. Set the diff tool to `auto` for automatic IDE detection
 
-### 
-
-​
-
 Plugin Settings
 
 Configure the Claude Code plugin by going to **Settings → Tools → Claude Code [Beta]** :
-
-#### 
-
-​
 
 General Settings
 
@@ -148,10 +75,6 @@ General Settings
   * **Enable automatic updates** : Automatically check for and install plugin updates (applied on restart)
 
 For WSL users: Set `wsl -d Ubuntu -- bash -lic "claude"` as your Claude command (replace `Ubuntu` with your WSL distribution name)
-
-#### 
-
-​
 
 ESC Key Configuration
 
@@ -165,25 +88,13 @@ If the ESC key doesn’t interrupt Claude Code operations in JetBrains terminals
 
 This allows the ESC key to properly interrupt Claude Code operations.
 
-## 
-
-​
-
 Special Configurations
-
-### 
-
-​
 
 Remote Development
 
 When using JetBrains Remote Development, you must install the plugin in the remote host via **Settings → Plugin (Host)**.
 
 The plugin must be installed on the remote host, not on your local client machine.
-
-### 
-
-​
 
 WSL Configuration
 
@@ -195,15 +106,7 @@ WSL configuration may require:
   * Networking mode adjustments
   * Firewall settings updates
 
-## 
-
-​
-
 Troubleshooting
-
-### 
-
-​
 
 Plugin Not Working
 
@@ -212,20 +115,12 @@ Plugin Not Working
   * Completely restart the IDE (you may need to do this multiple times)
   * For Remote Development, ensure the plugin is installed in the remote host
 
-### 
-
-​
-
 IDE Not Detected
 
   * Verify the plugin is installed and enabled
   * Restart the IDE completely
   * Check that you’re running Claude Code from the integrated terminal
   * For WSL users, see the [WSL troubleshooting guide](/docs/en/troubleshooting#jetbrains-ide-not-detected-on-wsl2)
-
-### 
-
-​
 
 Command Not Found
 
@@ -234,10 +129,6 @@ If clicking the Claude icon shows “command not found”:
   1. Verify Claude Code is installed: `npm list -g @anthropic-ai/claude-code`
   2. Configure the Claude command path in plugin settings
   3. For WSL users, use the WSL command format mentioned in the configuration section
-
-## 
-
-​
 
 Security Considerations
 

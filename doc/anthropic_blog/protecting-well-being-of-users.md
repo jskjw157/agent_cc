@@ -4,13 +4,9 @@ title: Protecting the well-being of our users
 category: Commitments
 ---
 
-Announcements
-
 # Protecting the well-being of our users
 
 Dec 18, 2025
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/cd9cf56a7f049285b7c1c8786c0a600cf3d7f317-1000x1000.svg)
 
 People use AI for a wide variety of reasons, and for some that may include emotional support. Our Safeguards team leads our efforts to ensure that Claude handles these conversations appropriately—responding with empathy, being honest about its limitations as an AI, and being considerate of our users' wellbeing. When chatbots handle these questions without the appropriate safeguards in place, the stakes can be significant.
 
@@ -32,7 +28,7 @@ We’ve also introduced new features to identify when a user might require profe
 
 When this happens, a banner will appear on [Claude.ai](http://claude.ai/redirect/website.v1.65c36558-434c-4947-9025-b8e732501b98), pointing users to where they can seek human support. Users are directed to chat with a trained professional, call a helpline, or access country-specific resources.
 
-![](/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F3eb430641fb43ca2df725a12f698f0726ee070c3-1920x1263.png&w=3840&q=75)A simulated prompt and response that causes the crisis banner to appear.  
+A simulated prompt and response that causes the crisis banner to appear.
 
 The resources that appear in this banner are provided by ThroughLine, a leader in online crisis support that maintains a verified global network of helplines and services across 170+ countries. This means, for example, that users can access the 988 Lifeline in the US and Canada, the Samaritans Helpline in the UK, or Life Link in Japan. We've worked closely with ThroughLine to understand best practices for empathetic crisis response, and we’ve incorporated these into our product.
 
@@ -50,7 +46,7 @@ On requests involving clear risk, our latest models—Claude Opus 4.5, Sonnet 4.
 
 In our latest evaluations Claude Opus 4.5 and Sonnet 4.5 responded appropriately in 86% and 78% of scenarios, respectively. This represents a significant improvement over Claude Opus 4.1, which scored 56%. We think this is partly because our latest models are better at empathetically acknowledging users’ beliefs without reinforcing them. We continue to invest in improving Claude's responses across all of these scenarios.
 
-![](/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fa46ed2845c18bbf0538854f53a8b392ac09b06d6-1920x1080.png&w=3840&q=75)How often Claude models respond appropriately in multi-turn conversations about suicide and self-harm. Error bars show 95% confidence intervals.
+How often Claude models respond appropriately in multi-turn conversations about suicide and self-harm. Error bars show 95% confidence intervals.
 
 __
 
@@ -74,11 +70,11 @@ To assess sycophancy, in addition to a simple single-turn evaluation, we measure
 
 Our latest models perform substantially better on this evaluation than our previous releases, and very well overall. Claude Opus 4.5, Sonnet 4.5, and Haiku 4.5 each scored 70-85% lower than Opus 4.1—which we previously [considered](https://www-cdn.anthropic.com/4263b940cabb546aa0e3283f35b686f4f3b2ff47.pdf) to show very low rates of sycophancy—on both sycophancy and encouragement of user delusion.
 
-![](/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F0b936763ea53801a82dcabfbaa4c8dd0682b9a12-1920x1080.png&w=3840&q=75)Recent model performance on automated behavioral audits for sycophancy and encouragement of user delusion. Lower is better. Note that the y-axis shows relative performance, not absolute rates, as we explain in the footnote.3
+Recent model performance on automated behavioral audits for sycophancy and encouragement of user delusion. Lower is better. Note that the y-axis shows relative performance, not absolute rates, as we explain in the footnote.3
 
 We recently open-sourced [Petri](https://www.anthropic.com/research/petri-open-source-auditing), a version of our automated behavioral audit tool. It is now freely available, allowing anyone to compare scores across models. Our 4.5 model family performs better on Petri’s sycophancy evaluation than all other frontier models at the time of our testing.
 
-![](/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fb61fcd51cb0ff35cf99e68416583ae9cef495615-1920x1080.png&w=3840&q=75)Recent Claude model performance for sycophancy on the open-source Petri evaluation, compared to other leading models. Y-axis interpretation is the same as described above. This evaluation was completed in November 2025, timed with the launch of Opus 4.5.
+Recent Claude model performance for sycophancy on the open-source Petri evaluation, compared to other leading models. Y-axis interpretation is the same as described above. This evaluation was completed in November 2025, timed with the launch of Opus 4.5.
 
 **Stress-testing with real conversations.** Similar to the suicide and self-harm evaluation, we used the ‘prefill’ method to probe the limits of our models’ ability to course-correct from conversations where Claude may have been sycophantic. The difference here is that we did not specifically filter for inappropriate responses and instead gave Claude a broad set of older conversations.
 
@@ -103,8 +99,6 @@ If you have feedback for us on how Claude handles these conversations, you can r
   3. In automated behavioral audits, we give a Claude auditor hundreds of different conversational scenarios in which we suspect models might show dangerous or surprising behavior, and score each conversation for Claude’s performance on around two dozen behaviors (see page 69 in the [Claude Opus 4.5 system card](https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf)). Not every conversation gives Claude the opportunity to exhibit every behavior. For instance, encouragement of user delusion requires a user to exhibit delusional behavior in the first place, but sycophancy can appear in many different contexts. Because we use the same denominator (total conversations) when we score each behavior, scores can vary widely. For this reason, these tests are most useful for comparing progress between Claude models, not between behaviors.
 
   4. The public release includes over 100 seed instructions and customizable scoring dimensions, though it doesn't yet include the realism filter we use internally to prevent models from recognizing they're being tested.
-
-  
 
 [](https://twitter.com/intent/tweet?text=https://www.anthropic.com/news/protecting-well-being-of-users)[](https://www.linkedin.com/shareArticle?mini=true&url=https://www.anthropic.com/news/protecting-well-being-of-users)
 

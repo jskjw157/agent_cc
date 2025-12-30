@@ -11,6 +11,7 @@ import os
 import time
 import re
 from urllib.parse import urljoin, urlparse, urlunparse
+from bs4 import NavigableString
 from pathlib import Path
 import json
 
@@ -24,6 +25,8 @@ class ClaudeCodeCrawler:
         output_dir=DOCS_OUTPUT_DIR,
         include_path_prefixes=None,
         exclude_path_patterns=None,
+        compact_mode=True,
+        keep_links=True,
     ):
         self.base_url = base_url
         self.output_dir = output_dir
@@ -38,8 +41,10 @@ class ClaudeCodeCrawler:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         }
         self.html_converter = html2text.HTML2Text()
-        self.html_converter.ignore_links = False
-        self.html_converter.ignore_images = False
+        self.compact_mode = compact_mode
+        self.keep_links = keep_links
+        self.html_converter.ignore_links = compact_mode and not keep_links
+        self.html_converter.ignore_images = compact_mode
         self.html_converter.body_width = 0  # 줄바꿈 방지
         
         # 출력 디렉토리 생성
@@ -72,6 +77,75 @@ class ClaudeCodeCrawler:
         for header in content.find_all('header'):
             if header.find('h1') is None:
                 header.decompose()
+
+    def trim_to_first_heading(self, content, heading_tag="h1"):
+        """첫 번째 제목 이전의 콘텐츠 제거"""
+        if content is None:
+            return
+        first_heading = content.find(heading_tag)
+        if not first_heading:
+            return
+        node = first_heading
+        while node and node is not content:
+            prev = node.previous_sibling
+            while prev:
+                to_remove = prev
+                prev = prev.previous_sibling
+                if isinstance(to_remove, NavigableString):
+                    to_remove.extract()
+                else:
+                    to_remove.decompose()
+            node = node.parent
+
+    def compress_markdown(self, markdown):
+        """마크다운 크기 축소"""
+        if not markdown:
+            return markdown
+        markdown = markdown.replace("\u200b", "")
+        skip_exact = {
+            "Copy",
+            "Copied",
+            "Skip to main content",
+            "Search",
+            "Navigation",
+        }
+        lines = []
+        in_code_block = False
+        prev_blank = False
+        skip_next_blank = False
+        for raw_line in markdown.splitlines():
+            line = raw_line.rstrip()
+            stripped = line.strip()
+            if stripped.startswith("```"):
+                if not in_code_block:
+                    while lines and lines[-1] == "":
+                        lines.pop()
+                else:
+                    skip_next_blank = True
+                in_code_block = not in_code_block
+                lines.append(line)
+                prev_blank = False
+                continue
+            if not in_code_block:
+                if stripped in skip_exact:
+                    continue
+                if re.match(r"^#+\s*$", stripped):
+                    continue
+                if stripped in {"⌘K"}:
+                    continue
+            if not stripped:
+                if skip_next_blank:
+                    continue
+                if prev_blank:
+                    continue
+                prev_blank = True
+                lines.append("")
+                continue
+            if skip_next_blank:
+                skip_next_blank = False
+            prev_blank = False
+            lines.append(line)
+        return "\n".join(lines).strip()
         
     def is_valid_doc_url(self, url):
         """문서 URL인지 확인"""
@@ -145,7 +219,10 @@ class ClaudeCodeCrawler:
             markdown = self.html_converter.handle(str(html_content))
             # 불필요한 공백 정리
             markdown = re.sub(r'\n{3,}', '\n\n', markdown)
-            return markdown.strip()
+            markdown = markdown.strip()
+            if self.compact_mode:
+                markdown = self.compress_markdown(markdown)
+            return markdown
         except Exception as e:
             print(f"⚠️  Markdown conversion error: {str(e)}")
             return str(html_content)
@@ -198,23 +275,24 @@ title: {title}
         
         # HTML 파싱
         soup = BeautifulSoup(html_content, 'html.parser')
-        
+
+        # 링크 추출 (정제 전에 수행해서 링크 손실 방지)
+        new_links = self.extract_links(soup, url)
+
         # 제목 추출
         title = soup.title.string if soup.title else ""
-        
+
         # 메인 콘텐츠 추출
         main_content = self.extract_main_content(soup)
         self.strip_noise(main_content)
+        self.trim_to_first_heading(main_content)
         
         # 마크다운 변환
         markdown_content = self.html_to_markdown(main_content)
         
         # 저장
         self.save_markdown(url, markdown_content, title)
-        
-        # 링크 추출
-        new_links = self.extract_links(soup, url)
-        
+
         return new_links
     
     def crawl(self, start_url, max_pages=50):

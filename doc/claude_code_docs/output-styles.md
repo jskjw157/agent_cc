@@ -3,35 +3,11 @@ source: https://code.claude.com/docs/en/output-styles
 title: Output styles - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Build with Claude Code
-
-  * [Subagents](/docs/en/sub-agents)
-  * [Create plugins](/docs/en/plugins)
-  * [Discover and install prebuilt plugins](/docs/en/discover-plugins)
-  * [Agent Skills](/docs/en/skills)
-  * [Output styles](/docs/en/output-styles)
-  * [Hooks](/docs/en/hooks-guide)
-  * [Programmatic usage](/docs/en/headless)
-  * [Model Context Protocol (MCP)](/docs/en/mcp)
-  * [Troubleshooting](/docs/en/troubleshooting)
-
-Build with Claude Code
-
 # Output styles
 
 Adapt Claude Code for uses beyond software engineering
 
 Output styles allow you to use Claude Code as any type of agent while keeping its core capabilities, such as running local scripts, reading/writing files, and tracking TODOs.
-
-## 
-
-​
 
 Built-in output styles
 
@@ -39,10 +15,6 @@ Claude Code’s **Default** output style is the existing system prompt, designed
 
   * **Explanatory** : Provides educational “Insights” in between helping you complete software engineering tasks. Helps you understand implementation choices and codebase patterns.
   * **Learning** : Collaborative, learn-by-doing mode where Claude will not only share “Insights” while coding, but also ask you to contribute small, strategic pieces of code yourself. Claude Code will add `TODO(human)` markers in your code for you to implement.
-
-## 
-
-​
 
 How output styles work
 
@@ -53,10 +25,6 @@ Output styles directly modify Claude Code’s system prompt.
   * All output styles have their own custom instructions added to the end of the system prompt.
   * All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation.
 
-## 
-
-​
-
 Change your output style
 
 You can either:
@@ -66,76 +34,48 @@ You can either:
 
 These changes apply to the [local project level](/docs/en/settings) and are saved in `.claude/settings.local.json`. You can also directly edit the `outputStyle` field in a settings file at a different level.
 
-## 
-
-​
-
 Create a custom output style
 
 Custom output styles are Markdown files with frontmatter and the text that will be added to the system prompt:
 
-Copy
-
 Ask AI
-    
-    
+
     ---
     name: My Custom Style
     description:
       A brief description of what this style does, to be displayed to the user
     ---
-    
+
     # Custom Style Instructions
-    
+
     You are an interactive CLI tool that helps users with software engineering
     tasks. [Your custom instructions here...]
-    
+
     ## Specific Behaviors
-    
+
     [Define how the assistant should behave in this style...]
-    
 
 You can save these files at the user level (`~/.claude/output-styles`) or project level (`.claude/output-styles`).
-
-### 
-
-​
 
 Frontmatter
 
 Output style files support frontmatter, useful for specifying metadata about the command:
 
-Frontmatter| Purpose| Default  
----|---|---  
-`name`| Name of the output style, if not the file name| Inherits from file name  
-`description`| Description of the output style. Used only in the UI of `/output-style`| None  
-`keep-coding-instructions`| Whether to keep the parts of Claude Code’s system prompt related to coding.| false  
-  
-## 
-
-​
+Frontmatter| Purpose| Default
+---|---|---
+`name`| Name of the output style, if not the file name| Inherits from file name
+`description`| Description of the output style. Used only in the UI of `/output-style`| None
+`keep-coding-instructions`| Whether to keep the parts of Claude Code’s system prompt related to coding.| false
 
 Comparisons to related features
-
-### 
-
-​
 
 Output Styles vs. CLAUDE.md vs. —append-system-prompt
 
 Output styles completely “turn off” the parts of Claude Code’s default system prompt specific to software engineering. Neither CLAUDE.md nor `--append-system-prompt` edit Claude Code’s default system prompt. CLAUDE.md adds the contents as a user message _following_ Claude Code’s default system prompt. `--append-system-prompt` appends the content to the system prompt.
 
-### 
-
-​
-
 Output Styles vs. [Agents](/docs/en/sub-agents)
 
 Output styles directly affect the main agent loop and only affect the system prompt. Agents are invoked to handle specific tasks and can include additional settings like the model to use, the tools they have available, and some context about when to use the agent.
-
-### 
-
-​
 
 Output Styles vs. [Custom Slash Commands](/docs/en/slash-commands)
 

@@ -3,32 +3,9 @@ source: https://code.claude.com/docs/en/setup
 title: Set up Claude Code - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Administration
-
-  * [Advanced installation](/docs/en/setup)
-  * [Identity and Access Management](/docs/en/iam)
-  * [Security](/docs/en/security)
-  * [Data usage](/docs/en/data-usage)
-  * [Monitoring](/docs/en/monitoring-usage)
-  * [Costs](/docs/en/costs)
-  * [Analytics](/docs/en/analytics)
-  * [Create and distribute a plugin marketplace](/docs/en/plugin-marketplaces)
-
-Administration
-
 # Set up Claude Code
 
 Install, authenticate, and start using Claude Code on your development machine.
-
-## 
-
-​
 
 System requirements
 
@@ -39,17 +16,9 @@ System requirements
   * **Shell** : Works best in Bash, Zsh or Fish
   * **Location** : [Anthropic supported countries](https://www.anthropic.com/supported-countries)
 
-### 
-
-​
-
 Additional dependencies
 
   * **ripgrep** : Usually included with Claude Code. If search fails, see [search troubleshooting](/docs/en/troubleshooting#search-and-discovery-issues).
-
-## 
-
-​
 
 Standard installation
 
@@ -63,64 +32,40 @@ To install Claude Code, use one of the following methods:
 
 **macOS, Linux, WSL:**
 
-Copy
-
 Ask AI
-    
-    
+
     curl -fsSL https://claude.ai/install.sh | bash
-    
 
 **Windows PowerShell:**
 
-Copy
-
 Ask AI
-    
-    
+
     irm https://claude.ai/install.ps1 | iex
-    
 
 **Windows CMD:**
 
-Copy
-
 Ask AI
-    
-    
+
     curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
-    
-
-Copy
 
 Ask AI
-    
-    
+
     brew install --cask claude-code
-    
 
 If you have [Node.js 18 or newer installed](https://nodejs.org/en/download/):
 
-Copy
-
 Ask AI
-    
-    
+
     npm install -g @anthropic-ai/claude-code
-    
 
 Some users may be automatically migrated to an improved installation method.
 
 After the installation process completes, navigate to your project and start Claude Code:
 
-Copy
-
 Ask AI
-    
-    
+
     cd your-awesome-project
     claude
-    
 
 Claude Code offers the following authentication options:
 
@@ -129,10 +74,6 @@ Claude Code offers the following authentication options:
   3. **Enterprise platforms** : Configure Claude Code to use [Amazon Bedrock, Google Vertex AI, or Microsoft Foundry](/docs/en/third-party-integrations) for enterprise deployments with your existing cloud infrastructure.
 
 Claude Code securely stores your credentials. See [Credential Management](/docs/en/iam#credential-management) for details.
-
-## 
-
-​
 
 Windows setup
 
@@ -145,26 +86,15 @@ Windows setup
   * Requires [Git for Windows](https://git-scm.com/downloads/win)
   * For portable Git installations, specify the path to your `bash.exe`:
 
-Copy
-
 Ask AI
-        
+
         $env:CLAUDE_CODE_GIT_BASH_PATH="C:\Program Files\Git\bin\bash.exe"
-        
-
-## 
-
-​
 
 Alternative installation methods
 
 Claude Code offers multiple installation methods to suit different environments. If you encounter any issues during installation, consult the [troubleshooting guide](/docs/en/troubleshooting#linux-permission-issues).
 
 Run `claude doctor` after installation to check your installation type and version.
-
-### 
-
-​
 
 Native installation options
 
@@ -176,56 +106,44 @@ The native installation is the recommended method and offers several benefits:
 
 If you have an existing installation of Claude Code, use `claude install` to migrate to the native binary installation. For advanced installation options with the native installer: **macOS, Linux, WSL:**
 
-Copy
-
 Ask AI
-    
-    
+
     # Install stable version (default)
     curl -fsSL https://claude.ai/install.sh | bash
-    
+
     # Install latest version
     curl -fsSL https://claude.ai/install.sh | bash -s latest
-    
+
     # Install specific version number
     curl -fsSL https://claude.ai/install.sh | bash -s 1.0.58
-    
 
 **Alpine Linux and other musl/uClibc-based distributions** : The native build requires `libgcc`, `libstdc++`, and `ripgrep`. For Alpine: `apk add libgcc libstdc++ ripgrep`. Set `USE_BUILTIN_RIPGREP=0`.
 
 **Windows PowerShell:**
 
-Copy
-
 Ask AI
-    
-    
+
     # Install stable version (default)
     irm https://claude.ai/install.ps1 | iex
-    
+
     # Install latest version
     & ([scriptblock]::Create((irm https://claude.ai/install.ps1))) latest
-    
+
     # Install specific version number
     & ([scriptblock]::Create((irm https://claude.ai/install.ps1))) 1.0.58
-    
 
 **Windows CMD:**
 
-Copy
-
 Ask AI
-    
-    
+
     REM Install stable version (default)
     curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
-    
+
     REM Install latest version
     curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd latest && del install.cmd
-    
+
     REM Install specific version number
     curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd 1.0.58 && del install.cmd
-    
 
 Make sure that you remove any outdated aliases or symlinks before installing.
 
@@ -236,41 +154,21 @@ Make sure that you remove any outdated aliases or symlinks before installing.
     * macOS: Signed by “Anthropic PBC” and notarized by Apple
     * Windows: Signed by “Anthropic, PBC”
 
-### 
-
-​
-
 NPM installation
 
 For environments where NPM is preferred or required:
 
-Copy
-
 Ask AI
-    
-    
+
     npm install -g @anthropic-ai/claude-code
-    
 
 Do NOT use `sudo npm install -g` as this can lead to permission issues and security risks. If you encounter permission errors, see [configure Claude Code](/docs/en/troubleshooting#linux-permission-issues) for recommended solutions.
-
-## 
-
-​
 
 Running on AWS or GCP
 
 By default, Claude Code uses the Claude API. For details on running Claude Code on AWS or GCP, see [third-party integrations](/docs/en/third-party-integrations).
 
-## 
-
-​
-
 Update Claude Code
-
-### 
-
-​
 
 Auto updates
 
@@ -283,106 +181,54 @@ Claude Code automatically keeps itself up to date to ensure you have the latest 
 
 **Disable auto-updates:** Set the `DISABLE_AUTOUPDATER` environment variable in your shell or [settings.json file](/docs/en/settings):
 
-Copy
-
 Ask AI
-    
-    
+
     export DISABLE_AUTOUPDATER=1
-    
-
-### 
-
-​
 
 Update manually
 
-Copy
-
 Ask AI
-    
-    
+
     claude update
-    
-
-## 
-
-​
 
 Uninstall Claude Code
 
 If you need to uninstall Claude Code, follow the instructions for your installation method.
 
-### 
-
-​
-
 Native installation
 
 Remove the Claude Code binary and symlink: **macOS, Linux, WSL:**
 
-Copy
-
 Ask AI
-    
-    
+
     rm -f ~/.local/bin/claude
     rm -rf ~/.claude-code
-    
 
 **Windows PowerShell:**
 
-Copy
-
 Ask AI
-    
-    
+
     Remove-Item -Path "$env:LOCALAPPDATA\Programs\claude-code" -Recurse -Force
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\WindowsApps\claude.exe" -Force
-    
 
 **Windows CMD:**
 
-Copy
-
 Ask AI
-    
-    
+
     rmdir /s /q "%LOCALAPPDATA%\Programs\claude-code"
     del "%LOCALAPPDATA%\Microsoft\WindowsApps\claude.exe"
-    
-
-### 
-
-​
 
 Homebrew installation
 
-Copy
-
 Ask AI
-    
-    
+
     brew uninstall --cask claude-code
-    
-
-### 
-
-​
 
 NPM installation
 
-Copy
-
 Ask AI
-    
-    
+
     npm uninstall -g @anthropic-ai/claude-code
-    
-
-### 
-
-​
 
 Clean up configuration files (optional)
 
@@ -390,51 +236,39 @@ Removing configuration files will delete all your settings, allowed tools, MCP s
 
 To remove Claude Code settings and cached data: **macOS, Linux, WSL:**
 
-Copy
-
 Ask AI
-    
-    
+
     # Remove user settings and state
     rm -rf ~/.claude
     rm ~/.claude.json
-    
+
     # Remove project-specific settings (run from your project directory)
     rm -rf .claude
     rm -f .mcp.json
-    
 
 **Windows PowerShell:**
 
-Copy
-
 Ask AI
-    
-    
+
     # Remove user settings and state
     Remove-Item -Path "$env:USERPROFILE\.claude" -Recurse -Force
     Remove-Item -Path "$env:USERPROFILE\.claude.json" -Force
-    
+
     # Remove project-specific settings (run from your project directory)
     Remove-Item -Path ".claude" -Recurse -Force
     Remove-Item -Path ".mcp.json" -Force
-    
 
 **Windows CMD:**
 
-Copy
-
 Ask AI
-    
-    
+
     REM Remove user settings and state
     rmdir /s /q "%USERPROFILE%\.claude"
     del "%USERPROFILE%\.claude.json"
-    
+
     REM Remove project-specific settings (run from your project directory)
     rmdir /s /q ".claude"
     del ".mcp.json"
-    
 
 Was this page helpful?
 

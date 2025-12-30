@@ -3,38 +3,9 @@ source: https://code.claude.com/docs/en/overview
 title: Claude Code overview - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Getting started
-
-  * [Overview](/docs/en/overview)
-  * [Quickstart](/docs/en/quickstart)
-  * [Common workflows](/docs/en/common-workflows)
-
-##### Outside of the terminal
-
-  * [Claude Code on the web](/docs/en/claude-code-on-the-web)
-  * [Claude Code on desktop](/docs/en/desktop)
-  * [Chrome extension (beta)](/docs/en/chrome)
-  * [Visual Studio Code](/docs/en/vs-code)
-  * [JetBrains IDEs](/docs/en/jetbrains)
-  * [GitHub Actions](/docs/en/github-actions)
-  * [GitLab CI/CD](/docs/en/gitlab-ci-cd)
-  * [Claude Code in Slack](/docs/en/slack)
-
-Getting started
-
 # Claude Code overview
 
 Learn about Claude Code, Anthropic’s agentic coding tool that lives in your terminal and helps you turn ideas into code faster than ever before.
-
-## 
-
-​
 
 Get started in 30 seconds
 
@@ -52,70 +23,42 @@ Prerequisites:
 
 **macOS, Linux, WSL:**
 
-Copy
-
 Ask AI
-    
-    
+
     curl -fsSL https://claude.ai/install.sh | bash
-    
 
 **Windows PowerShell:**
 
-Copy
-
 Ask AI
-    
-    
+
     irm https://claude.ai/install.ps1 | iex
-    
 
 **Windows CMD:**
 
-Copy
-
 Ask AI
-    
-    
+
     curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
-    
-
-Copy
 
 Ask AI
-    
-    
+
     brew install --cask claude-code
-    
 
 If you have [Node.js 18 or newer installed](https://nodejs.org/en/download/):
 
-Copy
-
 Ask AI
-    
-    
+
     npm install -g @anthropic-ai/claude-code
-    
 
 **Start using Claude Code:**
 
-Copy
-
 Ask AI
-    
-    
+
     cd your-project
     claude
-    
 
 You’ll be prompted to log in on first use. That’s it! [Continue with Quickstart (5 minutes) →](/docs/en/quickstart)
 
 Claude Code automatically keeps itself up to date. See [advanced setup](/docs/en/setup) for installation options, manual updates, or uninstallation instructions. Visit [troubleshooting](/docs/en/troubleshooting) if you hit issues.
-
-## 
-
-​
 
 What Claude Code does for you
 
@@ -124,10 +67,6 @@ What Claude Code does for you
   * **Navigate any codebase** : Ask anything about your team’s codebase, and get a thoughtful answer back. Claude Code maintains awareness of your entire project structure, can find up-to-date information from the web, and with [MCP](/docs/en/mcp) can pull from external data sources like Google Drive, Figma, and Slack.
   * **Automate tedious tasks** : Fix fiddly lint issues, resolve merge conflicts, and write release notes. Do all this in a single command from your developer machines, or automatically in CI.
 
-## 
-
-​
-
 Why developers love Claude Code
 
   * **Works in your terminal** : Not another chat window. Not another IDE. Claude Code meets you where you already work, with the tools you already love.
@@ -135,17 +74,9 @@ Why developers love Claude Code
   * **Unix philosophy** : Claude Code is composable and scriptable. `tail -f app.log | claude -p "Slack me if you see any anomalies appear in this log stream"` _works_. Your CI can run `claude -p "If there are new text strings, translate them into French and raise a PR for @lang-fr-team to review"`.
   * **Enterprise-ready** : Use the Claude API, or host on AWS or GCP. Enterprise-grade [security](/docs/en/security), [privacy](/docs/en/data-usage), and [compliance](https://trust.anthropic.com/) is built-in.
 
-## 
-
-​
-
 Next steps
 
 ## [QuickstartSee Claude Code in action with practical examples](/docs/en/quickstart)## [Common workflowsStep-by-step guides for common workflows](/docs/en/common-workflows)## [TroubleshootingSolutions for common issues with Claude Code](/docs/en/troubleshooting)## [IDE setupAdd Claude Code to your IDE](/docs/en/vs-code)
-
-## 
-
-​
 
 Additional resources
 

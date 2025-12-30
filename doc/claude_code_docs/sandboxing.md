@@ -3,40 +3,13 @@ source: https://code.claude.com/docs/en/sandboxing
 title: Sandboxing - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Deployment
-
-  * [Overview](/docs/en/third-party-integrations)
-  * [Amazon Bedrock](/docs/en/amazon-bedrock)
-  * [Google Vertex AI](/docs/en/google-vertex-ai)
-  * [Microsoft Foundry](/docs/en/microsoft-foundry)
-  * [Network configuration](/docs/en/network-config)
-  * [LLM gateway](/docs/en/llm-gateway)
-  * [Development containers](/docs/en/devcontainer)
-  * [Sandboxing](/docs/en/sandboxing)
-
-Deployment
-
 # Sandboxing
 
 Learn how Claude Code’s sandboxed bash tool provides filesystem and network isolation for safer, more autonomous agent execution.
 
-## 
-
-​
-
 Overview
 
 Claude Code features native sandboxing to provide a more secure environment for agent execution while reducing the need for constant permission prompts. Instead of asking permission for each bash command, sandboxing creates defined boundaries upfront where Claude Code can work more freely with reduced risk. The sandboxed bash tool uses OS-level primitives to enforce both filesystem and network isolation.
-
-## 
-
-​
 
 Why sandboxing matters
 
@@ -55,15 +28,7 @@ Sandboxing addresses these challenges by:
 
 Effective sandboxing requires **both** filesystem and network isolation. Without network isolation, a compromised agent could exfiltrate sensitive files like SSH keys. Without filesystem isolation, a compromised agent could backdoor system resources to gain network access. When configuring sandboxing it is important to ensure that your configured settings do not create bypasses in these systems.
 
-## 
-
-​
-
 How it works
-
-### 
-
-​
 
 Filesystem isolation
 
@@ -74,10 +39,6 @@ The sandboxed bash tool restricts file system access to specific directories:
   * **Blocked access** : Cannot modify files outside the current working directory without explicit permission
   * **Configurable** : Define custom allowed and denied paths through settings
 
-### 
-
-​
-
 Network isolation
 
 Network access is controlled through a proxy server running outside the sandbox:
@@ -86,10 +47,6 @@ Network access is controlled through a proxy server running outside the sandbox:
   * **User confirmation** : New domain requests trigger permission prompts
   * **Custom proxy support** : Advanced users can implement custom rules on outgoing traffic
   * **Comprehensive coverage** : Restrictions apply to all scripts, programs, and subprocesses spawned by commands
-
-### 
-
-​
 
 OS-level enforcement
 
@@ -100,43 +57,23 @@ The sandboxed bash tool leverages operating system security primitives:
 
 These OS-level restrictions ensure that all child processes spawned by Claude Code’s commands inherit the same security boundaries.
 
-## 
-
-​
-
 Getting started
-
-### 
-
-​
 
 Enable sandboxing
 
 You can enable sandboxing by running the `/sandbox` slash command:
 
-Copy
-
 Ask AI
-    
-    
+
     > /sandbox
-    
 
 This opens a menu where you can choose between sandbox modes.
-
-### 
-
-​
 
 Sandbox modes
 
 Claude Code offers two sandbox modes: **Auto-allow mode** : Bash commands will attempt to run inside the sandbox and are automatically allowed without requiring permission. Commands that cannot be sandboxed (such as those needing network access to non-allowed hosts) fall back to the regular permission flow. Explicit ask/deny rules you’ve configured are always respected. **Regular permissions mode** : All bash commands go through the standard permission flow, even when sandboxed. This provides more control but requires more approvals. In both modes, the sandbox enforces the same filesystem and network restrictions. The difference is only in whether sandboxed commands are auto-approved or require explicit permission.
 
 Auto-allow mode works independently of your permission mode setting. Even if you’re not in “accept edits” mode, sandboxed bash commands will run automatically when auto-allow is enabled. This means bash commands that modify files within the sandbox boundaries will execute without prompting, even when file edit tools would normally require approval.
-
-### 
-
-​
 
 Configure sandboxing
 
@@ -150,15 +87,7 @@ Not all commands are compatible with sandboxing out of the box. Some notes that 
 
 Claude Code includes an intentional escape hatch mechanism that allows commands to run outside the sandbox when necessary. When a command fails due to sandbox restrictions (such as network connectivity issues or incompatible tools), Claude is prompted to analyze the failure and may retry the command with the `dangerouslyDisableSandbox` parameter. Commands that use this parameter go through the normal Claude Code permissions flow requiring user permission to execute. This allows Claude Code to handle edge cases where certain tools or network operations cannot function within sandbox constraints.You can disable this escape hatch by setting `"allowUnsandboxedCommands": false` in your [sandbox settings](/docs/en/settings#sandbox-settings). When disabled, the `dangerouslyDisableSandbox` parameter is completely ignored and all commands must run sandboxed or be explicitly listed in `excludedCommands`.
 
-## 
-
-​
-
 Security benefits
-
-### 
-
-​
 
 Protection against prompt injection
 
@@ -181,10 +110,6 @@ Even if an attacker successfully manipulates Claude Code’s behavior through pr
   * You receive immediate notifications when boundaries are tested
   * You can choose to deny, allow once, or permanently update your configuration
 
-### 
-
-​
-
 Reduced attack surface
 
 Sandboxing limits the potential damage from:
@@ -193,10 +118,6 @@ Sandboxing limits the potential damage from:
   * **Compromised scripts** : Build scripts or tools with security vulnerabilities
   * **Social engineering** : Attacks that trick users into running dangerous commands
   * **Prompt injection** : Attacks that trick Claude into running dangerous commands
-
-### 
-
-​
 
 Transparent operation
 
@@ -209,10 +130,6 @@ When Claude Code attempts to access network resources outside the sandbox:
      * Allow it once
      * Update your sandbox configuration to permanently allow it
 
-## 
-
-​
-
 Security Limitations
 
   * Network Sandboxing Limitations: The network filtering system operates by restricting the domains that processes are allowed to connect to. It does not otherwise inspect the traffic passing through the proxy and users are responsible for ensuring they only allow trusted domains in their policy.
@@ -223,15 +140,7 @@ Users should be aware of potential risks that come from allowing broad domains l
   * Filesystem Permission Escalation: Overly broad filesystem write permissions can enable privilege escalation attacks. Allowing writes to directories containing executables in `$PATH`, system configuration directories, or user shell configuration files (`.bashrc`, `.zshrc`) can lead to code execution in different security contexts when other users or system processes access these files.
   * Linux Sandbox Strength: The Linux implementation provides strong filesystem and network isolation but includes an `enableWeakerNestedSandbox` mode that enables it to work inside of Docker environments without privileged namespaces. This option considerably weakens security and should only be used in cases where additional isolation is otherwise enforced.
 
-## 
-
-​
-
 Advanced usage
-
-### 
-
-​
 
 Custom proxy configuration
 
@@ -242,11 +151,8 @@ For organizations requiring advanced network security, you can implement a custo
   * Log all network requests
   * Integrate with existing security infrastructure
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "sandbox": {
         "network": {
@@ -255,11 +161,6 @@ Ask AI
         }
       }
     }
-    
-
-### 
-
-​
 
 Integration with existing security tools
 
@@ -269,10 +170,6 @@ The sandboxed bash tool works alongside:
   * **Development containers** : Use with [devcontainers](/docs/en/devcontainer) for additional isolation
   * **Enterprise policies** : Enforce sandbox configurations through [managed settings](/docs/en/settings#settings-precedence)
 
-## 
-
-​
-
 Best practices
 
   1. **Start restrictive** : Begin with minimal permissions and expand as needed
@@ -281,37 +178,21 @@ Best practices
   4. **Combine with permissions** : Use sandboxing alongside IAM policies for comprehensive security
   5. **Test configurations** : Verify your sandbox settings don’t block legitimate workflows
 
-## 
-
-​
-
 Open source
 
 The sandbox runtime is available as an open source npm package for use in your own agent projects. This enables the broader AI agent community to build safer, more secure autonomous systems. This can also be used to sandbox other programs you may wish to run. For example, to sandbox an MCP server you could run:
 
-Copy
-
 Ask AI
-    
-    
+
     npx @anthropic-ai/sandbox-runtime <command-to-sandbox>
-    
 
 For implementation details and source code, visit the [GitHub repository](https://github.com/anthropic-experimental/sandbox-runtime).
-
-## 
-
-​
 
 Limitations
 
   * **Performance overhead** : Minimal, but some filesystem operations may be slightly slower
   * **Compatibility** : Some tools that require specific system access patterns may need configuration adjustments, or may even need to be run outside of the sandbox
   * **Platform support** : Currently supports Linux and macOS; Windows support planned
-
-## 
-
-​
 
 See also
 

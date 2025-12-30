@@ -4,13 +4,9 @@ title: Thoughts on America’s AI Action Plan
 category: Commitments
 ---
 
-Policy
-
 # Thoughts on America’s AI Action Plan
 
 Jul 23, 2025
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6e00dbffcddc82df5e471c43453abfc74ca94e8d-1000x1000.svg)
 
 Today, the White House released "Winning the Race: America's AI Action Plan"—a comprehensive strategy to maintain America's advantage in AI development. We are encouraged by the plan’s focus on accelerating AI infrastructure and federal adoption, as well as strengthening safety testing and security coordination. Many of the plan’s recommendations reflect Anthropic’s [response](https://assets.anthropic.com/m/4e20a4ab6512e217/original/Anthropic-Response-to-OSTP-RFI-March-2025-Final-Submission-v3.pdf) to the Office of Science and Technology Policy’s (OSTP) prior [request for information](https://www.federalregister.gov/documents/2025/02/06/2025-02305/request-for-information-on-the-development-of-an-artificial-intelligence-ai-action-plan). While the plan positions America for AI advancement, we believe strict export controls and AI development transparency standards remain crucial next steps for securing American AI leadership.
 
@@ -51,13 +47,13 @@ We share the Administration’s concern about overly-prescriptive regulatory app
 
 ## **Maintaining strong export controls**
 
-The Action Plan states that “denying our foreign adversaries access to [Advanced AI compute] . . . is a matter of both geostrategic competition and national security.” We strongly agree. That is why we are concerned with the Administration’s recent reversal on export of the Nvidia H20 chips to China. 
+The Action Plan states that “denying our foreign adversaries access to [Advanced AI compute] . . . is a matter of both geostrategic competition and national security.” We strongly agree. That is why we are concerned with the Administration’s recent reversal on export of the Nvidia H20 chips to China.
 
-AI development has been defined by scaling laws: the intelligence and capability of a system is defined by the scale of its compute, energy, and data inputs during training. While these scaling laws continue to hold, the newest and most capable reasoning models have demonstrated that AI capability scales with the amount of compute made available to a system working on a given task, or “inference.” The amount of compute made available during inference is limited by a chip’s memory bandwidth. While the H20’s raw computing power is exceeded by chips made by Huawei, as Commerce Secretary Lutnick and Under Secretary Kessler [recently testified](https://www.bloomberg.com/news/articles/2025-06-12/us-says-huawei-s-2025-output-is-no-more-than-200-000-ai-chips), Huawei continues to struggle with production volume and no domestically-produced Chinese chip [matches the H20’s memory bandwidth](https://www.chinatalk.media/p/mapping-chinas-hbm-advancement). 
+AI development has been defined by scaling laws: the intelligence and capability of a system is defined by the scale of its compute, energy, and data inputs during training. While these scaling laws continue to hold, the newest and most capable reasoning models have demonstrated that AI capability scales with the amount of compute made available to a system working on a given task, or “inference.” The amount of compute made available during inference is limited by a chip’s memory bandwidth. While the H20’s raw computing power is exceeded by chips made by Huawei, as Commerce Secretary Lutnick and Under Secretary Kessler [recently testified](https://www.bloomberg.com/news/articles/2025-06-12/us-says-huawei-s-2025-output-is-no-more-than-200-000-ai-chips), Huawei continues to struggle with production volume and no domestically-produced Chinese chip [matches the H20’s memory bandwidth](https://www.chinatalk.media/p/mapping-chinas-hbm-advancement).
 
 As a result, the H20 provides unique and critical computing capabilities that would otherwise be unavailable to Chinese firms, and will compensate for China’s otherwise major shortage of AI chips. To allow export of the H20 to China would squander an opportunity to extend American AI dominance just as a new phase of competition is starting. Moreover, exports of U.S. AI chips will not divert the Chinese Communist Party from its [quest for self-reliance in the AI stack](https://rhg.com/research/back-to-the-future-from-freeze-in-place-to-sliding-scale-chip-controls/).
 
-To that end, we strongly encourage the Administration to maintain controls on the H20 chip. These controls are consistent with the export controls recommended by the Action Plan and are essential to securing and growing America’s AI lead. 
+To that end, we strongly encourage the Administration to maintain controls on the H20 chip. These controls are consistent with the export controls recommended by the Action Plan and are essential to securing and growing America’s AI lead.
 
 ## **Looking ahead**
 

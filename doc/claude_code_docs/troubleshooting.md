@@ -3,39 +3,11 @@ source: https://code.claude.com/docs/en/troubleshooting
 title: Troubleshooting - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Build with Claude Code
-
-  * [Subagents](/docs/en/sub-agents)
-  * [Create plugins](/docs/en/plugins)
-  * [Discover and install prebuilt plugins](/docs/en/discover-plugins)
-  * [Agent Skills](/docs/en/skills)
-  * [Output styles](/docs/en/output-styles)
-  * [Hooks](/docs/en/hooks-guide)
-  * [Programmatic usage](/docs/en/headless)
-  * [Model Context Protocol (MCP)](/docs/en/mcp)
-  * [Troubleshooting](/docs/en/troubleshooting)
-
-Build with Claude Code
-
 # Troubleshooting
 
 Discover solutions to common issues with Claude Code installation and usage.
 
-## 
-
-​
-
 Common installation issues
-
-### 
-
-​
 
 Windows installation issues: errors in WSL
 
@@ -51,87 +23,58 @@ You might encounter the following issues in WSL: **OS/platform detection issues*
 
 To resolve this issue, fix your Linux PATH to ensure the Linux node/npm versions take priority: **Primary solution: Ensure nvm is properly loaded in your shell** The most common cause is that nvm isn’t loaded in non-interactive shells. Add the following to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.):
 
-Copy
-
 Ask AI
-    
-    
+
     # Load nvm if it exists
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    
 
 Or run directly in your current session:
 
-Copy
-
 Ask AI
-    
-    
+
     source ~/.nvm/nvm.sh
-    
 
 **Alternative: Adjust PATH order** If nvm is properly loaded but Windows paths still take priority, you can explicitly prepend your Linux paths to PATH in your shell configuration:
 
-Copy
-
 Ask AI
-    
-    
+
     export PATH="$HOME/.nvm/versions/node/$(node -v)/bin:$PATH"
-    
 
 Avoid disabling Windows PATH importing (`appendWindowsPath = false`) as this breaks the ability to call Windows executables from WSL. Similarly, avoid uninstalling Node.js from Windows if you use it for Windows development.
-
-### 
-
-​
 
 Linux and Mac installation issues: permission or command not found errors
 
 When installing Claude Code with npm, `PATH` problems may prevent access to `claude`. You may also encounter permission errors if your npm global prefix is not user writable (for example, `/usr`, or `/usr/local`).
 
-#### 
-
-​
-
 Recommended solution: Native Claude Code installation
 
 Claude Code has a native installation that doesn’t depend on npm or Node.js. Use the following command to run the native installer. **macOS, Linux, WSL:**
 
-Copy
-
 Ask AI
-    
-    
+
     # Install stable version (default)
     curl -fsSL https://claude.ai/install.sh | bash
-    
+
     # Install latest version
     curl -fsSL https://claude.ai/install.sh | bash -s latest
-    
+
     # Install specific version number
     curl -fsSL https://claude.ai/install.sh | bash -s 1.0.58
-    
 
 **Windows PowerShell:**
 
-Copy
-
 Ask AI
-    
-    
+
     # Install stable version (default)
     irm https://claude.ai/install.ps1 | iex
-    
+
     # Install latest version
     & ([scriptblock]::Create((irm https://claude.ai/install.ps1))) latest
-    
+
     # Install specific version number
     & ([scriptblock]::Create((irm https://claude.ai/install.ps1))) 1.0.58
-    
-    
 
 This command installs the appropriate build of Claude Code for your operating system and architecture and adds a symlink to the installation at `~/.local/bin/claude`.
 
@@ -139,31 +82,15 @@ Make sure that you have the installation directory in your system PATH.
 
 Verify installation:
 
-Copy
-
 Ask AI
-    
-    
+
     claude doctor # Check installation health
-    
-
-## 
-
-​
 
 Permissions and authentication
-
-### 
-
-​
 
 Repeated permission prompts
 
 If you find yourself repeatedly approving the same commands, you can allow specific tools to run without approval using the `/permissions` command. See [Permissions docs](/docs/en/iam#configuring-permissions).
-
-### 
-
-​
 
 Authentication issues
 
@@ -175,35 +102,27 @@ If you’re experiencing authentication problems:
 
 If problems persist, try:
 
-Copy
-
 Ask AI
-    
-    
+
     rm -rf ~/.config/claude-code/auth.json
     claude
-    
 
 This removes your stored authentication information and forces a clean login.
-
-## 
-
-​
 
 Configuration file locations
 
 Claude Code stores configuration in several locations:
 
-File| Purpose  
----|---  
-`~/.claude/settings.json`| User settings (permissions, hooks, model overrides)  
-`.claude/settings.json`| Project settings (checked into source control)  
-`.claude/settings.local.json`| Local project settings (not committed)  
-`~/.claude.json`| Global state (theme, OAuth, MCP servers, allowed tools)  
-`.mcp.json`| Project MCP servers (checked into source control)  
-`managed-settings.json`| [Enterprise managed settings](/docs/en/settings#settings-files)  
-`managed-mcp.json`| [Enterprise managed MCP servers](/docs/en/mcp#enterprise-mcp-configuration)  
-  
+File| Purpose
+---|---
+`~/.claude/settings.json`| User settings (permissions, hooks, model overrides)
+`.claude/settings.json`| Project settings (checked into source control)
+`.claude/settings.local.json`| Local project settings (not committed)
+`~/.claude.json`| Global state (theme, OAuth, MCP servers, allowed tools)
+`.mcp.json`| Project MCP servers (checked into source control)
+`managed-settings.json`| [Enterprise managed settings](/docs/en/settings#settings-files)
+`managed-mcp.json`| [Enterprise managed MCP servers](/docs/en/mcp#enterprise-mcp-configuration)
+
 On Windows, `~` refers to your user home directory, such as `C:\Users\YourName`. **Enterprise managed file locations:**
 
   * macOS: `/Library/Application Support/ClaudeCode/`
@@ -212,39 +131,23 @@ On Windows, `~` refers to your user home directory, such as `C:\Users\YourName`.
 
 For details on configuring these files, see [Settings](/docs/en/settings) and [MCP](/docs/en/mcp).
 
-### 
-
-​
-
 Resetting configuration
 
 To reset Claude Code to default settings, you can remove the configuration files:
 
-Copy
-
 Ask AI
-    
-    
+
     # Reset all user settings and state
     rm ~/.claude.json
     rm -rf ~/.claude/
-    
+
     # Reset project-specific settings
     rm -rf .claude/
     rm .mcp.json
-    
 
 This will remove all your settings, allowed tools, MCP server configurations, and session history.
 
-## 
-
-​
-
 Performance and stability
-
-### 
-
-​
 
 High CPU or memory usage
 
@@ -254,10 +157,6 @@ Claude Code is designed to work with most development environments, but may cons
   2. Close and restart Claude Code between major tasks
   3. Consider adding large build directories to your `.gitignore` file
 
-### 
-
-​
-
 Command hangs or freezes
 
 If Claude Code seems unresponsive:
@@ -265,40 +164,28 @@ If Claude Code seems unresponsive:
   1. Press Ctrl+C to attempt to cancel the current operation
   2. If unresponsive, you may need to close the terminal and restart
 
-### 
-
-​
-
 Search and discovery issues
 
 If Search tool, `@file` mentions, custom agents, and custom slash commands aren’t working, install system `ripgrep`:
 
-Copy
-
 Ask AI
-    
-    
-    # macOS (Homebrew)  
+
+    # macOS (Homebrew)
     brew install ripgrep
-    
+
     # Windows (winget)
     winget install BurntSushi.ripgrep.MSVC
-    
+
     # Ubuntu/Debian
     sudo apt install ripgrep
-    
+
     # Alpine Linux
     apk add ripgrep
-    
+
     # Arch Linux
     pacman -S ripgrep
-    
 
 Then set `USE_BUILTIN_RIPGREP=0` in your [environment](/docs/en/settings#environment-variables).
-
-### 
-
-​
 
 Slow or incomplete search results on WSL
 
@@ -312,23 +199,11 @@ Disk read performance penalties when [working across file systems on WSL](https:
   2. **Move project to Linux filesystem** : If possible, ensure your project is located on the Linux filesystem (`/home/`) rather than the Windows filesystem (`/mnt/c/`).
   3. **Use native Windows instead** : Consider running Claude Code natively on Windows instead of through WSL, for better file system performance.
 
-## 
-
-​
-
 IDE integration issues
-
-### 
-
-​
 
 JetBrains IDE not detected on WSL2
 
 If you’re using Claude Code on WSL2 with JetBrains IDEs and getting “No available IDEs detected” errors, this is likely due to WSL2’s networking configuration or Windows Firewall blocking the connection.
-
-#### 
-
-​
 
 WSL2 networking modes
 
@@ -336,46 +211,32 @@ WSL2 uses NAT networking by default, which can prevent IDE detection. You have t
 
   1. Find your WSL2 IP address:
 
-Copy
-
 Ask AI
-         
+
          wsl hostname -I
          # Example output: 172.21.123.456
-         
 
   2. Open PowerShell as Administrator and create a firewall rule:
 
-Copy
-
 Ask AI
-         
+
          New-NetFirewallRule -DisplayName "Allow WSL2 Internal Traffic" -Direction Inbound -Protocol TCP -Action Allow -RemoteAddress 172.21.0.0/16 -LocalAddress 172.21.0.0/16
-         
 
 (Adjust the IP range based on your WSL2 subnet from step 1)
   3. Restart both your IDE and Claude Code
 
 **Option 2: Switch to mirrored networking** Add to `.wslconfig` in your Windows user directory:
 
-Copy
-
 Ask AI
-    
-    
+
     [wsl2]
     networkingMode=mirrored
-    
 
 Then restart WSL with `wsl --shutdown` from PowerShell.
 
 These networking issues only affect WSL2. WSL1 uses the host’s network directly and doesn’t require these configurations.
 
 For additional JetBrains configuration tips, see our [JetBrains IDE guide](/docs/en/jetbrains#plugin-settings).
-
-### 
-
-​
 
 Reporting Windows IDE integration issues (both native and WSL)
 
@@ -386,10 +247,6 @@ If you’re experiencing IDE integration problems on Windows, [create an issue](
   * IDE name and version
   * Claude Code extension/plugin version
   * Shell type: Bash, Zsh, PowerShell, etc.
-
-### 
-
-​
 
 Escape key not working in JetBrains (IntelliJ, PyCharm, etc.) terminals
 
@@ -403,57 +260,33 @@ If you’re using Claude Code in JetBrains terminals and the `Esc` key doesn’t
 
 This allows the `Esc` key to properly interrupt Claude Code operations.
 
-## 
-
-​
-
 Markdown formatting issues
 
 Claude Code sometimes generates markdown files with missing language tags on code fences, which can affect syntax highlighting and readability in GitHub, editors, and documentation tools.
-
-### 
-
-​
 
 Missing language tags in code blocks
 
 If you notice code blocks like this in generated markdown:
 
-Copy
-
 Ask AI
-    
-    
     ```
     function example() {
       return "hello";
     }
     ```
-    
-
 Instead of properly tagged blocks like:
 
-Copy
-
 Ask AI
-    
-    
     ```javascript
     function example() {
       return "hello";
     }
     ```
-    
-
 **Solutions:**
 
   1. **Ask Claude to add language tags** : Request “Add appropriate language tags to all code blocks in this markdown file.”
   2. **Use post-processing hooks** : Set up automatic formatting hooks to detect and add missing language tags. See the [markdown formatting hook example](/docs/en/hooks-guide#markdown-formatting-hook) for implementation details.
   3. **Manual verification** : After generating markdown files, review them for proper code block formatting and request corrections if needed.
-
-### 
-
-​
 
 Inconsistent spacing and formatting
 
@@ -463,10 +296,6 @@ If generated markdown has excessive blank lines or inconsistent spacing: **Solut
   2. **Use formatting tools** : Set up hooks to run markdown formatters like `prettier` or custom formatting scripts on generated markdown files.
   3. **Specify formatting preferences** : Include formatting requirements in your prompts or project [memory](/docs/en/memory) files.
 
-### 
-
-​
-
 Best practices for markdown generation
 
 To minimize formatting issues:
@@ -474,10 +303,6 @@ To minimize formatting issues:
   * **Be explicit in requests** : Ask for “properly formatted markdown with language-tagged code blocks”
   * **Use project conventions** : Document your preferred markdown style in [`CLAUDE.md`](/docs/en/memory)
   * **Set up validation hooks** : Use post-processing hooks to automatically verify and fix common formatting issues
-
-## 
-
-​
 
 Getting more help
 

@@ -3,38 +3,11 @@ source: https://code.claude.com/docs/en/data-usage
 title: Data usage - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Administration
-
-  * [Advanced installation](/docs/en/setup)
-  * [Identity and Access Management](/docs/en/iam)
-  * [Security](/docs/en/security)
-  * [Data usage](/docs/en/data-usage)
-  * [Monitoring](/docs/en/monitoring-usage)
-  * [Costs](/docs/en/costs)
-  * [Analytics](/docs/en/analytics)
-  * [Create and distribute a plugin marketplace](/docs/en/plugin-marketplaces)
-
-Administration
-
 # Data usage
 
 Learn about Anthropic’s data usage policies for Claude
 
-## 
-
-​
-
 Data policies
-
-### 
-
-​
 
 Data training policy
 
@@ -45,33 +18,17 @@ Data training policy
 
 **Commercial users** : (Team and Enterprise plans, API, 3rd-party platforms, and Claude Gov) maintain existing policies: Anthropic does not train generative models using code or prompts sent to Claude Code under commercial terms, unless the customer has chosen to provide their data to us for model improvement (for example, the [Developer Partner Program](https://support.claude.com/en/articles/11174108-about-the-development-partner-program)).
 
-### 
-
-​
-
 Development Partner Program
 
 If you explicitly opt in to methods to provide us with materials to train on, such as via the [Development Partner Program](https://support.claude.com/en/articles/11174108-about-the-development-partner-program), we may use those materials provided to train our models. An organization admin can expressly opt-in to the Development Partner Program for their organization. Note that this program is available only for Anthropic first-party API, and not for Bedrock or Vertex users.
-
-### 
-
-​
 
 Feedback using the `/bug` command
 
 If you choose to send us feedback about Claude Code using the `/bug` command, we may use your feedback to improve our products and services. Transcripts shared via `/bug` are retained for 5 years.
 
-### 
-
-​
-
 Session quality surveys
 
 When you see the “How is Claude doing this session?” prompt in Claude Code, responding to this survey (including selecting “Dismiss”), only your numeric rating (1, 2, 3, or dismiss) is recorded. We do not collect or store any conversation transcripts, inputs, outputs, or other session data as part of this survey. Unlike thumbs up/down feedback or `/bug` reports, this session quality survey is a simple product satisfaction metric. Your responses to this survey do not impact your data training preferences and cannot be used to train our AI models.
-
-### 
-
-​
 
 Data retention
 
@@ -89,17 +46,9 @@ Anthropic retains Claude Code data based on your account type and preferences. *
 
 Learn more about data retention practices in our [Privacy Center](https://privacy.anthropic.com/). For full details, please review our [Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms) (for Team, Enterprise, and API users) or [Consumer Terms](https://www.anthropic.com/legal/consumer-terms) (for Free, Pro, and Max users) and [Privacy Policy](https://www.anthropic.com/legal/privacy).
 
-## 
-
-​
-
 Data flow and dependencies
 
-![Claude Code data flow diagram](https://mintcdn.com/claude-code/-YhHHmtSxwr7W8gy/images/claude-code-data-flow.png?fit=max&auto=format&n=-YhHHmtSxwr7W8gy&q=85&s=4672f138596e864633b4b7c7ae4ae812) Claude Code is installed from [NPM](https://www.npmjs.com/package/@anthropic-ai/claude-code). Claude Code runs locally. In order to interact with the LLM, Claude Code sends data over the network. This data includes all user prompts and model outputs. The data is encrypted in transit via TLS and is not encrypted at rest. Claude Code is compatible with most popular VPNs and LLM proxies. Claude Code is built on Anthropic’s APIs. For details regarding our API’s security controls, including our API logging procedures, please refer to compliance artifacts offered in the [Anthropic Trust Center](https://trust.anthropic.com).
-
-### 
-
-​
+Claude Code is installed from [NPM](https://www.npmjs.com/package/@anthropic-ai/claude-code). Claude Code runs locally. In order to interact with the LLM, Claude Code sends data over the network. This data includes all user prompts and model outputs. The data is encrypted in transit via TLS and is not encrypted at rest. Claude Code is compatible with most popular VPNs and LLM proxies. Claude Code is built on Anthropic’s APIs. For details regarding our API’s security controls, including our API logging procedures, please refer to compliance artifacts offered in the [Anthropic Trust Center](https://trust.anthropic.com).
 
 Cloud execution
 
@@ -115,37 +64,29 @@ When using [Claude Code on the web](/docs/en/claude-code-on-the-web), sessions r
 
 For security details about cloud execution, see [Security](/docs/en/security#cloud-execution-security).
 
-## 
-
-​
-
 Telemetry services
 
 Claude Code connects from users’ machines to the Statsig service to log operational metrics such as latency, reliability, and usage patterns. This logging does not include any code or file paths. Data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the [Statsig security documentation](https://www.statsig.com/trust/security). To opt out of Statsig telemetry, set the `DISABLE_TELEMETRY` environment variable. Claude Code connects from users’ machines to Sentry for operational error logging. The data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the [Sentry security documentation](https://sentry.io/security/). To opt out of error logging, set the `DISABLE_ERROR_REPORTING` environment variable. When users run the `/bug` command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit and at rest. Optionally, a Github issue is created in our public repository. To opt out of bug reporting, set the `DISABLE_BUG_COMMAND` environment variable.
-
-## 
-
-​
 
 Default behaviors by API provider
 
 By default, we disable all non-essential traffic (including error reporting, telemetry, and bug reporting functionality) when using Bedrock or Vertex. You can also opt out of all of these at once by setting the `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` environment variable. Here are the full default behaviors:
 
-Service| Claude API| Vertex API| Bedrock API  
----|---|---|---  
-**Statsig (Metrics)**|  Default on.  
-`DISABLE_TELEMETRY=1` to disable.| Default off.  
-`CLAUDE_CODE_USE_VERTEX` must be 1.| Default off.  
-`CLAUDE_CODE_USE_BEDROCK` must be 1.  
-**Sentry (Errors)**|  Default on.  
-`DISABLE_ERROR_REPORTING=1` to disable.| Default off.  
-`CLAUDE_CODE_USE_VERTEX` must be 1.| Default off.  
-`CLAUDE_CODE_USE_BEDROCK` must be 1.  
-**Claude API (`/bug` reports)**| Default on.  
-`DISABLE_BUG_COMMAND=1` to disable.| Default off.  
-`CLAUDE_CODE_USE_VERTEX` must be 1.| Default off.  
-`CLAUDE_CODE_USE_BEDROCK` must be 1.  
-  
+Service| Claude API| Vertex API| Bedrock API
+---|---|---|---
+**Statsig (Metrics)**|  Default on.
+`DISABLE_TELEMETRY=1` to disable.| Default off.
+`CLAUDE_CODE_USE_VERTEX` must be 1.| Default off.
+`CLAUDE_CODE_USE_BEDROCK` must be 1.
+**Sentry (Errors)**|  Default on.
+`DISABLE_ERROR_REPORTING=1` to disable.| Default off.
+`CLAUDE_CODE_USE_VERTEX` must be 1.| Default off.
+`CLAUDE_CODE_USE_BEDROCK` must be 1.
+**Claude API (`/bug` reports)**| Default on.
+`DISABLE_BUG_COMMAND=1` to disable.| Default off.
+`CLAUDE_CODE_USE_VERTEX` must be 1.| Default off.
+`CLAUDE_CODE_USE_BEDROCK` must be 1.
+
 All environment variables can be checked into `settings.json` ([read more](/docs/en/settings)).
 
 Was this page helpful?

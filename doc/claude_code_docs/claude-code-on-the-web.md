@@ -3,40 +3,11 @@ source: https://code.claude.com/docs/en/claude-code-on-the-web
 title: Claude Code on the web - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Getting started
-
-  * [Overview](/docs/en/overview)
-  * [Quickstart](/docs/en/quickstart)
-  * [Common workflows](/docs/en/common-workflows)
-
-##### Outside of the terminal
-
-  * [Claude Code on the web](/docs/en/claude-code-on-the-web)
-  * [Claude Code on desktop](/docs/en/desktop)
-  * [Chrome extension (beta)](/docs/en/chrome)
-  * [Visual Studio Code](/docs/en/vs-code)
-  * [JetBrains IDEs](/docs/en/jetbrains)
-  * [GitHub Actions](/docs/en/github-actions)
-  * [GitLab CI/CD](/docs/en/gitlab-ci-cd)
-  * [Claude Code in Slack](/docs/en/slack)
-
-Outside of the terminal
-
 # Claude Code on the web
 
 Run Claude Code tasks asynchronously on secure cloud infrastructure
 
 Claude Code on the web is currently in research preview.
-
-## 
-
-​
 
 What is Claude Code on the web?
 
@@ -55,10 +26,6 @@ Claude Code is also available on the Claude iOS app. This is perfect for:
 
 Developers can also move Claude Code sessions from the Claude app to their terminal to continue tasks locally.
 
-## 
-
-​
-
 Who can use Claude Code on the web?
 
 Claude Code on the web is available in research preview to:
@@ -68,10 +35,6 @@ Claude Code on the web is available in research preview to:
   * **Team premium seat users**
   * **Enterprise premium seat users**
 
-## 
-
-​
-
 Getting started
 
   1. Visit [claude.ai/code](https://claude.ai/code)
@@ -80,10 +43,6 @@ Getting started
   4. Select your default environment
   5. Submit your coding task
   6. Review changes and create a pull request in GitHub
-
-## 
-
-​
 
 How it works
 
@@ -96,15 +55,7 @@ When you start a task on Claude Code on the web:
   5. **Completion** : You’re notified when finished and can create a PR with the changes
   6. **Results** : Changes are pushed to a branch, ready for pull request creation
 
-## 
-
-​
-
 Moving tasks between web and terminal
-
-### 
-
-​
 
 From web to terminal
 
@@ -115,15 +66,7 @@ After starting a task on the web:
   3. Any existing local changes will be stashed, and the remote session will be loaded
   4. Continue working locally
 
-## 
-
-​
-
 Cloud environment
-
-### 
-
-​
 
 Default image
 
@@ -133,31 +76,19 @@ We build and maintain a universal image with common toolchains and language ecos
   * Common build tools and package managers
   * Testing frameworks and linters
 
-#### 
-
-​
-
 Checking available tools
 
 To see what’s pre-installed in your environment, ask Claude Code to run:
 
-Copy
-
 Ask AI
-    
-    
+
     check-tools
-    
 
 This command displays:
 
   * Programming languages and their versions
   * Available package managers
   * Installed development tools
-
-#### 
-
-​
 
 Language-specific setups
 
@@ -172,20 +103,12 @@ The universal image includes pre-configured environments for:
   * **Rust** : Rust toolchain with cargo
   * **C++** : GCC and Clang compilers
 
-#### 
-
-​
-
 Databases
 
 The universal image includes the following databases:
 
   * **PostgreSQL** : Version 16
   * **Redis** : Version 7.0
-
-### 
-
-​
 
 Environment configuration
 
@@ -202,28 +125,17 @@ Claude operates entirely through the terminal and CLI tools available in the env
 
 Environment variables must be specified as key-value pairs, in [`.env` format](https://www.dotenv.org/). For example:
 
-Copy
-
 Ask AI
-    
-    
+
     API_KEY=your_api_key
     DEBUG=true
-    
-
-### 
-
-​
 
 Dependency management
 
 Configure automatic dependency installation using [SessionStart hooks](/docs/en/hooks#sessionstart). This can be configured in your repository’s `.claude/settings.json` file:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "hooks": {
         "SessionStart": [
@@ -239,70 +151,41 @@ Ask AI
         ]
       }
     }
-    
 
 Create the corresponding script at `scripts/install_pkgs.sh`:
 
-Copy
-
 Ask AI
-    
-    
+
     #!/bin/bash
     npm install
     pip install -r requirements.txt
     exit 0
-    
 
 Make it executable: `chmod +x scripts/install_pkgs.sh`
-
-#### 
-
-​
 
 Local vs remote execution
 
 By default, all hooks execute both locally and in remote (web) environments. To run a hook only in one environment, check the `CLAUDE_CODE_REMOTE` environment variable in your hook script.
 
-Copy
-
 Ask AI
-    
-    
+
     #!/bin/bash
-    
+
     # Example: Only run in remote environments
     if [ "$CLAUDE_CODE_REMOTE" != "true" ]; then
       exit 0
     fi
-    
+
     npm install
     pip install -r requirements.txt
-    
-
-#### 
-
-​
 
 Persisting environment variables
 
 SessionStart hooks can persist environment variables for subsequent bash commands by writing to the file specified in the `CLAUDE_ENV_FILE` environment variable. For details, see [SessionStart hooks](/docs/en/hooks#sessionstart) in the hooks reference.
 
-## 
-
-​
-
 Network access and security
 
-### 
-
-​
-
 Network policy
-
-#### 
-
-​
 
 GitHub proxy
 
@@ -312,10 +195,6 @@ For security, all GitHub operations go through a dedicated proxy service that tr
   * Restricts git push operations to the current working branch for safety
   * Enables seamless cloning, fetching, and PR operations while maintaining security boundaries
 
-#### 
-
-​
-
 Security proxy
 
 Environments run behind an HTTP/HTTPS network proxy for security and abuse prevention purposes. All outbound internet traffic passes through this proxy, which provides:
@@ -324,35 +203,19 @@ Environments run behind an HTTP/HTTPS network proxy for security and abuse preve
   * Rate limiting and abuse prevention
   * Content filtering for enhanced security
 
-### 
-
-​
-
 Access levels
 
 By default, network access is limited to allowlisted domains. You can configure custom network access, including disabling network access.
 
-### 
-
-​
-
 Default allowed domains
 
 When using “Limited” network access, the following domains are allowed by default:
-
-#### 
-
-​
 
 Anthropic Services
 
   * api.anthropic.com
   * statsig.anthropic.com
   * claude.ai
-
-#### 
-
-​
 
 Version Control
 
@@ -372,10 +235,6 @@ Version Control
   * [www.bitbucket.org](http://www.bitbucket.org)
   * api.bitbucket.org
 
-#### 
-
-​
-
 Container Registries
 
   * registry-1.docker.io
@@ -389,10 +248,6 @@ Container Registries
   * ghcr.io
   * mcr.microsoft.com
   * *.data.mcr.microsoft.com
-
-#### 
-
-​
 
 Cloud Platforms
 
@@ -422,10 +277,6 @@ Cloud Platforms
   * download.oracle.com
   * yum.oracle.com
 
-#### 
-
-​
-
 Package Managers - JavaScript/Node
 
   * registry.npmjs.org
@@ -435,10 +286,6 @@ Package Managers - JavaScript/Node
   * npmjs.org
   * yarnpkg.com
   * registry.yarnpkg.com
-
-#### 
-
-​
 
 Package Managers - Python
 
@@ -450,10 +297,6 @@ Package Managers - Python
   * pypi.python.org
   * pypa.io
   * [www.pypa.io](http://www.pypa.io)
-
-#### 
-
-​
 
 Package Managers - Ruby
 
@@ -470,10 +313,6 @@ Package Managers - Ruby
   * rvm.io
   * get.rvm.io
 
-#### 
-
-​
-
 Package Managers - Rust
 
   * crates.io
@@ -482,10 +321,6 @@ Package Managers - Rust
   * rustup.rs
   * static.rust-lang.org
   * [www.rust-lang.org](http://www.rust-lang.org)
-
-#### 
-
-​
 
 Package Managers - Go
 
@@ -496,10 +331,6 @@ Package Managers - Go
   * [www.golang.org](http://www.golang.org)
   * goproxy.io
   * pkg.go.dev
-
-#### 
-
-​
 
 Package Managers - JVM
 
@@ -513,10 +344,6 @@ Package Managers - JVM
   * services.gradle.org
   * spring.io
   * repo.spring.io
-
-#### 
-
-​
 
 Package Managers - Other Languages
 
@@ -544,10 +371,6 @@ Package Managers - Other Languages
   * swift.org
   * [www.swift.org](http://www.swift.org)
 
-#### 
-
-​
-
 Linux Distributions
 
   * archive.ubuntu.com
@@ -558,10 +381,6 @@ Linux Distributions
   * ppa.launchpad.net
   * launchpad.net
   * [www.launchpad.net](http://www.launchpad.net)
-
-#### 
-
-​
 
 Development Tools & Platforms
 
@@ -591,10 +410,6 @@ Development Tools & Platforms
   * nodejs.org (Node.js)
   * [www.nodejs.org](http://www.nodejs.org)
 
-#### 
-
-​
-
 Cloud Services & Monitoring
 
   * statsig.com
@@ -602,19 +417,11 @@ Cloud Services & Monitoring
   * api.statsig.com
   * *.sentry.io
 
-#### 
-
-​
-
 Content Delivery & Mirrors
 
   * *.sourceforge.net
   * packagecloud.io
   * *.packagecloud.io
-
-#### 
-
-​
 
 Schema & Configuration
 
@@ -625,19 +432,11 @@ Schema & Configuration
 
 Domains marked with `*` indicate wildcard subdomain matching. For example, `*.gcr.io` allows access to any subdomain of `gcr.io`.
 
-### 
-
-​
-
 Security best practices for customized network access
 
   1. **Principle of least privilege** : Only enable the minimum network access required
   2. **Audit regularly** : Review allowed domains periodically
   3. **Use HTTPS** : Always prefer HTTPS endpoints over HTTP
-
-## 
-
-​
 
 Security and isolation
 
@@ -651,35 +450,19 @@ When running with network access disabled, Claude Code is allowed to communicate
   * **Credential protection** : Sensitive credentials (such as git credentials or signing keys) are never inside the sandbox with Claude Code. Authentication is handled through a secure proxy using scoped credentials
   * **Secure analysis** : Code is analyzed and modified within isolated VMs before creating PRs
 
-## 
-
-​
-
 Pricing and rate limits
 
 Claude Code on the web shares rate limits with all other Claude and Claude Code usage within your account. Running multiple tasks in parallel will consume more rate limits proportionately.
-
-## 
-
-​
 
 Limitations
 
   * **Repository authentication** : You can only move sessions from web to local when you are authenticated to the same account
   * **Platform restrictions** : Claude Code on the web only works with code hosted in GitHub. GitLab and other non-GitHub repositories cannot be used with cloud sessions
 
-## 
-
-​
-
 Best practices
 
   1. **Use Claude Code hooks** : Configure [SessionStart hooks](/docs/en/hooks#sessionstart) to automate environment setup and dependency installation.
   2. **Document requirements** : Clearly specify dependencies and commands in your `CLAUDE.md` file. If you have an `AGENTS.md` file, you can source it in your `CLAUDE.md` using `@AGENTS.md` to maintain a single source of truth.
-
-## 
-
-​
 
 Related resources
 

@@ -4,13 +4,9 @@ title: Snowflake and Anthropic announce $200 million partnership to bring agenti
 category: Commitments
 ---
 
-AnnouncementsProduct
-
 # Snowflake and Anthropic announce $200 million partnership to bring agentic AI to global enterprises
 
 Dec 3, 2025
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1576ae23eaf481f33bd36ab468171cc69d12361a-1000x1000.svg)
 
 Today, we announce a significant expansion of our strategic partnership with Snowflake. The multi-year, $200 million agreement will not only make Anthropic’s Claude models available in the Snowflake platform to more than 12,600 global customers across Amazon Bedrock, Google Cloud Vertex AI, and Microsoft Azure, but also establishes a joint go-to-market (GTM) initiative focused on deploying AI agents across the world's largest enterprises. The partnership enables enterprises to gain insights from both structured and unstructured data using Claude, while maintaining rigorous security standards.
 

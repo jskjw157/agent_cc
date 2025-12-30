@@ -3,32 +3,9 @@ source: https://code.claude.com/docs/en/google-vertex-ai
 title: Claude Code on Google Vertex AI - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Deployment
-
-  * [Overview](/docs/en/third-party-integrations)
-  * [Amazon Bedrock](/docs/en/amazon-bedrock)
-  * [Google Vertex AI](/docs/en/google-vertex-ai)
-  * [Microsoft Foundry](/docs/en/microsoft-foundry)
-  * [Network configuration](/docs/en/network-config)
-  * [LLM gateway](/docs/en/llm-gateway)
-  * [Development containers](/docs/en/devcontainer)
-  * [Sandboxing](/docs/en/sandboxing)
-
-Deployment
-
 # Claude Code on Google Vertex AI
 
 Learn about configuring Claude Code through Google Vertex AI, including setup, IAM configuration, and troubleshooting.
-
-## 
-
-​
 
 Prerequisites
 
@@ -40,10 +17,6 @@ Before configuring Claude Code with Vertex AI, ensure you have:
   * Google Cloud SDK (`gcloud`) installed and configured
   * Quota allocated in desired GCP region
 
-## 
-
-​
-
 Region Configuration
 
 Claude Code can be used with both Vertex AI [global](https://cloud.google.com/blog/products/ai-machine-learning/global-endpoint-for-claude-models-generally-available-on-vertex-ai) and regional endpoints.
@@ -52,35 +25,19 @@ Vertex AI may not support the Claude Code default models on all regions. You may
 
 Vertex AI may not support the Claude Code default models on global endpoints. You may need to switch to a regional endpoint or [supported model](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-partner-models#supported_models).
 
-## 
-
-​
-
 Setup
-
-### 
-
-​
 
 1\. Enable Vertex AI API
 
 Enable the Vertex AI API in your GCP project:
 
-Copy
-
 Ask AI
-    
-    
+
     # Set your project ID
     gcloud config set project YOUR-PROJECT-ID
-    
+
     # Enable Vertex AI API
     gcloud services enable aiplatform.googleapis.com
-    
-
-### 
-
-​
 
 2\. Request model access
 
@@ -91,81 +48,57 @@ Request access to Claude models in Vertex AI:
   3. Request access to desired Claude models (for example, Claude Sonnet 4.5)
   4. Wait for approval (may take 24-48 hours)
 
-### 
-
-​
-
 3\. Configure GCP credentials
 
 Claude Code uses standard Google Cloud authentication. For more information, see [Google Cloud authentication documentation](https://cloud.google.com/docs/authentication).
 
 When authenticating, Claude Code will automatically use the project ID from the `ANTHROPIC_VERTEX_PROJECT_ID` environment variable. To override this, set one of these environment variables: `GCLOUD_PROJECT`, `GOOGLE_CLOUD_PROJECT`, or `GOOGLE_APPLICATION_CREDENTIALS`.
 
-### 
-
-​
-
 4\. Configure Claude Code
 
 Set the following environment variables:
 
-Copy
-
 Ask AI
-    
-    
+
     # Enable Vertex AI integration
     export CLAUDE_CODE_USE_VERTEX=1
     export CLOUD_ML_REGION=global
     export ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID
-    
+
     # Optional: Disable prompt caching if needed
     export DISABLE_PROMPT_CACHING=1
-    
+
     # When CLOUD_ML_REGION=global, override region for unsupported models
     export VERTEX_REGION_CLAUDE_3_5_HAIKU=us-east5
-    
+
     # Optional: Override regions for other specific models
     export VERTEX_REGION_CLAUDE_3_5_SONNET=us-east5
     export VERTEX_REGION_CLAUDE_3_7_SONNET=us-east5
     export VERTEX_REGION_CLAUDE_4_0_OPUS=europe-west1
     export VERTEX_REGION_CLAUDE_4_0_SONNET=us-east5
     export VERTEX_REGION_CLAUDE_4_1_OPUS=europe-west1
-    
 
 [Prompt caching](https://docs.claude.com/en/docs/build-with-claude/prompt-caching) is automatically supported when you specify the `cache_control` ephemeral flag. To disable it, set `DISABLE_PROMPT_CACHING=1`. For heightened rate limits, contact Google Cloud support.
 
 When using Vertex AI, the `/login` and `/logout` commands are disabled since authentication is handled through Google Cloud credentials.
 
-### 
-
-​
-
 5\. Model configuration
 
 Claude Code uses these default models for Vertex AI:
 
-Model type| Default value  
----|---  
-Primary model| `claude-sonnet-4-5@20250929`  
-Small/fast model| `claude-haiku-4-5@20251001`  
-  
+Model type| Default value
+---|---
+Primary model| `claude-sonnet-4-5@20250929`
+Small/fast model| `claude-haiku-4-5@20251001`
+
 For Vertex AI users, Claude Code will not automatically upgrade from Haiku 3.5 to Haiku 4.5. To manually switch to a newer Haiku model, set the `ANTHROPIC_DEFAULT_HAIKU_MODEL` environment variable to the full model name (for example, `claude-haiku-4-5@20251001`).
 
 To customize models:
 
-Copy
-
 Ask AI
-    
-    
+
     export ANTHROPIC_MODEL='claude-opus-4-1@20250805'
     export ANTHROPIC_SMALL_FAST_MODEL='claude-haiku-4-5@20251001'
-    
-
-## 
-
-​
 
 IAM configuration
 
@@ -177,19 +110,11 @@ For more restrictive permissions, create a custom role with only the permissions
 
 We recommend creating a dedicated GCP project for Claude Code to simplify cost tracking and access control.
 
-## 
-
-​
-
 1M token context window
 
 Claude Sonnet 4 and Sonnet 4.5 support the [1M token context window](https://docs.claude.com/en/docs/build-with-claude/context-windows#1m-token-context-window) on Vertex AI.
 
 The 1M token context window is currently in beta. To use the extended context window, include the `context-1m-2025-08-07` beta header in your Vertex AI requests.
-
-## 
-
-​
 
 Troubleshooting
 
@@ -209,10 +134,6 @@ If you encounter 429 errors:
 
   * For regional endpoints, ensure the primary model and small/fast model are supported in your selected region
   * Consider switching to `CLOUD_ML_REGION=global` for better availability
-
-## 
-
-​
 
 Additional resources
 

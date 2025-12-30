@@ -3,26 +3,6 @@ source: https://code.claude.com/docs/en/hooks-guide
 title: Get started with Claude Code hooks - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Build with Claude Code
-
-  * [Subagents](/docs/en/sub-agents)
-  * [Create plugins](/docs/en/plugins)
-  * [Discover and install prebuilt plugins](/docs/en/discover-plugins)
-  * [Agent Skills](/docs/en/skills)
-  * [Output styles](/docs/en/output-styles)
-  * [Hooks](/docs/en/hooks-guide)
-  * [Programmatic usage](/docs/en/headless)
-  * [Model Context Protocol (MCP)](/docs/en/mcp)
-  * [Troubleshooting](/docs/en/troubleshooting)
-
-Build with Claude Code
-
 # Get started with Claude Code hooks
 
 Learn how to customize and extend Claude Code’s behavior by registering shell commands
@@ -43,10 +23,6 @@ By encoding these rules as hooks rather than prompting instructions, you turn su
 
 You must consider the security implication of hooks as you add them, because hooks run automatically during the agent loop with your current environment’s credentials. For example, malicious hooks code can exfiltrate your data. Always review your hooks implementation before registering them.For full security best practices, see [Security Considerations](/docs/en/hooks#security-considerations) in the hooks reference documentation.
 
-## 
-
-​
-
 Hook Events Overview
 
 Claude Code provides several hook events that run at different points in the workflow:
@@ -64,33 +40,17 @@ Claude Code provides several hook events that run at different points in the wor
 
 Each event receives different data and can control Claude’s behavior in different ways.
 
-## 
-
-​
-
 Quickstart
 
 In this quickstart, you’ll add a hook that logs the shell commands that Claude Code runs.
-
-### 
-
-​
 
 Prerequisites
 
 Install `jq` for JSON processing in the command line.
 
-### 
-
-​
-
 Step 1: Open hooks configuration
 
 Run the `/hooks` [slash command](/docs/en/slash-commands) and select the `PreToolUse` hook event. `PreToolUse` hooks run before tool calls and can block them while providing Claude feedback on what to do differently.
-
-### 
-
-​
 
 Step 2: Add a matcher
 
@@ -98,43 +58,24 @@ Select `+ Add new matcher…` to run your hook only on Bash tool calls. Type `Ba
 
 You can use `*` to match all tools.
 
-### 
-
-​
-
 Step 3: Add the hook
 
 Select `+ Add new hook…` and enter this command:
 
-Copy
-
 Ask AI
-    
-    
+
     jq -r '"\(.tool_input.command) - \(.tool_input.description // "No description")"' >> ~/.claude/bash-command-log.txt
-    
-
-### 
-
-​
 
 Step 4: Save your configuration
 
 For storage location, select `User settings` since you’re logging to your home directory. This hook will then apply to all projects, not just your current project. Then press `Esc` until you return to the REPL. Your hook is now registered.
 
-### 
-
-​
-
 Step 5: Verify your hook
 
 Run `/hooks` again or check `~/.claude/settings.json` to see your configuration:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "hooks": {
         "PreToolUse": [
@@ -150,55 +91,31 @@ Ask AI
         ]
       }
     }
-    
-
-### 
-
-​
 
 Step 6: Test your hook
 
 Ask Claude to run a simple command like `ls` and check your log file:
 
-Copy
-
 Ask AI
-    
-    
+
     cat ~/.claude/bash-command-log.txt
-    
 
 You should see entries like:
 
-Copy
-
 Ask AI
-    
-    
+
     ls - Lists files and directories
-    
-
-## 
-
-​
 
 More Examples
 
 For a complete example implementation, see the [bash command validator example](https://github.com/anthropics/claude-code/blob/main/examples/hooks/bash_command_validator_example.py) in our public codebase.
 
-### 
-
-​
-
 Code Formatting Hook
 
 Automatically format TypeScript files after editing:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "hooks": {
         "PostToolUse": [
@@ -214,21 +131,13 @@ Ask AI
         ]
       }
     }
-    
-
-### 
-
-​
 
 Markdown Formatting Hook
 
 Automatically fix missing language tags and formatting issues in markdown files:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "hooks": {
         "PostToolUse": [
@@ -244,15 +153,11 @@ Ask AI
         ]
       }
     }
-    
 
 Create `.claude/hooks/markdown_formatter.py` with this content:
 
-Copy
-
 Ask AI
-    
-    
+
     #!/usr/bin/env python3
     """
     Markdown formatter for Claude Code output.
@@ -262,11 +167,11 @@ Ask AI
     import sys
     import re
     import os
-    
+
     def detect_language(code):
         """Best-effort language detection from code content."""
         s = code.strip()
-        
+
         # JSON detection
         if re.search(r'^\s*[{\[]', s):
             try:
@@ -274,28 +179,28 @@ Ask AI
                 return 'json'
             except:
                 pass
-        
+
         # Python detection
         if re.search(r'^\s*def\s+\w+\s*\(', s, re.M) or \
            re.search(r'^\s*(import|from)\s+\w+', s, re.M):
             return 'python'
-        
-        # JavaScript detection  
+
+        # JavaScript detection
         if re.search(r'\b(function\s+\w+\s*\(|const\s+\w+\s*=)', s) or \
            re.search(r'=>|console\.(log|error)', s):
             return 'javascript'
-        
+
         # Bash detection
         if re.search(r'^#!.*\b(bash|sh)\b', s, re.M) or \
            re.search(r'\b(if|then|fi|for|in|do|done)\b', s):
             return 'bash'
-        
+
         # SQL detection
         if re.search(r'\b(SELECT|INSERT|UPDATE|DELETE|CREATE)\s+', s, re.I):
             return 'sql'
-            
+
         return 'text'
-    
+
     def format_markdown(content):
         """Format markdown content with language detection."""
         # Fix unlabeled code fences
@@ -305,48 +210,43 @@ Ask AI
                 lang = detect_language(body)
                 return f"{indent}```{lang}\n{body}{closing}\n"
             return match.group(0)
-        
+
         fence_pattern = r'(?ms)^([ \t]{0,3})```([^\n]*)\n(.*?)(\n\1```)\s*$'
         content = re.sub(fence_pattern, add_lang_to_fence, content)
-        
+
         # Fix excessive blank lines (only outside code fences)
         content = re.sub(r'\n{3,}', '\n\n', content)
-        
+
         return content.rstrip() + '\n'
-    
+
     # Main execution
     try:
         input_data = json.load(sys.stdin)
         file_path = input_data.get('tool_input', {}).get('file_path', '')
-        
+
         if not file_path.endswith(('.md', '.mdx')):
             sys.exit(0)  # Not a markdown file
-        
+
         if os.path.exists(file_path):
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
-            
+
             formatted = format_markdown(content)
-            
+
             if formatted != content:
                 with open(file_path, 'w', encoding='utf-8') as f:
                     f.write(formatted)
                 print(f"✓ Fixed markdown formatting in {file_path}")
-        
+
     except Exception as e:
         print(f"Error formatting markdown: {e}", file=sys.stderr)
         sys.exit(1)
-    
 
 Make the script executable:
 
-Copy
-
 Ask AI
-    
-    
+
     chmod +x .claude/hooks/markdown_formatter.py
-    
 
 This hook automatically:
 
@@ -355,19 +255,12 @@ This hook automatically:
   * Fixes excessive blank lines while preserving code content
   * Only processes markdown files (`.md`, `.mdx`)
 
-### 
-
-​
-
 Custom Notification Hook
 
 Get desktop notifications when Claude needs input:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "hooks": {
         "Notification": [
@@ -383,21 +276,13 @@ Ask AI
         ]
       }
     }
-    
-
-### 
-
-​
 
 File Protection Hook
 
 Block edits to sensitive files:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "hooks": {
         "PreToolUse": [
@@ -413,11 +298,6 @@ Ask AI
         ]
       }
     }
-    
-
-## 
-
-​
 
 Learn more
 

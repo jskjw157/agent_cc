@@ -3,40 +3,11 @@ source: https://code.claude.com/docs/en/quickstart
 title: Quickstart - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Getting started
-
-  * [Overview](/docs/en/overview)
-  * [Quickstart](/docs/en/quickstart)
-  * [Common workflows](/docs/en/common-workflows)
-
-##### Outside of the terminal
-
-  * [Claude Code on the web](/docs/en/claude-code-on-the-web)
-  * [Claude Code on desktop](/docs/en/desktop)
-  * [Chrome extension (beta)](/docs/en/chrome)
-  * [Visual Studio Code](/docs/en/vs-code)
-  * [JetBrains IDEs](/docs/en/jetbrains)
-  * [GitHub Actions](/docs/en/github-actions)
-  * [GitLab CI/CD](/docs/en/gitlab-ci-cd)
-  * [Claude Code in Slack](/docs/en/slack)
-
-Getting started
-
 # Quickstart
 
 Welcome to Claude Code!
 
 This quickstart guide will have you using AI-powered coding assistance in just a few minutes. By the end, you’ll understand how to use Claude Code for common development tasks.
-
-## 
-
-​
 
 Before you begin
 
@@ -45,10 +16,6 @@ Make sure you have:
   * A terminal or command prompt open
   * A code project to work with
   * A [Claude.ai](https://claude.ai) (recommended) or [Claude Console](https://console.anthropic.com/) account
-
-## 
-
-​
 
 Step 1: Install Claude Code
 
@@ -62,77 +29,45 @@ To install Claude Code, use one of the following methods:
 
 **macOS, Linux, WSL:**
 
-Copy
-
 Ask AI
-    
-    
+
     curl -fsSL https://claude.ai/install.sh | bash
-    
 
 **Windows PowerShell:**
 
-Copy
-
 Ask AI
-    
-    
+
     irm https://claude.ai/install.ps1 | iex
-    
 
 **Windows CMD:**
 
-Copy
-
 Ask AI
-    
-    
+
     curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
-    
-
-Copy
 
 Ask AI
-    
-    
+
     brew install --cask claude-code
-    
 
 If you have [Node.js 18 or newer installed](https://nodejs.org/en/download/):
 
-Copy
-
 Ask AI
-    
-    
+
     npm install -g @anthropic-ai/claude-code
-    
-
-## 
-
-​
 
 Step 2: Log in to your account
 
 Claude Code requires an account to use. When you start an interactive session with the `claude` command, you’ll need to log in:
 
-Copy
-
 Ask AI
-    
-    
+
     claude
     # You'll be prompted to log in on first use
-    
-
-Copy
 
 Ask AI
-    
-    
+
     /login
     # Follow the prompts to log in with your account
-    
 
 You can log in using either account type:
 
@@ -145,112 +80,64 @@ When you first authenticate Claude Code with your Claude Console account, a work
 
 You can have both account types under the same email address. If you need to log in again or switch accounts, use the `/login` command within Claude Code.
 
-## 
-
-​
-
 Step 3: Start your first session
 
 Open your terminal in any project directory and start Claude Code:
 
-Copy
-
 Ask AI
-    
-    
+
     cd /path/to/your/project
     claude
-    
 
 You’ll see the Claude Code welcome screen with your session information, recent conversations, and latest updates. Type `/help` for available commands or `/resume` to continue a previous conversation.
 
 After logging in (Step 2), your credentials are stored on your system. Learn more in [Credential Management](/docs/en/iam#credential-management).
 
-## 
-
-​
-
 Step 4: Ask your first question
 
 Let’s start with understanding your codebase. Try one of these commands:
 
-Copy
-
 Ask AI
-    
-    
+
     > what does this project do?
-    
 
 Claude will analyze your files and provide a summary. You can also ask more specific questions:
 
-Copy
-
 Ask AI
-    
-    
+
     > what technologies does this project use?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > where is the main entry point?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > explain the folder structure
-    
 
 You can also ask Claude about its own capabilities:
 
-Copy
-
 Ask AI
-    
-    
+
     > what can Claude Code do?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > how do I use slash commands in Claude Code?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > can Claude Code work with Docker?
-    
 
 Claude Code reads your files as needed - you don’t have to manually add context. Claude also has access to its own documentation and can answer questions about its features and capabilities.
-
-## 
-
-​
 
 Step 5: Make your first code change
 
 Now let’s make Claude Code do some actual coding. Try a simple task:
 
-Copy
-
 Ask AI
-    
-    
+
     > add a hello world function to the main file
-    
 
 Claude Code will:
 
@@ -261,81 +148,45 @@ Claude Code will:
 
 Claude Code always asks for permission before modifying files. You can approve individual changes or enable “Accept all” mode for a session.
 
-## 
-
-​
-
 Step 6: Use Git with Claude Code
 
 Claude Code makes Git operations conversational:
 
-Copy
-
 Ask AI
-    
-    
+
     > what files have I changed?
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > commit my changes with a descriptive message
-    
 
 You can also prompt for more complex Git operations:
 
-Copy
-
 Ask AI
-    
-    
+
     > create a new branch called feature/quickstart
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > show me the last 5 commits
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > help me resolve merge conflicts
-    
-
-## 
-
-​
 
 Step 7: Fix a bug or add a feature
 
 Claude is proficient at debugging and feature implementation. Describe what you want in natural language:
 
-Copy
-
 Ask AI
-    
-    
+
     > add input validation to the user registration form
-    
 
 Or fix existing issues:
 
-Copy
-
 Ask AI
-    
-    
+
     > there's a bug where users can submit empty forms - fix it
-    
 
 Claude Code will:
 
@@ -344,79 +195,51 @@ Claude Code will:
   * Implement a solution
   * Run tests if available
 
-## 
-
-​
-
 Step 8: Test out other common workflows
 
 There are a number of ways to work with Claude: **Refactor code**
 
-Copy
-
 Ask AI
-    
-    
+
     > refactor the authentication module to use async/await instead of callbacks
-    
 
 **Write tests**
 
-Copy
-
 Ask AI
-    
-    
+
     > write unit tests for the calculator functions
-    
 
 **Update documentation**
 
-Copy
-
 Ask AI
-    
-    
+
     > update the README with installation instructions
-    
 
 **Code review**
 
-Copy
-
 Ask AI
-    
-    
+
     > review my changes and suggest improvements
-    
 
 **Remember** : Claude Code is your AI pair programmer. Talk to it like you would a helpful colleague - describe what you want to achieve, and it will help you get there.
-
-## 
-
-​
 
 Essential commands
 
 Here are the most important commands for daily use:
 
-Command| What it does| Example  
----|---|---  
-`claude`| Start interactive mode| `claude`  
-`claude "task"`| Run a one-time task| `claude "fix the build error"`  
-`claude -p "query"`| Run one-off query, then exit| `claude -p "explain this function"`  
-`claude -c`| Continue most recent conversation| `claude -c`  
-`claude -r`| Resume a previous conversation| `claude -r`  
-`claude commit`| Create a Git commit| `claude commit`  
-`/clear`| Clear conversation history| `> /clear`  
-`/help`| Show available commands| `> /help`  
-`exit` or Ctrl+C| Exit Claude Code| `> exit`  
-  
+Command| What it does| Example
+---|---|---
+`claude`| Start interactive mode| `claude`
+`claude "task"`| Run a one-time task| `claude "fix the build error"`
+`claude -p "query"`| Run one-off query, then exit| `claude -p "explain this function"`
+`claude -c`| Continue most recent conversation| `claude -c`
+`claude -r`| Resume a previous conversation| `claude -r`
+`claude commit`| Create a Git commit| `claude commit`
+`/clear`| Clear conversation history| `> /clear`
+`/help`| Show available commands| `> /help`
+`exit` or Ctrl+C| Exit Claude Code| `> exit`
+
 See the [CLI reference](/docs/en/cli-reference) for a complete list of commands.
-
-## 
-
-​
 
 Pro tips for beginners
 
@@ -428,49 +251,29 @@ Use step-by-step instructions
 
 Break complex tasks into steps:
 
-Copy
-
 Ask AI
-    
-    
+
     > 1. create a new database table for user profiles
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > 2. create an API endpoint to get and update user profiles
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > 3. build a webpage that allows users to see and edit their information
-    
 
 Let Claude explore first
 
 Before making changes, let Claude understand your code:
 
-Copy
-
 Ask AI
-    
-    
+
     > analyze the database schema
-    
-
-Copy
 
 Ask AI
-    
-    
+
     > build a dashboard showing products that are most frequently returned by our UK customers
-    
 
 Save time with shortcuts
 
@@ -479,19 +282,11 @@ Save time with shortcuts
   * Press ↑ for command history
   * Type `/` to see all slash commands
 
-## 
-
-​
-
 What’s next?
 
 Now that you’ve learned the basics, explore more advanced features:
 
 ## [Common workflowsStep-by-step guides for common tasks](/docs/en/common-workflows)## [CLI referenceMaster all commands and options](/docs/en/cli-reference)## [ConfigurationCustomize Claude Code for your workflow](/docs/en/settings)## [Claude Code on the webRun tasks asynchronously in the cloud](/docs/en/claude-code-on-the-web)## [About Claude CodeLearn more on claude.com](https://claude.com/product/claude-code)
-
-## 
-
-​
 
 Getting help
 

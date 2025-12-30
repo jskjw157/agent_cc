@@ -3,35 +3,11 @@ source: https://code.claude.com/docs/en/discover-plugins
 title: Discover and install prebuilt plugins through marketplaces - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Build with Claude Code
-
-  * [Subagents](/docs/en/sub-agents)
-  * [Create plugins](/docs/en/plugins)
-  * [Discover and install prebuilt plugins](/docs/en/discover-plugins)
-  * [Agent Skills](/docs/en/skills)
-  * [Output styles](/docs/en/output-styles)
-  * [Hooks](/docs/en/hooks-guide)
-  * [Programmatic usage](/docs/en/headless)
-  * [Model Context Protocol (MCP)](/docs/en/mcp)
-  * [Troubleshooting](/docs/en/troubleshooting)
-
-Build with Claude Code
-
 # Discover and install prebuilt plugins through marketplaces
 
 Find and install plugins from marketplaces to extend Claude Code with new commands, agents, and capabilities.
 
 Plugins extend Claude Code with custom commands, agents, hooks, and MCP servers. Plugin marketplaces are catalogs that help you discover and install these extensions without building them yourself. Looking to create and distribute your own marketplace? See [Create and distribute a plugin marketplace](/docs/en/plugin-marketplaces).
-
-## 
-
-​
 
 How marketplaces work
 
@@ -51,54 +27,38 @@ Browse the catalog and install the plugins you want.
 
 Think of it like adding an app store: adding the store gives you access to browse its collection, but you still choose which apps to download individually.
 
-## 
-
-​
-
 Official Anthropic marketplace
 
 The official Anthropic marketplace (`claude-plugins-official`) is automatically available when you start Claude Code. Run `/plugin` and go to the **Discover** tab to browse what’s available. To install a plugin from the official marketplace:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin install plugin-name@claude-plugins-official
-    
 
 The official marketplace is maintained by Anthropic. To distribute your own plugins, [create your own marketplace](/docs/en/plugin-marketplaces) and share it with users.
 
 The official marketplace includes several categories of plugins:
 
-### 
-
-​
-
 Code intelligence
 
 Code intelligence plugins help Claude understand your codebase more deeply. With these plugins installed, Claude can jump to definitions, find references, and see type errors immediately after edits. These plugins use the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) (LSP), the same technology that powers VS Code’s code intelligence. These plugins require the language server binary to be installed on your system. If you already have a language server installed, Claude may prompt you to install the corresponding plugin when you open a project.
 
-Language| Plugin| Binary required  
----|---|---  
-C/C++| `clangd-lsp`| `clangd`  
-C#| `csharp-lsp`| `csharp-ls`  
-Go| `gopls-lsp`| `gopls`  
-Java| `jdtls-lsp`| `jdtls`  
-Lua| `lua-lsp`| `lua-language-server`  
-PHP| `php-lsp`| `intelephense`  
-Python| `pyright-lsp`| `pyright-langserver`  
-Rust| `rust-analyzer-lsp`| `rust-analyzer`  
-Swift| `swift-lsp`| `sourcekit-lsp`  
-TypeScript| `typescript-lsp`| `typescript-language-server`  
-  
+Language| Plugin| Binary required
+---|---|---
+C/C++| `clangd-lsp`| `clangd`
+C#| `csharp-lsp`| `csharp-ls`
+Go| `gopls-lsp`| `gopls`
+Java| `jdtls-lsp`| `jdtls`
+Lua| `lua-lsp`| `lua-language-server`
+PHP| `php-lsp`| `intelephense`
+Python| `pyright-lsp`| `pyright-langserver`
+Rust| `rust-analyzer-lsp`| `rust-analyzer`
+Swift| `swift-lsp`| `sourcekit-lsp`
+TypeScript| `typescript-lsp`| `typescript-language-server`
+
 You can also [create your own LSP plugin](/docs/en/plugins-reference#lsp-servers) for other languages.
 
 If you see `Executable not found in $PATH` in the `/plugin` Errors tab after installing a plugin, install the required binary from the table above.
-
-### 
-
-​
 
 External integrations
 
@@ -111,10 +71,6 @@ These plugins bundle pre-configured [MCP servers](/docs/en/mcp) so you can conne
   * **Communication** : `slack`
   * **Monitoring** : `sentry`
 
-### 
-
-​
-
 Development workflows
 
 Plugins that add commands and agents for common development tasks:
@@ -124,20 +80,12 @@ Plugins that add commands and agents for common development tasks:
   * **agent-sdk-dev** : Tools for building with the Claude Agent SDK
   * **plugin-dev** : Toolkit for creating your own plugins
 
-### 
-
-​
-
 Output styles
 
 Customize how Claude responds:
 
   * **explanatory-output-style** : Educational insights about implementation choices
   * **learning-output-style** : Interactive learning mode for skill building
-
-## 
-
-​
 
 Try it: add the demo marketplace
 
@@ -149,13 +97,9 @@ Add the marketplace
 
 From within Claude Code, run the `plugin marketplace add` command for the `anthropics/claude-code` marketplace:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace add anthropics/claude-code
-    
 
 This downloads the marketplace catalog and makes its plugins available to you.
 
@@ -184,13 +128,9 @@ Select a plugin to view its details, then choose an installation scope:
 
 For example, select **commit-commands** (a plugin that adds git workflow commands) and install it to your user scope.You can also install directly from the command line:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin install commit-commands@anthropics-claude-code
-    
 
 See [Configuration scopes](/docs/en/settings#configuration-scopes) to learn more about scopes.
 
@@ -200,21 +140,13 @@ Use your new plugin
 
 After installing, the plugin’s commands are immediately available. Plugin commands are namespaced by the plugin name, so **commit-commands** provides commands like `/commit-commands:commit`.Try it out by making a change to a file and running:
 
-Copy
-
 Ask AI
-    
-    
+
     /commit-commands:commit
-    
 
 This stages your changes, generates a commit message, and creates the commit.Each plugin works differently. Check the plugin’s description in the **Discover** tab or its homepage to learn what commands and capabilities it provides.
 
 The rest of this guide covers all the ways you can add marketplaces, install plugins, and manage your configuration.
-
-## 
-
-​
 
 Add marketplaces
 
@@ -227,109 +159,61 @@ Use the `/plugin marketplace add` command to add marketplaces from different sou
   * **Local paths** : directories or direct paths to `marketplace.json` files
   * **Remote URLs** : direct URLs to hosted `marketplace.json` files
 
-### 
-
-​
-
 Add from GitHub
 
 Add a GitHub repository that contains a `.claude-plugin/marketplace.json` file using the `owner/repo` format—where `owner` is the GitHub username or organization and `repo` is the repository name. For example, `anthropics/claude-code` refers to the `claude-code` repository owned by `anthropics`:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace add anthropics/claude-code
-    
-
-### 
-
-​
 
 Add from other Git hosts
 
 Add any git repository by providing the full URL. This works with any Git host, including GitLab, Bitbucket, and self-hosted servers: Using HTTPS:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace add https://gitlab.com/company/plugins.git
-    
 
 Using SSH:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace add [[email protected]](/cdn-cgi/l/email-protection):company/plugins.git
-    
 
 To add a specific branch or tag, append `#` followed by the ref:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace add https://gitlab.com/company/plugins.git#v1.0.0
-    
-
-### 
-
-​
 
 Add from local paths
 
 Add a local directory that contains a `.claude-plugin/marketplace.json` file:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace add ./my-marketplace
-    
 
 You can also add a direct path to a `marketplace.json` file:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace add ./path/to/marketplace.json
-    
 
 Or add a remote `marketplace.json` file via URL:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace add https://example.com/marketplace.json
-    
-
-## 
-
-​
 
 Install plugins
 
 Once you’ve added marketplaces, you can install plugins directly (installs to user scope by default):
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin install plugin-name@marketplace-name
-    
 
 To choose a different [installation scope](/docs/en/settings#configuration-scopes), use the interactive UI: run `/plugin`, go to the **Discover** tab, and press **Enter** on a plugin. You’ll see options for:
 
@@ -341,64 +225,36 @@ You may also see plugins with **managed** scope—these are installed by enterpr
 
 Make sure you trust a plugin before installing it. Anthropic does not control what MCP servers, files, or other software are included in plugins and cannot verify that they work as intended. Check each plugin’s homepage for more information.
 
-## 
-
-​
-
 Manage installed plugins
 
 Run `/plugin` and go to the **Installed** tab to view, enable, disable, or uninstall your plugins. You can also manage plugins with direct commands. Disable a plugin without uninstalling:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin disable plugin-name@marketplace-name
-    
 
 Re-enable a disabled plugin:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin enable plugin-name@marketplace-name
-    
 
 Completely remove a plugin:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin uninstall plugin-name@marketplace-name
-    
 
 The `--scope` option lets you target a specific scope with CLI commands:
 
-Copy
-
 Ask AI
-    
-    
+
     claude plugin install formatter@your-org --scope project
     claude plugin uninstall formatter@your-org --scope project
-    
-
-## 
-
-​
 
 Manage marketplaces
 
 You can manage marketplaces through the interactive `/plugin` interface or with CLI commands.
-
-### 
-
-​
 
 Use the interactive interface
 
@@ -409,47 +265,27 @@ Run `/plugin` and go to the **Marketplaces** tab to:
   * Update marketplace listings to fetch the latest plugins
   * Remove marketplaces you no longer need
 
-### 
-
-​
-
 Use CLI commands
 
 You can also manage marketplaces with direct commands. List all configured marketplaces:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace list
-    
 
 Refresh plugin listings from a marketplace:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace update marketplace-name
-    
 
 Remove a marketplace:
 
-Copy
-
 Ask AI
-    
-    
+
     /plugin marketplace remove marketplace-name
-    
 
 Removing a marketplace will uninstall any plugins you installed from it.
-
-### 
-
-​
 
 Configure auto-updates
 
@@ -462,23 +298,11 @@ Claude Code can automatically update marketplaces and their installed plugins at
 
 Official Anthropic marketplaces have auto-update enabled by default. Third-party and local development marketplaces have auto-update disabled by default. To disable all automatic updates entirely for both Claude Code and all plugins, set the `DISABLE_AUTOUPDATER` environment variable. See [Auto updates](/docs/en/setup#auto-updates) for details.
 
-## 
-
-​
-
 Configure team marketplaces
 
 Team admins can set up automatic marketplace installation for projects by adding marketplace configuration to `.claude/settings.json`. When team members trust the repository folder, Claude Code prompts them to install these marketplaces and plugins. For full configuration options including `extraKnownMarketplaces` and `enabledPlugins`, see [Plugin settings](/docs/en/settings#plugin-settings).
 
-## 
-
-​
-
 Troubleshooting
-
-### 
-
-​
 
 /plugin command not recognized
 
@@ -491,10 +315,6 @@ If you see “unknown command” or the `/plugin` command doesn’t appear:
      * **Native installer** : Re-run the install command from [Setup](/docs/en/setup)
   3. **Restart Claude Code** : After updating, restart your terminal and run `claude` again.
 
-### 
-
-​
-
 Common issues
 
   * **Marketplace not loading** : Verify the URL is accessible and that `.claude-plugin/marketplace.json` exists at the path
@@ -503,10 +323,6 @@ Common issues
   * **Plugin Skills not appearing** : Clear the cache with `rm -rf ~/.claude/plugins/cache`, restart Claude Code, and reinstall the plugin. See [Plugin Skills not appearing](/docs/en/skills#plugin-skills-not-appearing-after-installation) for details.
 
 For detailed troubleshooting with solutions, see [Troubleshooting](/docs/en/plugin-marketplaces#troubleshooting) in the marketplace guide. For debugging tools, see [Debugging and development tools](/docs/en/plugins-reference#debugging-and-development-tools).
-
-## 
-
-​
 
 Next steps
 

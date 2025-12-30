@@ -3,32 +3,9 @@ source: https://code.claude.com/docs/en/iam
 title: Identity and Access Management - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Administration
-
-  * [Advanced installation](/docs/en/setup)
-  * [Identity and Access Management](/docs/en/iam)
-  * [Security](/docs/en/security)
-  * [Data usage](/docs/en/data-usage)
-  * [Monitoring](/docs/en/monitoring-usage)
-  * [Costs](/docs/en/costs)
-  * [Analytics](/docs/en/analytics)
-  * [Create and distribute a plugin marketplace](/docs/en/plugin-marketplaces)
-
-Administration
-
 # Identity and Access Management
 
 Learn how to configure user authentication, authorization, and access controls for Claude Code in your organization.
-
-## 
-
-​
 
 Authentication methods
 
@@ -38,10 +15,6 @@ Setting up Claude Code requires access to Anthropic models. For teams, you can s
   * Amazon Bedrock
   * Microsoft Foundry
   * Google Vertex AI
-
-### 
-
-​
 
 Claude API authentication
 
@@ -60,10 +33,6 @@ Claude API authentication
      * [Install Claude Code](/docs/en/setup#installation)
      * Login with Console account credentials
 
-### 
-
-​
-
 Cloud provider authentication
 
 **To set up Claude Code access for your team via Bedrock, Vertex, or Azure:**
@@ -72,31 +41,19 @@ Cloud provider authentication
   2. Distribute the environment variables and instructions for generating cloud credentials to your users. Read more about how to [manage configuration here](/docs/en/settings).
   3. Users can [install Claude Code](/docs/en/setup#installation)
 
-## 
-
-​
-
 Access control and permissions
 
 We support fine-grained permissions so that you’re able to specify exactly what the agent is allowed to do (e.g. run tests, run linter) and what it is not allowed to do (e.g. update cloud infrastructure). These permission settings can be checked into version control and distributed to all developers in your organization, as well as customized by individual developers.
-
-### 
-
-​
 
 Permission system
 
 Claude Code uses a tiered permission system to balance power and safety:
 
-Tool Type| Example| Approval Required| ”Yes, don’t ask again” Behavior  
----|---|---|---  
-Read-only| File reads, LS, Grep| No| N/A  
-Bash Commands| Shell execution| Yes| Permanently per project directory and command  
-File Modification| Edit/write files| Yes| Until session end  
-  
-### 
-
-​
+Tool Type| Example| Approval Required| ”Yes, don’t ask again” Behavior
+---|---|---|---
+Read-only| File reads, LS, Grep| No| N/A
+Bash Commands| Shell execution| Yes| Permanently per project directory and command
+File Modification| Edit/write files| Yes| Until session end
 
 Configuring permissions
 
@@ -110,24 +67,16 @@ You can view & manage Claude Code’s tool permissions with `/permissions`. This
 
 Permission rules use the format: `Tool` or `Tool(optional-specifier)` A rule that is just the tool name matches any use of that tool. For example, adding `Bash` to the list of allow rules would allow Claude Code to use the Bash tool without requiring user approval.
 
-#### 
-
-​
-
 Permission modes
 
 Claude Code supports several permission modes that can be set as the `defaultMode` in [settings files](/docs/en/settings#settings-files):
 
-Mode| Description  
----|---  
-`default`| Standard behavior - prompts for permission on first use of each tool  
-`acceptEdits`| Automatically accepts file edit permissions for the session  
-`plan`| Plan Mode - Claude can analyze but not modify files or execute commands  
-`bypassPermissions`| Skips all permission prompts (requires safe environment - see warning below)  
-  
-#### 
-
-​
+Mode| Description
+---|---
+`default`| Standard behavior - prompts for permission on first use of each tool
+`acceptEdits`| Automatically accepts file edit permissions for the session
+`plan`| Plan Mode - Claude can analyze but not modify files or execute commands
+`bypassPermissions`| Skips all permission prompts (requires safe environment - see warning below)
 
 Working directories
 
@@ -138,10 +87,6 @@ By default, Claude has access to files in the directory where it was launched. Y
   * **Persistent configuration** : Add to `additionalDirectories` in [settings files](/docs/en/settings#settings-files)
 
 Files in additional directories follow the same permission rules as the original working directory - they become readable without prompts, and file editing permissions follow the current permission mode.
-
-#### 
-
-​
 
 Tool-specific permission rules
 
@@ -172,13 +117,13 @@ For more reliable URL filtering, consider:
 
 **Read & Edit** `Edit` rules apply to all built-in tools that edit files. Claude will make a best-effort attempt to apply `Read` rules to all built-in tools that read files like Grep, Glob, and LS. Read & Edit rules both follow the [gitignore](https://git-scm.com/docs/gitignore) specification with four distinct pattern types:
 
-Pattern| Meaning| Example| Matches  
----|---|---|---  
-`//path`| **Absolute** path from filesystem root| `Read(//Users/alice/secrets/**)`| `/Users/alice/secrets/**`  
-`~/path`| Path from **home** directory| `Read(~/Documents/*.pdf)`| `/Users/alice/Documents/*.pdf`  
-`/path`| Path **relative to settings file**| `Edit(/src/**/*.ts)`| `<settings file path>/src/**/*.ts`  
-`path` or `./path`| Path **relative to current directory**| `Read(*.env)`| `<cwd>/*.env`  
-  
+Pattern| Meaning| Example| Matches
+---|---|---|---
+`//path`| **Absolute** path from filesystem root| `Read(//Users/alice/secrets/**)`| `/Users/alice/secrets/**`
+`~/path`| Path from **home** directory| `Read(~/Documents/*.pdf)`| `/Users/alice/Documents/*.pdf`
+`/path`| Path **relative to settings file**| `Edit(/src/**/*.ts)`| `<settings file path>/src/**/*.ts`
+`path` or `./path`| Path **relative to current directory**| `Read(*.env)`| `<cwd>/*.env`
+
 A pattern like `/Users/alice/file` is NOT an absolute path - it’s relative to your settings file! Use `//Users/alice/file` for absolute paths.
 
   * `Edit(/docs/**)` \- Edits in `<project>/docs/` (NOT `/docs/`!)
@@ -196,25 +141,13 @@ A pattern like `/Users/alice/file` is NOT an absolute path - it’s relative to 
   * `mcp__puppeteer__*` Wildcard syntax that also matches all tools from the `puppeteer` server
   * `mcp__puppeteer__puppeteer_navigate` Matches the `puppeteer_navigate` tool provided by the `puppeteer` server
 
-### 
-
-​
-
 Additional permission control with hooks
 
 [Claude Code hooks](/docs/en/hooks-guide) provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission system runs, and the hook output can determine whether to approve or deny the tool call in place of the permission system.
 
-### 
-
-​
-
 Enterprise managed settings
 
 For enterprise deployments of Claude Code, administrators can configure and distribute settings to their organization through the [Claude.ai admin console](https://claude.ai/admin-settings/claude-code). These settings are fetched automatically when users authenticate and cannot be overridden locally. This feature is available to Claude for Enterprise customers. If you don’t see this option in your admin console, contact your Anthropic account team to have the feature enabled. For organizations that prefer file-based policy distribution, Claude Code also supports `managed-settings.json` files that can be deployed to [system directories](/docs/en/settings#settings-files). These policy files follow the same format as regular settings files and cannot be overridden by user or project settings.
-
-### 
-
-​
 
 Settings precedence
 
@@ -228,10 +161,6 @@ When multiple settings sources exist, they are applied in the following order (h
   6. User settings (`~/.claude/settings.json`)
 
 This hierarchy ensures that organizational policies are always enforced while still allowing flexibility at the project and user levels where appropriate.
-
-## 
-
-​
 
 Credential management
 

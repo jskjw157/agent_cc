@@ -4,13 +4,9 @@ title: Claude now available in Microsoft Foundry and Microsoft 365 Copilot
 category: Commitments
 ---
 
-Product
-
 # Claude now available in Microsoft Foundry and Microsoft 365 Copilot
 
 Nov 18, 2025
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a7b8978859371a024139418f3366bb0600ee1675-1000x1000.svg)
 
 Today we announced that Microsoft and Anthropic are [expanding our partnership](http://anthropic.com/news/microsoft-nvidia-anthropic-announce-strategic-partnerships). As part of the partnership, Claude Sonnet 4.5, Haiku 4.5, and Opus 4.1 models are now available in public preview in Microsoft Foundry, where Azure customers can build production applications and enterprise agents.
 

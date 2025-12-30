@@ -3,32 +3,9 @@ source: https://code.claude.com/docs/en/microsoft-foundry
 title: Claude Code on Microsoft Foundry - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Deployment
-
-  * [Overview](/docs/en/third-party-integrations)
-  * [Amazon Bedrock](/docs/en/amazon-bedrock)
-  * [Google Vertex AI](/docs/en/google-vertex-ai)
-  * [Microsoft Foundry](/docs/en/microsoft-foundry)
-  * [Network configuration](/docs/en/network-config)
-  * [LLM gateway](/docs/en/llm-gateway)
-  * [Development containers](/docs/en/devcontainer)
-  * [Sandboxing](/docs/en/sandboxing)
-
-Deployment
-
 # Claude Code on Microsoft Foundry
 
 Learn about configuring Claude Code through Microsoft Foundry, including setup, configuration, and troubleshooting.
-
-## 
-
-​
 
 Prerequisites
 
@@ -38,15 +15,7 @@ Before configuring Claude Code with Microsoft Foundry, ensure you have:
   * RBAC permissions to create Microsoft Foundry resources and deployments
   * Azure CLI installed and configured (optional - only needed if you don’t have another mechanism for getting credentials)
 
-## 
-
-​
-
 Setup
-
-### 
-
-​
 
 1\. Provision Microsoft Foundry resource
 
@@ -59,10 +28,6 @@ First, create a Claude resource in Azure:
      * Claude Sonnet
      * Claude Haiku
 
-### 
-
-​
-
 2\. Configure Azure credentials
 
 Claude Code supports two authentication methods for Microsoft Foundry. Choose the method that best fits your security requirements. **Option A: API key authentication**
@@ -72,68 +37,45 @@ Claude Code supports two authentication methods for Microsoft Foundry. Choose th
   3. Copy **API Key**
   4. Set the environment variable:
 
-Copy
-
 Ask AI
-    
-    
+
     export ANTHROPIC_FOUNDRY_API_KEY=your-azure-api-key
-    
 
 **Option B: Microsoft Entra ID authentication** When `ANTHROPIC_FOUNDRY_API_KEY` is not set, Claude Code automatically uses the Azure SDK [default credential chain](https://learn.microsoft.com/en-us/azure/developer/javascript/sdk/authentication/credential-chains#defaultazurecredential-overview). This supports a variety of methods for authenticating local and remote workloads. On local environments, you commonly may use the Azure CLI:
 
-Copy
-
 Ask AI
-    
-    
+
     az login
-    
 
 When using Microsoft Foundry, the `/login` and `/logout` commands are disabled since authentication is handled through Azure credentials.
-
-### 
-
-​
 
 3\. Configure Claude Code
 
 Set the following environment variables to enable Microsoft Foundry. Note that your deployments’ names are set as the model identifiers in Claude Code (may be optional if using suggested deployment names).
 
-Copy
-
 Ask AI
-    
-    
+
     # Enable Microsoft Foundry integration
     export CLAUDE_CODE_USE_FOUNDRY=1
-    
+
     # Azure resource name (replace {resource} with your resource name)
     export ANTHROPIC_FOUNDRY_RESOURCE={resource}
     # Or provide the full base URL:
     # export ANTHROPIC_FOUNDRY_BASE_URL=https://{resource}.services.ai.azure.com
-    
+
     # Set models to your resource's deployment names
     export ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-5'
     export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'
     export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-1'
-    
 
 For more details on model configuration options, see [Model configuration](/docs/en/model-config).
-
-## 
-
-​
 
 Azure RBAC configuration
 
 The `Azure AI User` and `Cognitive Services User` default roles include all required permissions for invoking Claude models. For more restrictive permissions, create a custom role with the following:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "permissions": [
         {
@@ -143,23 +85,14 @@ Ask AI
         }
       ]
     }
-    
 
 For details, see [Microsoft Foundry RBAC documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/rbac-azure-ai-foundry).
-
-## 
-
-​
 
 Troubleshooting
 
 If you receive an error “Failed to get token from azureADTokenProvider: ChainedTokenCredential authentication failed”:
 
   * Configure Entra ID on the environment, or set `ANTHROPIC_FOUNDRY_API_KEY`.
-
-## 
-
-​
 
 Additional resources
 

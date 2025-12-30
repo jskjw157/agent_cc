@@ -3,35 +3,11 @@ source: https://code.claude.com/docs/en/sub-agents
 title: Subagents - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Build with Claude Code
-
-  * [Subagents](/docs/en/sub-agents)
-  * [Create plugins](/docs/en/plugins)
-  * [Discover and install prebuilt plugins](/docs/en/discover-plugins)
-  * [Agent Skills](/docs/en/skills)
-  * [Output styles](/docs/en/output-styles)
-  * [Hooks](/docs/en/hooks-guide)
-  * [Programmatic usage](/docs/en/headless)
-  * [Model Context Protocol (MCP)](/docs/en/mcp)
-  * [Troubleshooting](/docs/en/troubleshooting)
-
-Build with Claude Code
-
 # Subagents
 
 Create and use specialized AI subagents in Claude Code for task-specific workflows and improved context management.
 
 Custom subagents in Claude Code are specialized AI assistants that can be invoked to handle specific types of tasks. They enable more efficient problem-solving by providing task-specific configurations with customized system prompts, tools and a separate context window.
-
-## 
-
-​
 
 What are subagents?
 
@@ -43,10 +19,6 @@ Subagents are pre-configured AI personalities that Claude Code can delegate task
   * Includes a custom system prompt that guides its behavior
 
 When Claude Code encounters a task that matches a subagent’s expertise, it can delegate that task to the specialized subagent, which works independently and returns results.
-
-## 
-
-​
 
 Key benefits
 
@@ -66,10 +38,6 @@ Once created, you can use subagents across different projects and share them wit
 
 Each subagent can have different tool access levels, allowing you to limit powerful tools to specific subagent types.
 
-## 
-
-​
-
 Quick start
 
 To create your first subagent:
@@ -80,13 +48,9 @@ Open the subagents interface
 
 Run the following command:
 
-Copy
-
 Ask AI
-    
-    
+
     /agents
-    
 
 2
 
@@ -110,38 +74,22 @@ Save and use
 
 Your subagent is now available. Claude uses it automatically when appropriate, or you can invoke it explicitly:
 
-Copy
-
 Ask AI
-    
-    
+
     > Use the code-reviewer subagent to check my recent changes
-    
-
-## 
-
-​
 
 Subagent configuration
-
-### 
-
-​
 
 File locations
 
 Subagents are stored as Markdown files with YAML frontmatter in two possible locations:
 
-Type| Location| Scope| Priority  
----|---|---|---  
-**Project subagents**| `.claude/agents/`| Available in current project| Highest  
-**User subagents**| `~/.claude/agents/`| Available across all projects| Lower  
-  
+Type| Location| Scope| Priority
+---|---|---|---
+**Project subagents**| `.claude/agents/`| Available in current project| Highest
+**User subagents**| `~/.claude/agents/`| Available across all projects| Lower
+
 When subagent names conflict, project-level subagents take precedence over user-level subagents.
-
-### 
-
-​
 
 Plugin agents
 
@@ -154,19 +102,12 @@ Plugin agents
 
 See the [plugin components reference](/docs/en/plugins-reference#agents) for details on creating plugin agents.
 
-### 
-
-​
-
 CLI-based configuration
 
 You can also define subagents dynamically using the `--agents` CLI flag, which accepts a JSON object:
 
-Copy
-
 Ask AI
-    
-    
+
     claude --agents '{
       "code-reviewer": {
         "description": "Expert code reviewer. Use proactively after code changes.",
@@ -175,7 +116,6 @@ Ask AI
         "model": "sonnet"
       }
     }'
-    
 
 **Priority** : CLI-defined subagents have lower priority than project-level subagents but higher priority than user-level subagents. **Use case** : This approach is useful for:
 
@@ -186,19 +126,12 @@ Ask AI
 
 For detailed information about the JSON format and all available options, see the [CLI reference documentation](/docs/en/cli-reference#agents-flag-format).
 
-### 
-
-​
-
 File format
 
 Each subagent is defined in a Markdown file with this structure:
 
-Copy
-
 Ask AI
-    
-    
+
     ---
     name: your-sub-agent-name
     description: Description of when this subagent should be invoked
@@ -207,33 +140,24 @@ Ask AI
     permissionMode: default  # Optional - permission mode for the subagent
     skills: skill1, skill2  # Optional - skills to auto-load
     ---
-    
+
     Your subagent's system prompt goes here. This can be multiple paragraphs
     and should clearly define the subagent's role, capabilities, and approach
     to solving problems.
-    
+
     Include specific instructions, best practices, and any constraints
     the subagent should follow.
-    
-
-#### 
-
-​
 
 Configuration fields
 
-Field| Required| Description  
----|---|---  
-`name`| Yes| Unique identifier using lowercase letters and hyphens  
-`description`| Yes| Natural language description of the subagent’s purpose  
-`tools`| No| Comma-separated list of specific tools. If omitted, inherits all tools from the main thread  
-`model`| No| Model to use for this subagent. Can be a model alias (`sonnet`, `opus`, `haiku`) or `'inherit'` to use the main conversation’s model. If omitted, defaults to the [configured subagent model](/docs/en/model-config)  
-`permissionMode`| No| Permission mode for the subagent. Valid values: `default`, `acceptEdits`, `bypassPermissions`, `plan`, `ignore`. Controls how the subagent handles permission requests  
-`skills`| No| Comma-separated list of skill names to auto-load when the subagent starts. Subagents do not inherit Skills from the parent conversation. If omitted, no Skills are preloaded.  
-  
-### 
-
-​
+Field| Required| Description
+---|---|---
+`name`| Yes| Unique identifier using lowercase letters and hyphens
+`description`| Yes| Natural language description of the subagent’s purpose
+`tools`| No| Comma-separated list of specific tools. If omitted, inherits all tools from the main thread
+`model`| No| Model to use for this subagent. Can be a model alias (`sonnet`, `opus`, `haiku`) or `'inherit'` to use the main conversation’s model. If omitted, defaults to the [configured subagent model](/docs/en/model-config)
+`permissionMode`| No| Permission mode for the subagent. Valid values: `default`, `acceptEdits`, `bypassPermissions`, `plan`, `ignore`. Controls how the subagent handles permission requests
+`skills`| No| Comma-separated list of skill names to auto-load when the subagent starts. Subagents do not inherit Skills from the parent conversation. If omitted, no Skills are preloaded.
 
 Model selection
 
@@ -244,10 +168,6 @@ The `model` field allows you to control which [AI model](/docs/en/model-config) 
   * **Omitted** : If not specified, uses the default model configured for subagents (`sonnet`)
 
 Using `'inherit'` is particularly useful when you want your subagents to adapt to the model choice of the main conversation, ensuring consistent capabilities and response style throughout your session.
-
-### 
-
-​
 
 Available tools
 
@@ -262,27 +182,15 @@ You have two options for configuring tools:
 
 **MCP Tools** : Subagents can access MCP tools from configured MCP servers. When the `tools` field is omitted, subagents inherit all MCP tools available to the main thread.
 
-## 
-
-​
-
 Managing subagents
-
-### 
-
-​
 
 Using the /agents command (Recommended)
 
 The `/agents` command provides a comprehensive interface for subagent management:
 
-Copy
-
 Ask AI
-    
-    
+
     /agents
-    
 
 This opens an interactive menu where you can:
 
@@ -293,44 +201,28 @@ This opens an interactive menu where you can:
   * See which subagents are active when duplicates exist
   * **Manage tool permissions** with a complete list of available tools
 
-### 
-
-​
-
 Direct file management
 
 You can also manage subagents by working directly with their files:
 
-Copy
-
 Ask AI
-    
-    
+
     # Create a project subagent
     mkdir -p .claude/agents
     echo '---
     name: test-runner
     description: Use proactively to run tests and fix failures
     ---
-    
+
     You are a test automation expert. When you see code changes, proactively run the appropriate tests. If tests fail, analyze the failures and fix them while preserving the original test intent.' > .claude/agents/test-runner.md
-    
+
     # Create a user subagent
     mkdir -p ~/.claude/agents
     # ... create subagent file
-    
 
 Subagents created by manually adding files will be loaded the next time you start a Claude Code session. To create and use a subagent immediately without restarting, use the `/agents` command instead.
 
-## 
-
-​
-
 Using subagents effectively
-
-### 
-
-​
 
 Automatic delegation
 
@@ -342,35 +234,19 @@ Claude Code proactively delegates tasks based on:
 
 To encourage more proactive subagent use, include phrases like “use PROACTIVELY” or “MUST BE USED” in your `description` field.
 
-### 
-
-​
-
 Explicit invocation
 
 Request a specific subagent by mentioning it in your command:
 
-Copy
-
 Ask AI
-    
-    
+
     > Use the test-runner subagent to fix failing tests
     > Have the code-reviewer subagent look at my recent changes
     > Ask the debugger subagent to investigate this error
-    
-
-## 
-
-​
 
 Built-in subagents
 
 Claude Code includes built-in subagents that are available out of the box:
-
-### 
-
-​
 
 General-purpose subagent
 
@@ -390,23 +266,15 @@ The general-purpose subagent is a capable agent for complex, multi-step tasks th
 
 **Example scenario:**
 
-Copy
-
 Ask AI
-    
-    
+
     User: Find all the places where we handle authentication and update them to use the new token format
-    
+
     Claude: [Invokes general-purpose subagent]
     [Agent searches for auth-related code across codebase]
     [Agent reads and analyzes multiple files]
     [Agent makes necessary edits]
     [Returns detailed writeup of changes made]
-    
-
-### 
-
-​
 
 Plan subagent
 
@@ -419,24 +287,16 @@ The Plan subagent is a specialized built-in agent designed for use during plan m
 
 **How it works:** When you’re in plan mode and Claude needs to understand your codebase to create a plan, it delegates research tasks to the Plan subagent. This prevents infinite nesting of agents (subagents cannot spawn other subagents) while still allowing Claude to gather the necessary context. **Example scenario:**
 
-Copy
-
 Ask AI
-    
-    
+
     User: [In plan mode] Help me refactor the authentication module
-    
+
     Claude: Let me research your authentication implementation first...
     [Internally invokes Plan subagent to explore auth-related files]
     [Plan subagent searches codebase and returns findings]
     Claude: Based on my research, here's my proposed plan...
-    
 
 The Plan subagent is only used in plan mode. In normal execution mode, Claude uses the general-purpose agent or other custom subagents you’ve created.
-
-### 
-
-​
 
 Explore subagent
 
@@ -458,63 +318,44 @@ The Explore subagent is a fast, lightweight agent optimized for searching and an
 
 **Example scenarios:**
 
-Copy
-
 Ask AI
-    
-    
+
     User: Where are errors from the client handled?
-    
+
     Claude: [Invokes Explore subagent with "medium" thoroughness]
     [Explore uses Grep to search for error handling patterns]
     [Explore uses Read to examine promising files]
     [Returns findings with absolute file paths]
     Claude: Client errors are handled in src/services/process.ts:712...
-    
-
-Copy
 
 Ask AI
-    
-    
+
     User: What's the codebase structure?
-    
+
     Claude: [Invokes Explore subagent with "quick" thoroughness]
     [Explore uses Glob and ls to map directory structure]
     [Returns overview of key directories and their purposes]
-    
-
-## 
-
-​
 
 Example subagents
 
-### 
-
-​
-
 Code reviewer
 
-Copy
-
 Ask AI
-    
-    
+
     ---
     name: code-reviewer
     description: Expert code review specialist. Proactively reviews code for quality, security, and maintainability. Use immediately after writing or modifying code.
     tools: Read, Grep, Glob, Bash
     model: inherit
     ---
-    
+
     You are a senior code reviewer ensuring high standards of code quality and security.
-    
+
     When invoked:
     1. Run git diff to see recent changes
     2. Focus on modified files
     3. Begin review immediately
-    
+
     Review checklist:
     - Code is clear and readable
     - Functions and variables are well-named
@@ -524,104 +365,83 @@ Ask AI
     - Input validation implemented
     - Good test coverage
     - Performance considerations addressed
-    
+
     Provide feedback organized by priority:
     - Critical issues (must fix)
     - Warnings (should fix)
     - Suggestions (consider improving)
-    
+
     Include specific examples of how to fix issues.
-    
-
-### 
-
-​
 
 Debugger
 
-Copy
-
 Ask AI
-    
-    
+
     ---
     name: debugger
     description: Debugging specialist for errors, test failures, and unexpected behavior. Use proactively when encountering any issues.
     tools: Read, Edit, Bash, Grep, Glob
     ---
-    
+
     You are an expert debugger specializing in root cause analysis.
-    
+
     When invoked:
     1. Capture error message and stack trace
     2. Identify reproduction steps
     3. Isolate the failure location
     4. Implement minimal fix
     5. Verify solution works
-    
+
     Debugging process:
     - Analyze error messages and logs
     - Check recent code changes
     - Form and test hypotheses
     - Add strategic debug logging
     - Inspect variable states
-    
+
     For each issue, provide:
     - Root cause explanation
     - Evidence supporting the diagnosis
     - Specific code fix
     - Testing approach
     - Prevention recommendations
-    
+
     Focus on fixing the underlying issue, not the symptoms.
-    
-
-### 
-
-​
 
 Data scientist
 
-Copy
-
 Ask AI
-    
-    
+
     ---
     name: data-scientist
     description: Data analysis expert for SQL queries, BigQuery operations, and data insights. Use proactively for data analysis tasks and queries.
     tools: Bash, Read, Write
     model: sonnet
     ---
-    
+
     You are a data scientist specializing in SQL and BigQuery analysis.
-    
+
     When invoked:
     1. Understand the data analysis requirement
     2. Write efficient SQL queries
     3. Use BigQuery command line tools (bq) when appropriate
     4. Analyze and summarize results
     5. Present findings clearly
-    
+
     Key practices:
     - Write optimized SQL queries with proper filters
     - Use appropriate aggregations and joins
     - Include comments explaining complex logic
     - Format results for readability
     - Provide data-driven recommendations
-    
+
     For each analysis:
     - Explain the query approach
     - Document any assumptions
     - Highlight key findings
     - Suggest next steps based on data
-    
+
     Always ensure queries are efficient and cost-effective.
-    
-
-## 
-
-​
 
 Best practices
 
@@ -631,39 +451,19 @@ Best practices
   * **Limit tool access** : Only grant tools that are necessary for the subagent’s purpose. This improves security and helps the subagent focus on relevant actions.
   * **Version control** : Check project subagents into version control so your team can benefit from and improve them collaboratively.
 
-## 
-
-​
-
 Advanced usage
-
-### 
-
-​
 
 Chaining subagents
 
 For complex workflows, you can chain multiple subagents:
 
-Copy
-
 Ask AI
-    
-    
+
     > First use the code-analyzer subagent to find performance issues, then use the optimizer subagent to fix them
-    
-
-### 
-
-​
 
 Dynamic subagent selection
 
 Claude Code intelligently selects subagents based on context. Make your `description` fields specific and action-oriented for best results.
-
-### 
-
-​
 
 Resumable subagents
 
@@ -676,27 +476,19 @@ Subagents can be resumed to continue previous conversations, which is particular
 
 **Example workflow:** Initial invocation:
 
-Copy
-
 Ask AI
-    
-    
+
     > Use the code-analyzer agent to start reviewing the authentication module
-    
+
     [Agent completes initial analysis and returns agentId: "abc123"]
-    
 
 Resume the agent:
 
-Copy
-
 Ask AI
-    
-    
+
     > Resume agent abc123 and now analyze the authorization logic as well
-    
+
     [Agent continues with full context from previous conversation]
-    
 
 **Use cases:**
 
@@ -713,33 +505,21 @@ Ask AI
 
 **Programmatic usage:** If you’re using the Agent SDK or interacting with the AgentTool directly, you can pass the `resume` parameter:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "description": "Continue analysis",
       "prompt": "Now examine the error handling patterns",
       "subagent_type": "code-analyzer",
       "resume": "abc123"  // Agent ID from previous execution
     }
-    
 
 Keep track of agent IDs for tasks you may want to resume later. Claude Code displays the agent ID when a subagent completes its work.
-
-## 
-
-​
 
 Performance considerations
 
   * **Context efficiency** : Agents help preserve main context, enabling longer overall sessions
   * **Latency** : Subagents start off with a clean slate each time they are invoked and may add latency as they gather context that they require to do their job effectively.
-
-## 
-
-​
 
 Related documentation
 

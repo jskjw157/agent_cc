@@ -4,13 +4,9 @@ title: Working with the US Department of Energy to unlock the next era of scient
 category: Commitments
 ---
 
-Announcements
-
 # Working with the US Department of Energy to unlock the next era of scientific discovery
 
 Dec 18, 2025
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c9d8dd2af6d065e1ace8bd4bb29c716eb53ffffb-1000x1000.svg)
 
 Anthropic and the US Department of Energy (DOE) are announcing a multi-year partnership as part of the Genesis Mission— the Department’s initiative to use AI to cement America’s leadership in science. Our partnership focuses on three domains—American energy dominance, the biological and life sciences, and scientific productivity—and has the potential to affect the work being done at all 17 of America’s national laboratories.
 

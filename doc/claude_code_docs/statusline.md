@@ -3,31 +3,11 @@ source: https://code.claude.com/docs/en/statusline
 title: Status line configuration - Claude Code Docs
 ---
 
-Skip to main content
-
-[Claude Code Docs home page![light logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/light.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=536eade682636e84231afce2577f9509)![dark logo](https://mintcdn.com/claude-code/o69F7a6qoW9vboof/logo/dark.svg?fit=max&auto=format&n=o69F7a6qoW9vboof&q=85&s=0766b3221061e80143e9f300733e640b)](/docs)
-
-[Getting started](/docs/en/overview)[Build with Claude Code](/docs/en/sub-agents)[Deployment](/docs/en/third-party-integrations)[Administration](/docs/en/setup)[Configuration](/docs/en/settings)[Reference](/docs/en/cli-reference)[Resources](/docs/en/legal-and-compliance)
-
-##### Configuration
-
-  * [Settings](/docs/en/settings)
-  * [Terminal configuration](/docs/en/terminal-config)
-  * [Model configuration](/docs/en/model-config)
-  * [Memory management](/docs/en/memory)
-  * [Status line configuration](/docs/en/statusline)
-
-Configuration
-
 # Status line configuration
 
 Create a custom status line for Claude Code to display contextual information
 
 Make Claude Code your own with a custom status line that displays at the bottom of the Claude Code interface, similar to how terminal prompts (PS1) work in shells like Oh-my-zsh.
-
-## 
-
-​
 
 Create a custom status line
 
@@ -36,11 +16,8 @@ You can either:
   * Run `/statusline` to ask Claude Code to help you set up a custom status line. By default, it will try to reproduce your terminal’s prompt, but you can provide additional instructions about the behavior you want to Claude Code, such as `/statusline show the model name in orange`
   * Directly add a `statusLine` command to your `.claude/settings.json`:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "statusLine": {
         "type": "command",
@@ -48,11 +25,6 @@ Ask AI
         "padding": 0 // Optional: set to 0 to let status line go to edge
       }
     }
-    
-
-## 
-
-​
 
 How it Works
 
@@ -62,19 +34,12 @@ How it Works
   * ANSI color codes are supported for styling your status line
   * Claude Code passes contextual information about the current session (model, directories, etc.) as JSON to your script via stdin
 
-## 
-
-​
-
 JSON Input Structure
 
 Your status line command receives structured data via stdin in JSON format:
 
-Copy
-
 Ask AI
-    
-    
+
     {
       "hook_event_name": "Status",
       "session_id": "abc123...",
@@ -111,55 +76,35 @@ Ask AI
         }
       }
     }
-    
-
-## 
-
-​
 
 Example Scripts
 
-### 
-
-​
-
 Simple Status Line
 
-Copy
-
 Ask AI
-    
-    
+
     #!/bin/bash
     # Read JSON input from stdin
     input=$(cat)
-    
+
     # Extract values using jq
     MODEL_DISPLAY=$(echo "$input" | jq -r '.model.display_name')
     CURRENT_DIR=$(echo "$input" | jq -r '.workspace.current_dir')
-    
+
     echo "[$MODEL_DISPLAY] 📁 ${CURRENT_DIR##*/}"
-    
-
-### 
-
-​
 
 Git-Aware Status Line
 
-Copy
-
 Ask AI
-    
-    
+
     #!/bin/bash
     # Read JSON input from stdin
     input=$(cat)
-    
+
     # Extract values using jq
     MODEL_DISPLAY=$(echo "$input" | jq -r '.model.display_name')
     CURRENT_DIR=$(echo "$input" | jq -r '.workspace.current_dir')
-    
+
     # Show git branch if in a git repo
     GIT_BRANCH=""
     if git rev-parse --git-dir > /dev/null 2>&1; then
@@ -168,33 +113,25 @@ Ask AI
             GIT_BRANCH=" | 🌿 $BRANCH"
         fi
     fi
-    
+
     echo "[$MODEL_DISPLAY] 📁 ${CURRENT_DIR##*/}$GIT_BRANCH"
-    
-
-### 
-
-​
 
 Python Example
 
-Copy
-
 Ask AI
-    
-    
+
     #!/usr/bin/env python3
     import json
     import sys
     import os
-    
+
     # Read JSON from stdin
     data = json.load(sys.stdin)
-    
+
     # Extract values
     model = data['model']['display_name']
     current_dir = os.path.basename(data['workspace']['current_dir'])
-    
+
     # Check for git branch
     git_branch = ""
     if os.path.exists('.git'):
@@ -205,36 +142,28 @@ Ask AI
                     git_branch = f" | 🌿 {ref.replace('ref: refs/heads/', '')}"
         except:
             pass
-    
+
     print(f"[{model}] 📁 {current_dir}{git_branch}")
-    
-
-### 
-
-​
 
 Node.js Example
 
-Copy
-
 Ask AI
-    
-    
+
     #!/usr/bin/env node
-    
+
     const fs = require('fs');
     const path = require('path');
-    
+
     // Read JSON from stdin
     let input = '';
     process.stdin.on('data', chunk => input += chunk);
     process.stdin.on('end', () => {
         const data = JSON.parse(input);
-        
+
         // Extract values
         const model = data.model.display_name;
         const currentDir = path.basename(data.workspace.current_dir);
-        
+
         // Check for git branch
         let gitBranch = '';
         try {
@@ -245,28 +174,20 @@ Ask AI
         } catch (e) {
             // Not a git repo or can't read HEAD
         }
-        
+
         console.log(`[${model}] 📁 ${currentDir}${gitBranch}`);
     });
-    
-
-### 
-
-​
 
 Helper Function Approach
 
 For more complex bash scripts, you can create helper functions:
 
-Copy
-
 Ask AI
-    
-    
+
     #!/bin/bash
     # Read JSON input once
     input=$(cat)
-    
+
     # Helper functions for common extractions
     get_model_name() { echo "$input" | jq -r '.model.display_name'; }
     get_current_dir() { echo "$input" | jq -r '.workspace.current_dir'; }
@@ -279,16 +200,11 @@ Ask AI
     get_input_tokens() { echo "$input" | jq -r '.context_window.total_input_tokens'; }
     get_output_tokens() { echo "$input" | jq -r '.context_window.total_output_tokens'; }
     get_context_window_size() { echo "$input" | jq -r '.context_window.context_window_size'; }
-    
+
     # Use the helpers
     MODEL=$(get_model_name)
     DIR=$(get_current_dir)
     echo "[$MODEL] 📁 ${DIR##*/}"
-    
-
-### 
-
-​
 
 Context Window Usage
 
@@ -303,18 +219,15 @@ Display the percentage of context window consumed. The `context_window` object c
 
 For accurate context percentage, use `current_usage` which reflects the actual context window state:
 
-Copy
-
 Ask AI
-    
-    
+
     #!/bin/bash
     input=$(cat)
-    
+
     MODEL=$(echo "$input" | jq -r '.model.display_name')
     CONTEXT_SIZE=$(echo "$input" | jq -r '.context_window.context_window_size')
     USAGE=$(echo "$input" | jq '.context_window.current_usage')
-    
+
     if [ "$USAGE" != "null" ]; then
         # Calculate current context from current_usage fields
         CURRENT_TOKENS=$(echo "$USAGE" | jq '.input_tokens + .cache_creation_input_tokens + .cache_read_input_tokens')
@@ -323,11 +236,6 @@ Ask AI
     else
         echo "[$MODEL] Context: 0%"
     fi
-    
-
-## 
-
-​
 
 Tips
 
@@ -336,10 +244,6 @@ Tips
   * Use `jq` for JSON parsing in Bash (see examples above)
   * Test your script by running it manually with mock JSON input: `echo '{"model":{"display_name":"Test"},"workspace":{"current_dir":"/test"}}' | ./statusline.sh`
   * Consider caching expensive operations (like git status) if needed
-
-## 
-
-​
 
 Troubleshooting
 
