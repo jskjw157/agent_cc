@@ -12,7 +12,7 @@ description: |
 
 ```bash
 /review              # 현재 변경사항 리뷰
-/review src/file.kt  # 특정 파일 리뷰
+/review src/file.js  # 특정 파일 리뷰
 /review-pr 123       # PR #123 리뷰
 ```
 
@@ -43,47 +43,35 @@ gh pr diff <number>
 - [ ] 테스트 커버리지
 - [ ] 기존 패턴과의 일관성
 
+**프로젝트 규칙 확인**
+- [ ] `.claude/rules/` 디렉토리의 프로젝트별 규칙 적용
+
 ### 3. 결과 출력 형식
 
 ```markdown
 ## Code Review Summary
 
 ### Critical Issues (Must Fix)
-- 🔴 [보안] SQL Injection 위험: `UserRepository.kt:45`
+- 🔴 [보안] SQL Injection 위험: `UserRepository.js:45`
   - 문제: 사용자 입력이 직접 쿼리에 삽입됨
   - 해결: Parameterized query 사용
 
 ### Warnings (Should Fix)
-- 🟡 [성능] N+1 쿼리 패턴: `OrderService.kt:78`
+- 🟡 [성능] N+1 쿼리 패턴: `OrderService.js:78`
   - 문제: 루프 내에서 개별 쿼리 실행
-  - 해결: JOIN fetch 또는 batch 조회
+  - 해결: Batch 조회 또는 JOIN 사용
 
 ### Suggestions (Nice to Have)
-- 🟢 [가독성] 함수 분리 권장: `PaymentController.kt:120`
+- 🟢 [가독성] 함수 분리 권장: `PaymentController.js:120`
   - 이유: 함수가 50줄 이상으로 단일 책임 위반
 
 ### Positive Highlights
-- ✨ 적절한 예외 처리: `AuthService.kt:35`
+- ✨ 적절한 예외 처리
 - ✨ 명확한 테스트 케이스 추가
 
 ### Statistics
 - Files reviewed: 5
 - Critical: 1 | Warnings: 2 | Suggestions: 3
 ```
-
-## Review Guidelines
-
-### Kotlin/Spring Boot 특화
-
-- `@Transactional` 누락 여부
-- Repository 메서드 네이밍 컨벤션
-- DTO/Entity 분리 확인
-- Exception 처리 패턴 (BusinessException 사용)
-
-### 이 프로젝트 컨텍스트
-
-- `ApiResponse<T>` wrapper 사용 여부
-- First-Writer-Wins 패턴 준수
-- Namespace Enforcement 규칙 적용
 
 상세 체크리스트: [references/checklist.md](references/checklist.md)
