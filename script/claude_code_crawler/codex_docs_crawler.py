@@ -16,7 +16,7 @@ import requests
 from bs4 import BeautifulSoup
 from bs4 import NavigableString
 
-CODEX_OUTPUT_DIR = os.path.join("doc", "codex_docs")
+CODEX_OUTPUT_DIR = os.path.join("doc", "openai_codex_crawler")
 
 DEFAULT_URLS = [
     "https://developers.openai.com/codex/quickstart",
