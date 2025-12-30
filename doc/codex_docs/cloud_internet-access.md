@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/cloud/internet-access/
+source: https://developers.openai.com/codex/cloud/internet-access
 title: Agent internet access
 ---
 

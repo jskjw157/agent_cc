@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/github-action/
+source: https://developers.openai.com/codex/github-action
 title: Codex GitHub Action
 ---
 

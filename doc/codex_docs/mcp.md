@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/mcp/
+source: https://developers.openai.com/codex/mcp
 title: Model Context Protocol
 ---
 

@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/cli/reference/
+source: https://developers.openai.com/codex/cli/reference
 title: Command line options
 ---
 

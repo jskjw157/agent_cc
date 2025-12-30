@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/cloud/
+source: https://developers.openai.com/codex/cloud
 title: Codex web
 ---
 

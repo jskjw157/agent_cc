@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/config-advanced/
+source: https://developers.openai.com/codex/config-advanced
 title: Advanced Configuration
 ---
 

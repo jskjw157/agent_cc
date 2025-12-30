@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/sdk/
+source: https://developers.openai.com/codex/sdk
 title: Codex SDK
 ---
 

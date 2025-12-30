@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/guides/agents-md/
+source: https://developers.openai.com/codex/guides/agents-md
 title: Custom instructions with AGENTS.md
 ---
 

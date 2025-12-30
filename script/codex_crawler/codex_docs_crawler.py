@@ -9,7 +9,7 @@ import os
 import re
 import time
 from pathlib import Path
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import urljoin, urlparse, urlunparse
 
 import html2text
 import requests
@@ -18,37 +18,27 @@ from bs4 import NavigableString
 
 CODEX_OUTPUT_DIR = os.path.join("doc", "codex_docs")
 
-DEFAULT_URLS = [
-    "https://developers.openai.com/codex/quickstart",
-    "https://developers.openai.com/codex/cli/",
-    "https://developers.openai.com/codex/cli/features/",
-    "https://developers.openai.com/codex/cli/reference/",
-    "https://developers.openai.com/codex/local-config",
-    "https://developers.openai.com/codex/config-basic/",
-    "https://developers.openai.com/codex/config-advanced/",
-    "https://developers.openai.com/codex/config-reference",
-    "https://developers.openai.com/codex/config-sample",
-    "https://developers.openai.com/codex/security/",
-    "https://developers.openai.com/codex/sandbox/",
-    "https://developers.openai.com/codex/exec-policy",
-    "https://developers.openai.com/codex/auth",
-    "https://developers.openai.com/codex/guides/agents-md/",
-    "https://developers.openai.com/codex/mcp/",
-    "https://developers.openai.com/codex/noninteractive",
-    "https://developers.openai.com/codex/models/",
-    "https://developers.openai.com/codex/changelog/",
-    "https://developers.openai.com/codex/open-source",
-    "https://developers.openai.com/codex/feature-maturity",
-    "https://developers.openai.com/codex/cloud/",
-    "https://developers.openai.com/codex/cloud/environments/",
-    "https://developers.openai.com/codex/cloud/internet-access/",
-    "https://developers.openai.com/codex/integrations/github/",
-    "https://developers.openai.com/codex/github-action/",
-    "https://developers.openai.com/codex/guides/autofix-ci/",
-    "https://developers.openai.com/codex/workflows",
-    "https://developers.openai.com/codex/prompting",
-    "https://developers.openai.com/codex/sdk/",
-]
+DEFAULT_START_URLS = ["https://developers.openai.com/codex/"]
+
+ASSET_EXTENSIONS = (
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".gif",
+    ".svg",
+    ".webp",
+    ".ico",
+    ".css",
+    ".js",
+    ".map",
+    ".woff",
+    ".woff2",
+    ".ttf",
+    ".otf",
+    ".eot",
+    ".pdf",
+    ".zip",
+)
 
 
 class CodexDocsCrawler:
@@ -56,13 +46,26 @@ class CodexDocsCrawler:
         self,
         output_dir=CODEX_OUTPUT_DIR,
         urls=None,
+        start_urls=None,
+        include_path_prefixes=None,
+        exclude_path_patterns=None,
+        max_pages=None,
         compact_mode=True,
         keep_links=True,
+        discover_links=True,
     ):
         self.base_url = "https://developers.openai.com"
         self.output_dir = output_dir
-        self.urls = urls or list(DEFAULT_URLS)
-        self.visited_urls = []
+        seed_urls = start_urls if start_urls is not None else urls
+        self.start_urls = list(seed_urls) if seed_urls else list(DEFAULT_START_URLS)
+        self.include_path_prefixes = include_path_prefixes or ["/codex"]
+        self.exclude_path_patterns = [
+            re.compile(pattern) for pattern in (exclude_path_patterns or [])
+        ]
+        self.max_pages = max_pages
+        self.discover_links = discover_links
+        self.visited_urls = set()
+        self.visited_order = []
         self.failed_urls = []
         self.headers = {
             "User-Agent": (
@@ -84,6 +87,24 @@ class CodexDocsCrawler:
         """쿼리/프래그먼트 제거"""
         parsed = urlparse(url)
         return urlunparse((parsed.scheme, parsed.netloc, parsed.path, "", "", ""))
+
+    def is_valid_doc_url(self, url):
+        """Codex 문서 URL인지 확인"""
+        parsed = urlparse(url)
+        if parsed.scheme not in {"http", "https"}:
+            return False
+        if parsed.netloc != "developers.openai.com":
+            return False
+        path = parsed.path or ""
+        if self.include_path_prefixes and not any(
+            path.startswith(prefix) for prefix in self.include_path_prefixes
+        ):
+            return False
+        if path.endswith(ASSET_EXTENSIONS):
+            return False
+        if any(pattern.search(path) for pattern in self.exclude_path_patterns):
+            return False
+        return True
 
     def strip_noise(self, content):
         """네비게이션/푸터 등 불필요한 요소 제거"""
@@ -212,6 +233,9 @@ class CodexDocsCrawler:
         parsed = urlparse(url)
         path = parsed.path.strip("/")
 
+        if path == "codex":
+            path = ""
+
         path = re.sub(r"^codex/", "", path)
 
         if not path:
@@ -250,23 +274,41 @@ class CodexDocsCrawler:
         print(f"✅ Saved: {filename}")
         return filepath
 
+    def extract_links(self, soup, current_url):
+        """페이지에서 Codex 문서 링크 추출"""
+        links = set()
+        for a_tag in soup.find_all("a", href=True):
+            href = a_tag["href"].strip()
+            full_url = urljoin(current_url, href)
+            full_url = self.normalize_url(full_url)
+            if self.is_valid_doc_url(full_url):
+                links.add(full_url)
+        return links
+
     def crawl_page(self, url):
         """단일 페이지 크롤링"""
         url = self.normalize_url(url)
         if url in self.visited_urls:
-            return
+            return set()
 
         print(f"\n🔍 Crawling: {url}")
+        self.visited_urls.add(url)
+        self.visited_order.append(url)
+
         html_content = self.get_page_content(url)
         if not html_content:
             self.failed_urls.append(url)
-            return
+            return set()
 
         soup = BeautifulSoup(html_content, "html.parser")
         title = ""
         title_tag = soup.find("h1") or soup.title
         if title_tag:
             title = title_tag.get_text(strip=True)
+
+        new_links = set()
+        if self.discover_links:
+            new_links = self.extract_links(soup, url)
 
         main_content = self.extract_main_content(soup)
         self.strip_noise(main_content)
@@ -275,32 +317,54 @@ class CodexDocsCrawler:
         markdown_content = self.html_to_markdown(main_content)
         self.save_markdown(url, markdown_content, title)
 
-        self.visited_urls.append(url)
+        return new_links
 
     def crawl(self):
         """전체 문서 크롤링"""
         print("🚀 Starting Codex docs crawl")
         print(f"📁 Output directory: {self.output_dir}")
-        print(f"📄 Total URLs: {len(self.urls)}\n")
+        print(f"📄 Seed URLs: {len(self.start_urls)}")
+        max_pages_label = self.max_pages if self.max_pages is not None else "unlimited"
+        print(f"📄 Max pages: {max_pages_label}\n")
 
-        for index, url in enumerate(self.urls, 1):
-            self.crawl_page(url)
-            if index % 5 == 0:
-                print(f"\n📈 Progress: {index}/{len(self.urls)} pages crawled")
+        to_visit = set()
+        for url in self.start_urls:
+            normalized = self.normalize_url(url)
+            if self.is_valid_doc_url(normalized):
+                to_visit.add(normalized)
+
+        pages_crawled = 0
+        while to_visit and (self.max_pages is None or pages_crawled < self.max_pages):
+            url = to_visit.pop()
+            if url in self.visited_urls:
+                continue
+
+            new_links = self.crawl_page(url)
+            pages_crawled += 1
+
+            if self.discover_links:
+                for link in new_links:
+                    if link not in self.visited_urls:
+                        to_visit.add(link)
+
+            if pages_crawled % 5 == 0:
+                print(f"\n📈 Progress: {pages_crawled} pages crawled")
+
             time.sleep(1.0)
 
         stats = {
-            "total_pages": len(self.visited_urls),
-            "visited_urls": self.visited_urls,
+            "total_pages": len(self.visited_order),
+            "visited_urls": self.visited_order,
             "failed_urls": self.failed_urls,
             "output_dir": self.output_dir,
+            "start_urls": self.start_urls,
         }
 
         with open(os.path.join(self.output_dir, "_crawl_stats.json"), "w", encoding="utf-8") as file:
             json.dump(stats, file, indent=2, ensure_ascii=False)
 
         print(f"\n✨ Crawling complete!")
-        print(f"📊 Pages crawled: {len(self.visited_urls)}")
+        print(f"📊 Pages crawled: {len(self.visited_order)}")
         if self.failed_urls:
             print(f"⚠️  Failed: {len(self.failed_urls)}")
         print(f"📁 Files saved in: {self.output_dir}")

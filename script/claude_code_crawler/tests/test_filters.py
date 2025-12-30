@@ -5,7 +5,10 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
+CODEX_ROOT = Path(__file__).resolve().parents[2] / "codex_crawler"
 sys.path.insert(0, str(ROOT))
+if CODEX_ROOT.exists():
+    sys.path.insert(0, str(CODEX_ROOT))
 
 from claude_code_crawler import ClaudeCodeCrawler
 from anthropic_blog_crawler import AnthropicBlogCrawler

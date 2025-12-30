@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/cli/
+source: https://developers.openai.com/codex/cli
 title: Codex CLI
 ---
 

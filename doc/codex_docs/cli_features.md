@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/cli/features/
+source: https://developers.openai.com/codex/cli/features
 title: Codex CLI features
 ---
 

@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/cloud/environments/
+source: https://developers.openai.com/codex/cloud/environments
 title: Cloud environments
 ---
 

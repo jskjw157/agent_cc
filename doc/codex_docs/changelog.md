@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/changelog/
+source: https://developers.openai.com/codex/changelog
 title: Codex changelog
 ---
 

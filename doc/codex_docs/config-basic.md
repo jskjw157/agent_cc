@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/config-basic/
+source: https://developers.openai.com/codex/config-basic
 title: Basic Configuration
 ---
 

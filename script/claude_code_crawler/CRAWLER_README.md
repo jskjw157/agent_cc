@@ -14,10 +14,8 @@ Claude Code 공식 문서와 Anthropic 블로그를 크롤링하여 마크다운
 - **결과**: 15개의 블로그/뉴스 포스트
 - **카테고리**: Claude Code, 제품 발표, 파트너십, 회사 소식, 정책
 
-### 3. Codex Developers 문서 크롤러 (`codex_docs_crawler.py`)
-- **대상**: https://developers.openai.com/codex
-- **결과**: 29개의 문서 페이지
-- **카테고리**: CLI, 설정, 보안, MCP, 클라우드, GitHub 통합, 워크플로우
+### Codex Developers 문서 크롤러
+별도 디렉토리로 분리했습니다. `script/codex_crawler/README.md`를 참고하세요.
 
 ## 📊 전체 크롤링 결과
 
@@ -25,8 +23,7 @@ Claude Code 공식 문서와 Anthropic 블로그를 크롤링하여 마크다운
 |--------|-----------|---------------|-----------|
 | Claude Code 문서 | 48 | `doc/claude_code_docs/` | Markdown |
 | Anthropic 블로그 | 15 | `doc/anthropic_blog/` | Markdown |
-| Codex Developers 문서 | 29 | `doc/codex_docs/` | Markdown |
-| **총합** | **92** | - | - |
+| **총합** | **63** | - | - |
 
 ## 🚀 빠른 시작
 
@@ -47,7 +44,6 @@ pip install requests beautifulsoup4 html2text
 기본값:
 - Claude Code 문서: `["/docs/en/"]`
 - Anthropic 블로그: `["/news/", "/blog/"]`
- - Codex Developers 문서: `DEFAULT_URLS` 리스트
 
 예시 (코드 내에서 커스터마이징):
 ```python
@@ -83,12 +79,6 @@ python3 claude_code_crawler.py
 python3 anthropic_blog_crawler.py
 ```
 
-### Codex Developers 문서 크롤링
-
-```bash
-python3 codex_docs_crawler.py
-```
-
 ## ✅ 필터/정제 테스트
 
 ```bash
@@ -115,12 +105,6 @@ python3 tests/test_filters.py
 │       ├── ...
 │       ├── README.md
 │       └── _crawl_stats.json
-│   └── codex_docs/                  # 크롤링된 문서 (29개)
-│       ├── quickstart.md
-│       ├── cli.md
-│       ├── config-basic.md
-│       ├── ...
-│       └── _crawl_stats.json
 ```
 
 ## 💡 주요 활용 사례
@@ -146,4 +130,3 @@ RAG 시스템의 지식 베이스로 활용
 **크롤링 소스**: 
 - Claude Code Documentation (https://code.claude.com/docs)
 - Anthropic News & Blog (https://www.anthropic.com/news)
-- OpenAI Codex Developers Docs (https://developers.openai.com/codex)

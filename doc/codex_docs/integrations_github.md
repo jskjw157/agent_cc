@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/integrations/github/
+source: https://developers.openai.com/codex/integrations/github
 title: Use Codex in GitHub
 ---
 

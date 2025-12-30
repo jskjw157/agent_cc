@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/security/
+source: https://developers.openai.com/codex/security
 title: Security
 ---
 

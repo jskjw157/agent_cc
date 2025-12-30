@@ -1,5 +1,5 @@
 ---
-source: https://developers.openai.com/codex/models/
+source: https://developers.openai.com/codex/models
 title: Codex Models
 ---
 
