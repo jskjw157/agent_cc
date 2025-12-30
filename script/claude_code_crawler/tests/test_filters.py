@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT))
 
 from claude_code_crawler import ClaudeCodeCrawler
 from anthropic_blog_crawler import AnthropicBlogCrawler
+from codex_docs_crawler import CodexDocsCrawler
 
 
 class TestClaudeCodeCrawlerFilters(unittest.TestCase):
@@ -139,6 +140,54 @@ class TestAnthropicBlogCrawlerFilters(unittest.TestCase):
         self.assertFalse(
             crawler.is_valid_post_url("https://www.anthropic.com/news/claude-opus-4-5")
         )
+
+    def test_trim_to_first_heading(self):
+        html = """
+        <html><body>
+        <main>
+          <p>Menu</p>
+          <section>
+            <h1>Title</h1>
+            <p>Body</p>
+          </section>
+        </main>
+        </body></html>
+        """
+        soup = BeautifulSoup(html, "html.parser")
+        content = soup.find("main")
+        self.crawler.trim_to_first_heading(content)
+        self.assertIsNone(content.find(string="Menu"))
+        self.assertIsNotNone(content.find(string="Body"))
+
+    def test_compress_markdown(self):
+        markdown = "Copy\n\n# Title\n\n\n```\nCopy\n```\n\n\nText\n"
+        compressed = self.crawler.compress_markdown(markdown)
+        self.assertTrue(compressed.startswith("# Title"))
+        self.assertIn("```\nCopy\n```", compressed)
+        self.assertNotIn("\n\n\n", compressed)
+        self.assertNotIn("# Title\n\n```", compressed)
+        self.assertNotIn("```\n\nText", compressed)
+
+    def test_compact_mode_keeps_links(self):
+        self.assertFalse(self.crawler.html_converter.ignore_links)
+        self.assertTrue(self.crawler.html_converter.ignore_images)
+
+
+class TestCodexDocsCrawlerFilters(unittest.TestCase):
+    def setUp(self):
+        self.crawler = CodexDocsCrawler(urls=["https://developers.openai.com/codex/cli/"])
+
+    def test_normalize_url(self):
+        normalized = self.crawler.normalize_url(
+            "https://developers.openai.com/codex/cli/?x=1#y"
+        )
+        self.assertEqual(normalized, "https://developers.openai.com/codex/cli/")
+
+    def test_clean_filename(self):
+        filename = self.crawler.clean_filename(
+            "https://developers.openai.com/codex/cli/reference/"
+        )
+        self.assertEqual(filename, "cli_reference.md")
 
     def test_trim_to_first_heading(self):
         html = """
