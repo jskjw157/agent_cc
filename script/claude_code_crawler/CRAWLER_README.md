@@ -25,7 +25,7 @@ Claude Code 공식 문서와 Anthropic 블로그를 크롤링하여 마크다운
 |--------|-----------|---------------|-----------|
 | Claude Code 문서 | 48 | `doc/claude_code_docs/` | Markdown |
 | Anthropic 블로그 | 15 | `doc/anthropic_blog/` | Markdown |
-| Codex Developers 문서 | 29 | `doc/openai_codex_crawler/` | Markdown |
+| Codex Developers 문서 | 29 | `doc/codex_docs/` | Markdown |
 | **총합** | **92** | - | - |
 
 ## 🚀 빠른 시작
@@ -115,7 +115,7 @@ python3 tests/test_filters.py
 │       ├── ...
 │       ├── README.md
 │       └── _crawl_stats.json
-│   └── openai_codex_crawler/         # 크롤링된 문서 (29개)
+│   └── codex_docs/                  # 크롤링된 문서 (29개)
 │       ├── quickstart.md
 │       ├── cli.md
 │       ├── config-basic.md

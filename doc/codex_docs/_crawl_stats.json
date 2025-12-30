@@ -32,5 +32,5 @@
     "https://developers.openai.com/codex/sdk/"
   ],
   "failed_urls": [],
-  "output_dir": "doc/openai_codex_crawler"
+  "output_dir": "doc/codex_docs"
 }
