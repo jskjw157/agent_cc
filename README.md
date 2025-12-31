@@ -12,15 +12,17 @@
 
 ## 🎯 핵심 성과
 
-| 작업 | 기존 토큰 | 개선 후 | 절감률 |
-|------|----------|---------|--------|
-| 코드 리뷰 | 15,000 | 800 | **95%** ⭐ |
-| 문서화 분석 | 8,000 | 600 | **92%** |
-| 설정 검증 | 5,000 | 500 | **90%** |
-| 웹 캐시 | 5,000 | 50 | **99%** ⭐ |
-| 규칙 생성 | 13,000 | 1,500 | **88%** |
-| 코드 병합 | 20,000 | 5,000 | **75%** |
-| **평균** | - | - | **90%+** |
+| 작업 | 기존 토큰 | 개선 후 | 절감률 | 비고 |
+|------|----------|---------|--------|------|
+| 코드 리뷰 | 15,000 | 800 | **95%** ⭐ | 정적 분석 |
+| 문서화 분석 | 8,000 | 600 | **92%** | AST 파싱 |
+| 설정 검증 | 5,000 | 500 | **90%** | 구조 검증 |
+| 웹 캐시 | 5,000 | 50 | **99%** | 개발/테스트용* |
+| 규칙 생성 | 13,000 | 1,500 | **88%** | 템플릿 기반 |
+| 코드 병합 | 20,000 | 5,000 | **75%** | 파일 통합 |
+| **평균** | - | - | **90%+** | |
+
+\* **웹 캐시**: 개발 중 반복 테스트 시 유용. 최신 문서 동기화가 목적이라면 부적합
 
 **목표 대비**: 45-60% 절감 목표 → **90%+ 달성** (2배 초과!)
 
@@ -97,21 +99,36 @@ python3 script/tech_rule_generator.py django --pattern "**/*.py"
 ### Phase 2: 단기 적용 (핵심 스크립트, 1주)
 
 #### 1. `cache_manager.py` - 웹 스크래핑 캐시 관리자
+
+**⚠️ 사용 시 주의**:
+- ✅ **적합**: 개발 중 반복 테스트, 안정적인 레퍼런스 문서
+- ❌ **부적합**: 최신 문서 동기화, 자주 변경되는 콘텐츠
+
 ```bash
-# URL 캐시
+# URL 캐시 (TTL 설정 가능)
 python3 script/cache_manager.py --action set \
   --url "https://example.com" \
   --data '{"title":"Example"}' \
-  --ttl 7
+  --ttl 1  # 1일 (짧게 설정)
 
 # 캐시 조회
 python3 script/cache_manager.py --action get --url "https://example.com"
 
 # 통계 확인
 python3 script/cache_manager.py --action stats
+
+# 최신 문서 필요 시 캐시 무효화
+python3 script/cache_manager.py --action invalidate --url "https://example.com"
 ```
 
+**주요 용도**:
+- 개발/테스트 중 동일 페이지 반복 접근 (API rate limit 회피)
+- 변경 빈도 낮은 기술 문서 임시 저장
+- 반복 실험 시 네트워크 요청 제거
+
 **효과**: 캐시 히트 시 99% 토큰 절감 (5,000 → 50)
+
+**최신 문서 동기화가 목적이라면**: 캐시 사용 안 하거나 TTL을 매우 짧게 (1일 이하) 설정
 
 ---
 
@@ -212,13 +229,22 @@ python3 script/code_merger.py \
 
 ---
 
-#### 3. `cached_crawler_example.py` - 크롤러 캐시 통합
+#### 3. `cached_crawler_example.py` - 크롤러 캐시 통합 가이드
+
+**⚠️ 캐시 적합성 판단**:
+- ✅ **개발/테스트**: 같은 페이지 반복 접근 시 유용
+- ✅ **안정 문서**: 변경 빈도 낮은 레퍼런스
+- ❌ **프로덕션 크롤링**: 최신 문서 동기화 목적이라면 부적합
+
 ```bash
 # 통합 가이드 보기
 python3 script/cached_crawler_example.py --guide
 
-# 단일 URL 크롤링 (캐시 활용)
+# 개발/테스트용 크롤링 (캐시 활용)
 python3 script/cached_crawler_example.py --url "https://example.com"
+
+# 최신 문서 필요 시 (캐시 무시)
+python3 script/cached_crawler_example.py --url "https://example.com" --force
 
 # 배치 크롤링
 python3 script/cached_crawler_example.py --urls \
@@ -227,7 +253,9 @@ python3 script/cached_crawler_example.py --urls \
 ```
 
 **통합 방법**: 기존 크롤러에 **14줄 추가**
-**효과**: 99% 토큰 절감 (5,000 → 50)
+**효과**: 개발 중 반복 테스트 시 99% 토큰 절감 (5,000 → 50)
+
+**프로덕션 권장사항**: 최신 문서 동기화가 목적이라면 캐시 비활성화 또는 `--force` 플래그 사용
 
 ---
 
