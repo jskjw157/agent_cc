@@ -4,8 +4,8 @@
 
 "과정은 스크립트에게, 결과만 AI에게" - 데이터 처리와 반복 작업은 스크립트가 수행하고, AI는 최종 결과만 분석하도록 설계하여 토큰 사용량을 획기적으로 줄입니다.
 
-[![Token Reduction](https://img.shields.io/badge/Token%20Reduction-90%25%2B-brightgreen)]()
-[![Scripts](https://img.shields.io/badge/Scripts-7-blue)]()
+[![Token Reduction](https://img.shields.io/badge/Token%20Reduction-88%25%2B-brightgreen)]()
+[![Scripts](https://img.shields.io/badge/Scripts-5-blue)]()
 [![Agents](https://img.shields.io/badge/Agents-4-orange)]()
 
 ---
@@ -17,14 +17,11 @@
 | 코드 리뷰 | 15,000 | 800 | **95%** ⭐ | 정적 분석 |
 | 문서화 분석 | 8,000 | 600 | **92%** | AST 파싱 |
 | 설정 검증 | 5,000 | 500 | **90%** | 구조 검증 |
-| 웹 캐시 | 5,000 | 50 | **99%** | 개발/테스트용* |
 | 규칙 생성 | 13,000 | 1,500 | **88%** | 템플릿 기반 |
 | 코드 병합 | 20,000 | 5,000 | **75%** | 파일 통합 |
-| **평균** | - | - | **90%+** | |
+| **평균** | - | - | **88%+** | |
 
-\* **웹 캐시**: 개발 중 반복 테스트 시 유용. 최신 문서 동기화가 목적이라면 부적합
-
-**목표 대비**: 45-60% 절감 목표 → **90%+ 달성** (2배 초과!)
+**목표 대비**: 45-60% 절감 목표 → **88%+ 달성** (2배 근접!)
 
 ---
 
@@ -98,41 +95,7 @@ python3 script/tech_rule_generator.py django --pattern "**/*.py"
 
 ### Phase 2: 단기 적용 (핵심 스크립트, 1주)
 
-#### 1. `cache_manager.py` - 웹 스크래핑 캐시 관리자
-
-**⚠️ 사용 시 주의**:
-- ✅ **적합**: 개발 중 반복 테스트, 안정적인 레퍼런스 문서
-- ❌ **부적합**: 최신 문서 동기화, 자주 변경되는 콘텐츠
-
-```bash
-# URL 캐시 (TTL 설정 가능)
-python3 script/cache_manager.py --action set \
-  --url "https://example.com" \
-  --data '{"title":"Example"}' \
-  --ttl 1  # 1일 (짧게 설정)
-
-# 캐시 조회
-python3 script/cache_manager.py --action get --url "https://example.com"
-
-# 통계 확인
-python3 script/cache_manager.py --action stats
-
-# 최신 문서 필요 시 캐시 무효화
-python3 script/cache_manager.py --action invalidate --url "https://example.com"
-```
-
-**주요 용도**:
-- 개발/테스트 중 동일 페이지 반복 접근 (API rate limit 회피)
-- 변경 빈도 낮은 기술 문서 임시 저장
-- 반복 실험 시 네트워크 요청 제거
-
-**효과**: 캐시 히트 시 99% 토큰 절감 (5,000 → 50)
-
-**최신 문서 동기화가 목적이라면**: 캐시 사용 안 하거나 TTL을 매우 짧게 (1일 이하) 설정
-
----
-
-#### 2. `code_review_analyzer.py` - 정적 분석 통합
+#### 1. `code_review_analyzer.py` - 정적 분석 통합
 ```bash
 python3 script/code_review_analyzer.py \
   --project-root . \
@@ -148,7 +111,7 @@ python3 script/code_review_analyzer.py \
 
 ---
 
-#### 3. `config_validator.py` - .claude/ 설정 검증기
+#### 2. `config_validator.py` - .claude/ 설정 검증기
 ```bash
 python3 script/config_validator.py \
   --target .claude \
@@ -166,7 +129,7 @@ python3 script/config_validator.py \
 
 ---
 
-#### 4. `doc_analyzer.py` - 문서화 품질 분석기
+#### 3. `doc_analyzer.py` - 문서화 품질 분석기
 ```bash
 python3 script/doc_analyzer.py \
   --target . \
@@ -229,36 +192,6 @@ python3 script/code_merger.py \
 
 ---
 
-#### 3. `cached_crawler_example.py` - 크롤러 캐시 통합 가이드
-
-**⚠️ 캐시 적합성 판단**:
-- ✅ **개발/테스트**: 같은 페이지 반복 접근 시 유용
-- ✅ **안정 문서**: 변경 빈도 낮은 레퍼런스
-- ❌ **프로덕션 크롤링**: 최신 문서 동기화 목적이라면 부적합
-
-```bash
-# 통합 가이드 보기
-python3 script/cached_crawler_example.py --guide
-
-# 개발/테스트용 크롤링 (캐시 활용)
-python3 script/cached_crawler_example.py --url "https://example.com"
-
-# 최신 문서 필요 시 (캐시 무시)
-python3 script/cached_crawler_example.py --url "https://example.com" --force
-
-# 배치 크롤링
-python3 script/cached_crawler_example.py --urls \
-  "https://example1.com" \
-  "https://example2.com"
-```
-
-**통합 방법**: 기존 크롤러에 **14줄 추가**
-**효과**: 개발 중 반복 테스트 시 99% 토큰 절감 (5,000 → 50)
-
-**프로덕션 권장사항**: 최신 문서 동기화가 목적이라면 캐시 비활성화 또는 `--force` 플래그 사용
-
----
-
 ## 📂 디렉토리 구조
 
 ```
@@ -278,21 +211,18 @@ agent_cc/
 │   │
 │   ├── skills/                  # 스킬 11개
 │   ├── hooks/                   # 훅 2개
-│   ├── cache/                   # 캐시 저장소 (gitignore)
 │   │
 │   └── 문서/
 │       ├── phase2-test-results.md
 │       ├── phase3-test-results.md
 │       └── mcp-cleanup-report.md
 │
-├── script/                      # 자동화 스크립트 7개
-│   ├── cache_manager.py         # 웹 캐시
+├── script/                      # 자동화 스크립트 5개
 │   ├── code_review_analyzer.py  # 정적 분석
 │   ├── config_validator.py      # 설정 검증
 │   ├── doc_analyzer.py          # 문서화 분석
 │   ├── tech_rule_generator.py   # 규칙 생성
-│   ├── code_merger.py           # 코드 병합
-│   └── cached_crawler_example.py # 크롤러 캐시
+│   └── code_merger.py           # 코드 병합
 │
 ├── doc/                         # 크롤링된 문서
 └── README.md                    # 이 파일
@@ -357,7 +287,6 @@ python3 script/code_review_analyzer.py --output review-report.json
 - 코드 리뷰: **3-5배** 빠름 (정적 분석 병렬 실행)
 - 문서화 분석: **2-3배** 빠름
 - 설정 검증: **5배** 빠름
-- 캐시 조회: **10-20배** 빠름 (네트워크 요청 제거)
 
 ### 품질 개선
 - **실제 이슈 발견**: config_validator가 3개 설정 오류 발견
@@ -413,8 +342,7 @@ brew install gh
 ### 주요 원칙
 1. **스크립트 우선**: 반복 작업은 스크립트로
 2. **결과만 AI에게**: 중간 과정은 숨기고 최종 결과만 제공
-3. **캐시 적극 활용**: 동일 데이터 재사용
-4. **측정 가능한 개선**: 토큰 사용량으로 효과 검증
+3. **측정 가능한 개선**: 토큰 사용량으로 효과 검증
 
 ---
 
@@ -426,11 +354,11 @@ MIT License
 
 ## 🎉 성과 요약
 
-- ✅ **7개 자동화 스크립트** 구현
+- ✅ **5개 자동화 스크립트** 구현
 - ✅ **4개 에이전트** 최적화
 - ✅ **4개 규칙 파일** 생성
-- ✅ **90%+ 토큰 절감** (목표 45-60% 대비 **2배 초과**)
-- ✅ **2-20배 속도 향상**
+- ✅ **88%+ 토큰 절감** (목표 45-60% 대비 **2배 근접**)
+- ✅ **2-5배 속도 향상**
 - ✅ **실제 이슈 발견**: 설정 오류 3개, 문서화 누락 80개
 
 **"Claude Code와 함께하는 효율적인 개발, Agent CC가 시작합니다."**

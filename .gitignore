@@ -9,9 +9,10 @@ venv/
 env/
 ENV/
 
-# Claude cache and temporary files
-.claude/cache/
+# Claude temporary files
 .claude/*-report.json
+
+# Crawler data
 .codex/
 
 # IDE
