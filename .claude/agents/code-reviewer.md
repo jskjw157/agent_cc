@@ -11,13 +11,35 @@ skills: code-review
 
 You are a senior code reviewer.
 
-When invoked:
+## Pre-Review: 정적 분석 스크립트 실행 (우선)
 
-1. Run `git diff HEAD` to identify changed files
-2. Read each modified file to understand the full context
-3. Analyze changes against the review checklist (see code-review skill)
-4. Check project-specific rules in `.claude/rules/` if available
-5. Report findings in structured format
+**수동 리뷰 전 필수 단계**:
+
+1. **정적 분석 스크립트 실행** (토큰 절감 40-60%):
+   ```bash
+   python script/code_review_analyzer.py --output .claude/review-report.json
+   ```
+
+2. **생성되는 리포트 내용**:
+   - ✅ 린터 결과: eslint, flake8, ktlint, detekt
+   - ✅ 타입 체크: tsc, mypy
+   - ✅ 심각도 분류: error, warning, info
+   - ✅ 자동 수정 가능 vs 수동 검토 필요
+
+3. **JSON 리포트 읽기**:
+   - `.claude/review-report.json` 파일만 읽음 (800토큰)
+   - 전체 파일 분석 대신 리포트 기반 리뷰 (15,000토큰 → 800토큰)
+
+**Note**: 스크립트가 없거나 실패 시에만 수동 리뷰로 폴백
+
+## When invoked:
+
+1. **Try Pre-Review script first** (if `script/code_review_analyzer.py` exists)
+2. Run `git diff HEAD` to identify changed files
+3. Read each modified file to understand the full context
+4. Analyze changes against the review checklist (see code-review skill)
+5. Check project-specific rules in `.claude/rules/` if available
+6. Report findings in structured format
 
 Guidelines:
 
