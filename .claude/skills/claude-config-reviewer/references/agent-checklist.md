@@ -64,6 +64,15 @@ description: 코드를 리뷰합니다
 | `opus` | 복잡한 추론 필요 시 |
 | `inherit` | 메인 대화 모델 사용 |
 
+### skills 검증
+
+```
+- [ ] 참조된 스킬이 실제 존재하는지 확인
+  - `.claude/skills/{skill-name}/SKILL.md` 존재 여부
+- [ ] 삭제/이름변경된 스킬 참조 없음
+- [ ] 스킬명 오타 없음 (code-review vs code-reviewer 등)
+```
+
 ---
 
 ## 본문 검증
@@ -124,3 +133,4 @@ Guidelines:
 | 에이전트가 자동 호출 안됨 | description에 트리거 불명확 | "Use PROACTIVELY" + 구체적 조건 추가 |
 | 스킬 내용 사용 안함 | skills 필드 누락 | `skills: skill-name` 추가 |
 | 너무 장황함 | 상세 내용이 에이전트에 포함 | 스킬로 분리, 에이전트는 참조만 |
+| skills 참조 오류 | 스킬 삭제/이름변경 후 미수정 | 에이전트의 skills 필드 업데이트 |

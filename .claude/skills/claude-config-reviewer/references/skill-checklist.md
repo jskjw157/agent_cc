@@ -132,10 +132,20 @@ description: 문서를 작성합니다
 ```
 
 ### scripts/ 체크리스트
+
+⚠️ **스킬 내 scripts/ 폴더 발견 시 → script/로 통합 권장**
+
+이유:
+- 중앙 집중 관리 (script/ 폴더)
+- 다른 에이전트/스킬에서도 재사용 가능
+- npx로 생성된 scripts/는 placeholder일 가능성 높음
+
 ```
-- [ ] 실행 가능 (shebang 포함)
-- [ ] 테스트 완료
-- [ ] 에러 처리 포함
+- [ ] scripts/ 폴더 존재 시 → script/로 이동 권장
+- [ ] placeholder/스캐폴딩이 아닌 실제 구현 확인
+  - 확인: analyze() 내부에 실제 로직 있는지
+- [ ] SKILL.md에서 script/ 경로 참조로 변경
+- [ ] 이동 후 scripts/ 폴더 삭제
 ```
 
 ---
@@ -152,6 +162,17 @@ description: 문서를 작성합니다
 
 ---
 
+## 중복 스킬 검증
+
+```
+- [ ] 유사한 이름의 스킬 존재 여부 확인
+  - 예: code-review vs code-reviewer
+- [ ] 중복 시 하나로 통합 권장
+- [ ] 삭제된 스킬을 참조하는 에이전트 없는지 확인
+```
+
+---
+
 ## 일반적인 문제
 
 | 문제 | 원인 | 해결 |
@@ -159,3 +180,5 @@ description: 문서를 작성합니다
 | 스킬이 자동 호출 안됨 | description에 트리거 불명확 | "사용 시기:" + 키워드 추가 |
 | SKILL.md가 너무 김 | 모든 내용을 포함 | references/로 분리 |
 | 에이전트에서 사용 안됨 | 에이전트 skills 필드 누락 | 에이전트에 `skills: skill-name` 추가 |
+| 중복 스킬 존재 | npx로 여러 번 생성 | 하나로 통합 후 나머지 삭제 |
+| scripts/ placeholder | npx 자동 생성 | script/로 통합 또는 실제 구현 |
