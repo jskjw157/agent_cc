@@ -10,13 +10,19 @@ Complete toolkit for code reviewer with modern tools and best practices.
 ## Quick Start
 
 ```bash
-# 코드 리뷰 분석 실행
+# 1. 정적 분석 (ktlint, eslint, flake8)
 python script/code_review_analyzer.py --output .claude/review-report.json
+
+# 2. PR 분석 (파일별 리스크, 리뷰 우선순위)
+python script/pr_analyzer.py --pr 123 --output .claude/pr-analysis.json
+
+# 3. 마크다운 리포트 생성
+python script/review_report_generator.py --input .claude/review-report.json
 ```
 
 ## Core Capabilities
 
-### Code Review Analyzer
+### 1. Code Review Analyzer
 
 정적 분석 도구(ktlint, eslint, flake8)를 통합하여 JSON 리포트를 생성합니다.
 
@@ -25,34 +31,48 @@ python script/code_review_analyzer.py --output .claude/review-report.json
 - 심각도 분류 (error/warning/info)
 - 자동 수정 가능 여부 표시 (auto_fixable)
 - 파일별 이슈 집계 및 상위 문제 파일 식별
-- 개선 권장사항 자동 생성
 
 **Usage:**
 ```bash
-# 기본 실행
-python script/code_review_analyzer.py
-
-# 프로젝트 루트 지정
-python script/code_review_analyzer.py --project-root /path/to/project
-
-# 출력 파일 지정
 python script/code_review_analyzer.py --output .claude/review-report.json
 ```
 
-**Output (JSON):**
-```json
-{
-  "summary": {
-    "error": 5,
-    "warning": 12,
-    "info": 3,
-    "total": 20,
-    "auto_fixable": 8,
-    "files_with_issues": 7
-  },
-  "issues": [...],
-  "recommendations": [...]
-}
+### 2. PR Analyzer
+
+GitHub PR의 변경사항을 분석하여 리스크 수준과 리뷰 우선순위를 산정합니다.
+
+**Features:**
+- 파일별 리스크 평가 (critical/high/medium/low)
+- 고위험 패턴 자동 식별 (보안, 설정, 인증 관련)
+- 변경량 기반 리스크 가중치
+- 리뷰 우선순위 자동 정렬
+
+**Usage:**
+```bash
+# GitHub PR 분석
+python script/pr_analyzer.py --pr 123
+
+# 로컬 변경사항 분석 (git diff)
+python script/pr_analyzer.py --base main
+```
+
+### 3. Review Report Generator
+
+JSON 분석 결과를 마크다운 리뷰 리포트로 변환합니다.
+
+**Features:**
+- Critical/Warning/Suggestion 분류
+- 파일:라인 형식으로 위치 표시
+- 파일별 이슈 그룹핑
+- GitHub PR 코멘트 형식 지원
+
+**Usage:**
+```bash
+# JSON → 마크다운 변환
+python script/review_report_generator.py -i .claude/review-report.json -o .claude/review-report.md
+
+# stdout 출력
+python script/review_report_generator.py --print
 ```
 
 ## Reference Documentation
