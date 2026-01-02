@@ -25,6 +25,40 @@ class ConfigValidator:
             "rules": {"total": 0, "valid": 0, "invalid": 0}
         }
 
+    def _detect_target_type(self) -> Optional[str]:
+        """타겟 경로의 유형 감지
+
+        Returns:
+            - "skill_dir": SKILL.md가 있는 스킬 디렉토리
+            - "agent_file": .md 에이전트 파일
+            - "claude_root": .claude/ 루트 디렉토리
+            - None: 알 수 없는 유형
+        """
+        target = self.claude_dir
+
+        # SKILL.md가 있으면 스킬 디렉토리
+        if (target / "SKILL.md").exists():
+            return "skill_dir"
+
+        # .md 파일이면 에이전트 파일일 수 있음
+        if target.is_file() and target.suffix == ".md":
+            return "agent_file"
+
+        # agents/, skills/, hooks/, rules/ 중 하나라도 있으면 claude root
+        subdirs = ["agents", "skills", "hooks", "rules"]
+        if any((target / subdir).exists() for subdir in subdirs):
+            return "claude_root"
+
+        # 부모 디렉토리 확인하여 유형 추론
+        if target.is_dir():
+            parent_name = target.parent.name
+            if parent_name == "skills":
+                return "skill_dir"
+            elif parent_name == "agents":
+                return "agent_file"
+
+        return None
+
     def validate(self) -> Dict[str, Any]:
         """전체 검증 실행"""
         print(f"🔍 Validating .claude/ configuration...\n")
@@ -37,11 +71,35 @@ class ConfigValidator:
             })
             return self._generate_report()
 
-        # 각 유형별 검증
-        self._validate_agents()
-        self._validate_skills()
-        self._validate_hooks()
-        self._validate_rules()
+        # 타겟 유형 감지
+        target_type = self._detect_target_type()
+
+        if target_type == "skill_dir":
+            # 특정 스킬 디렉토리만 검증
+            print(f"📁 Detected skill directory: {self.claude_dir}")
+            self.summary["skills"]["total"] = 1
+            is_valid = self._validate_skill_dir(self.claude_dir)
+            if is_valid:
+                self.summary["skills"]["valid"] += 1
+            else:
+                self.summary["skills"]["invalid"] += 1
+            print(f"✅ Skill validation complete\n")
+        elif target_type == "agent_file":
+            # 특정 에이전트 파일만 검증
+            print(f"📄 Detected agent file: {self.claude_dir}")
+            self.summary["agents"]["total"] = 1
+            is_valid = self._validate_agent_file(self.claude_dir)
+            if is_valid:
+                self.summary["agents"]["valid"] += 1
+            else:
+                self.summary["agents"]["invalid"] += 1
+            print(f"✅ Agent validation complete\n")
+        else:
+            # 전체 .claude/ 디렉토리 검증
+            self._validate_agents()
+            self._validate_skills()
+            self._validate_hooks()
+            self._validate_rules()
 
         return self._generate_report()
 
@@ -180,6 +238,14 @@ class ConfigValidator:
 
         print(f"✅ Skill validation complete\n")
 
+    def _get_relative_path(self, path: Path) -> str:
+        """경로를 상대 경로 문자열로 변환 (실패 시 절대 경로 반환)"""
+        try:
+            return str(path.relative_to(self.claude_dir))
+        except ValueError:
+            # relative_to 실패 시 파일명만 반환
+            return str(path.name) if path.is_file() else str(path)
+
     def _validate_skill_dir(self, skill_dir: Path) -> bool:
         """개별 스킬 디렉토리 검증"""
         skill_file = skill_dir / "SKILL.md"
@@ -188,7 +254,7 @@ class ConfigValidator:
             self.issues.append({
                 "type": "error",
                 "category": "skill",
-                "file": str(skill_dir.relative_to(self.claude_dir)),
+                "file": self._get_relative_path(skill_dir),
                 "message": "Missing SKILL.md file"
             })
             return False
@@ -203,26 +269,46 @@ class ConfigValidator:
                 self.issues.append({
                     "type": "error",
                     "category": "skill",
-                    "file": str(skill_file.relative_to(self.claude_dir)),
+                    "file": self._get_relative_path(skill_file),
                     "message": "Missing or invalid frontmatter"
                 })
                 return False
 
             # 필수 필드 검증
+            if "name" not in frontmatter:
+                self.issues.append({
+                    "type": "warning",
+                    "category": "skill",
+                    "file": self._get_relative_path(skill_file),
+                    "message": "Missing name field"
+                })
+
             if "description" not in frontmatter:
                 self.issues.append({
                     "type": "warning",
                     "category": "skill",
-                    "file": str(skill_file.relative_to(self.claude_dir)),
+                    "file": self._get_relative_path(skill_file),
                     "message": "Missing description field"
                 })
+
+            # name과 디렉토리명 일치 확인
+            if "name" in frontmatter:
+                name = frontmatter["name"]
+                dir_name = skill_dir.name
+                if name != dir_name:
+                    self.issues.append({
+                        "type": "warning",
+                        "category": "skill",
+                        "file": self._get_relative_path(skill_file),
+                        "message": f"Skill name '{name}' doesn't match directory name '{dir_name}'"
+                    })
 
             # Body 검증
             if not body.strip():
                 self.issues.append({
                     "type": "warning",
                     "category": "skill",
-                    "file": str(skill_file.relative_to(self.claude_dir)),
+                    "file": self._get_relative_path(skill_file),
                     "message": "Empty skill body"
                 })
 
@@ -232,7 +318,7 @@ class ConfigValidator:
             self.issues.append({
                 "type": "error",
                 "category": "skill",
-                "file": str(skill_file.relative_to(self.claude_dir)),
+                "file": self._get_relative_path(skill_file),
                 "message": f"Validation error: {str(e)}"
             })
             return False
