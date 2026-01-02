@@ -10,7 +10,8 @@
       "Bash(Select-String -Pattern \"\\(BUILD|PASS|FAIL|SUCCESS|EventsService\\)\")",
       "Bash(Select-Object -Last 30)",
       "Bash(./gradlew test:*)",
-      "Bash(powershell -Command:*)"
+      "Bash(powershell -Command:*)",
+      "Bash(chmod:*)"
     ]
   },
   "hooks": {
@@ -21,15 +22,10 @@
           {
             "type": "command",
             "command": "python .claude/hooks/run-tests-on-kotlin.py"
-          }
-        ]
-      },
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
+          },
           {
             "type": "command",
-            "command": "python3 .claude/hooks/config-review-notify.py"
+            "command": "python .claude/hooks/config-review-notify.py"
           }
         ]
       }
