@@ -12,9 +12,6 @@ ENV/
 # Claude temporary files
 .claude/*-report.json
 
-# Crawler data
-.codex/
-
 # IDE
 .vscode/
 .idea/
