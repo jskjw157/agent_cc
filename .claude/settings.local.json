@@ -13,7 +13,8 @@
       "Bash(powershell -Command:*)",
       "Bash(chmod:*)",
       "Bash(git commit:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: 작업 복잡도 기반 모델 선택 전략 추가\n\n- model-selection.md 규칙 파일 생성 \\(Opus/Sonnet/Haiku 사용 가이드\\)\n- backend-architect: sonnet → opus \\(아키텍처 설계는 고차원 판단 필요\\)\n- code-reviewer: haiku → sonnet \\(보안/성능 분석 품질 향상\\)\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   },
   "hooks": {
