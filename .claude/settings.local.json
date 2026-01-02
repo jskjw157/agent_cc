@@ -11,7 +11,9 @@
       "Bash(Select-Object -Last 30)",
       "Bash(./gradlew test:*)",
       "Bash(powershell -Command:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(git commit:*)",
+      "Bash(git add:*)"
     ]
   },
   "hooks": {
