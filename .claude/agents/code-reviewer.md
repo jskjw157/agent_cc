@@ -5,7 +5,7 @@ description: |
   Use PROACTIVELY after writing or modifying significant code (new features, refactoring, bug fixes).
   자동 호출 조건: (1) 새 기능 구현 완료 시 (2) 버그 수정 완료 시 (3) 리팩토링 완료 시
 tools: Read, Grep, Glob, Bash
-model: haiku
+model: sonnet
 skills: code-reviewer
 ---
 
